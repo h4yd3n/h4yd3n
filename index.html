@@ -108,11 +108,10 @@
     padding:9px 15px;border-radius:10px}
   .mailbtn:hover{background:#3a352b}
 
-  footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
-    max-width:1200px;margin:0 auto;padding:18px 22px 28px;color:var(--muted);font-size:13px}
-  footer .social{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-weight:600;transition:color .15s ease}
-  footer .social:hover{color:var(--ink)}
-  footer .social svg{display:block}
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:18px 0 26px}
+  .note .li-btn{display:inline-flex;margin-top:11px;color:#0A66C2;transition:opacity .15s ease}
+  .note .li-btn:hover{opacity:.7}
+  .note .li-btn svg{display:block}
 </style>
 </head>
 <body id="top">
@@ -208,20 +207,16 @@
       <div class="pad">Say hi</div>
       <h2>Let's talk.</h2>
       <p class="desc">Find me on LinkedIn — always happy to connect.</p>
-      <a class="mailbtn" href="https://www.linkedin.com/in/h4yd3n" target="_blank" rel="noopener">Connect on LinkedIn →</a>
+      <a class="li-btn" href="https://www.linkedin.com/in/h4yd3n" target="_blank" rel="noopener" aria-label="Hayden Lee on LinkedIn">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.75 2.65 4.75 6.1V21H22v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H14V9z"/></svg>
+      </a>
       <div class="meta"><span class="plat">h4yd3n</span><span class="when">always open</span></div>
     </article>
 
   </main>
 </div>
 
-<footer>
-  <span>Hayden Lee · © 2026</span>
-  <a class="social" href="https://www.linkedin.com/in/h4yd3n" target="_blank" rel="noopener" aria-label="Hayden Lee on LinkedIn">
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.75 2.65 4.75 6.1V21H22v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H14V9z"/></svg>
-    LinkedIn
-  </a>
-</footer>
+<footer>Hayden Lee · © 2026</footer>
 
 <script>
   // True masonry: build exactly N columns per breakpoint and drop each note into
