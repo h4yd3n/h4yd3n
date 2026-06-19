@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hayden Lee — the wall</title>
+<meta name="description" content="A wall of work by Hayden Lee — calm, native apps for iPhone, iPad, and Mac. Each project, a note." />
+<link rel="icon" href="assets/mark.png" />
+<style>
+  :root{
+    /* Washipad palette, pulled straight from the app's Theme.swift */
+    --wall:#F1ECDB; --ink:#29261F; --muted:#76705F; --line:#D9D2C0;
+    --vermillion:#C73D2E; --teal:#1C6E5E;
+    --note-ink:#2A2722; --note-muted:#756D5E;
+    /* the six sticky pastels */
+    --butter:#FCE685; --coral:#FCC4B5; --sage:#C9E3B8; --sky:#BDD9F2; --lavender:#DECFF2; --peach:#FAD9A8;
+    /* paired washi-tape tones */
+    --tape-butter:#35597F; --tape-coral:#2C6A4F; --tape-sage:#C73D2E;
+    --tape-sky:#C8952E; --tape-lavender:#2E7470; --tape-peach:#7C3F6B;
+    --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--wall);color:var(--ink);line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 1px 1px,rgba(41,38,31,.035) 1px,transparent 0);
+    background-size:22px 22px;padding-bottom:48px}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 22px}
+
+  /* ---- top chrome: mirrors the app's "Washi · pad" header ---- */
+  header.bar{position:sticky;top:0;z-index:40;background:rgba(241,236,219,.82);
+    backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+  header.bar .wrap{display:flex;align-items:center;gap:11px;height:64px}
+  .brand{display:flex;align-items:baseline;gap:7px;font-size:21px;font-weight:800;letter-spacing:.2px}
+  .brand .dot{color:var(--vermillion);font-weight:800}
+  .brand .light{font-weight:500;color:var(--muted)}
+  .spacer{flex:1}
+  .bar .chip{font-size:13px;font-weight:600;color:var(--muted)}
+
+  /* ---- wall heading ---- */
+  .wallhead{padding:34px 0 6px}
+  .wallhead .ey{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .wallhead h1{margin-top:10px;font-size:clamp(26px,4.4vw,40px);font-weight:800;letter-spacing:-.02em;line-height:1.08;max-width:18ch}
+  .wallhead p{margin-top:12px;color:var(--muted);font-size:17px;max-width:52ch}
+
+  /* ---- masonry wall: JS builds exactly N columns (5→4→3→2) and packs the shortest ---- */
+  .wall{display:flex;align-items:flex-start;gap:16px;padding:26px 0 10px}
+  .col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:16px}
+  @media(max-width:660px){ .wall{gap:12px} .col{gap:12px} }
+
+  .note{display:block;width:100%;margin:0;position:relative;
+    background:var(--butter);border-radius:12px;padding:15px 15px 14px;color:var(--note-ink);
+    box-shadow:0 1px 0 rgba(41,38,31,.04),0 14px 26px -18px rgba(41,38,31,.5);
+    transition:transform .16s ease, box-shadow .16s ease}
+  .note:hover{transform:translateY(-3px) rotate(0deg) !important;
+    box-shadow:0 1px 0 rgba(41,38,31,.04),0 20px 36px -16px rgba(41,38,31,.55)}
+
+  /* the washi-tape strip, centered on the top edge */
+  .note::before{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%) rotate(-3deg);
+    width:46px;height:15px;border-radius:2px;background:var(--tape);opacity:.92;
+    background-image:radial-gradient(circle,rgba(253,251,245,.85) 1.2px,transparent 1.4px);
+    background-size:6px 6px;box-shadow:0 2px 5px -2px rgba(41,38,31,.4)}
+
+  /* the ••• affordance, like the app */
+  .dots{position:absolute;top:11px;right:12px;color:var(--note-muted);letter-spacing:1.5px;font-weight:800;font-size:12px;opacity:.6}
+
+  .note .pad{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--note-muted);margin-top:2px;line-height:1.35;padding-right:26px}
+  .note h2{font-size:18px;font-weight:800;letter-spacing:-.01em;margin-top:6px;line-height:1.12}
+  /* brand wordmark in place of a plain text title — transparent, sits straight on the paper */
+  .note .logo{margin-top:9px;margin-bottom:1px}
+  .note .logo img{height:34px;width:auto;max-width:100%;display:block}
+  .note .tag{font-size:13.5px;font-weight:600;margin-top:7px;line-height:1.3}
+  .note .desc{font-size:12.5px;color:var(--note-muted);margin-top:8px;line-height:1.5}
+  .note .meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;font-size:11px;color:var(--note-muted)}
+  .note .meta .plat{font-weight:700}
+  .note .meta .when{font-style:italic;white-space:nowrap}
+
+  .shot{margin-top:11px;border-radius:8px;overflow:hidden;border:1px solid rgba(41,38,31,.12);background:#fff}
+  .shot img{display:block;width:100%}
+  /* phone shots look better letterboxed on a tinted ground */
+  .shot.phone{background:linear-gradient(160deg,#fbf8f0,#efe7d4);padding:10px 20px 0;border:1px solid rgba(41,38,31,.10)}
+  .shot.phone img{border-radius:11px 11px 0 0;box-shadow:0 8px 18px -12px rgba(41,38,31,.5)}
+  .icontile{margin-top:11px;border-radius:11px;overflow:hidden;border:1px solid rgba(41,38,31,.10);width:64px;height:64px}
+  .icontile img{display:block;width:100%;height:100%;object-fit:cover}
+
+  /* color variants */
+  .n-butter{background:var(--butter);--tape:var(--tape-butter)}
+  .n-coral{background:var(--coral);--tape:var(--tape-coral)}
+  .n-sage{background:var(--sage);--tape:var(--tape-sage)}
+  .n-sky{background:var(--sky);--tape:var(--tape-sky)}
+  .n-lavender{background:var(--lavender);--tape:var(--tape-lavender)}
+  .n-peach{background:var(--peach);--tape:var(--tape-peach)}
+
+  /* hand-tilt: a few notes sit slightly askew, like the real wall */
+  .t1{transform:rotate(-1.1deg)} .t2{transform:rotate(.9deg)}
+  .t3{transform:rotate(-.6deg)} .t4{transform:rotate(1.2deg)}
+
+  .quote{font-size:14.5px;font-weight:600;line-height:1.45}
+  .quote .by{display:block;margin-top:9px;font-size:12px;font-weight:600;color:var(--note-muted);font-style:italic}
+
+  .mailbtn{display:inline-block;margin-top:11px;background:var(--ink);color:#FDFBF5;font-weight:700;font-size:13px;
+    padding:9px 15px;border-radius:10px}
+  .mailbtn:hover{background:#3a352b}
+
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:18px 0 6px}
+</style>
+</head>
+<body id="top">
+
+<header class="bar">
+  <div class="wrap">
+    <span class="brand">Hayden<span class="dot"> · </span>Lee</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="wallhead">
+    <h1>A wall of things I've been making.</h1>
+    <p>Calm, native apps for iPhone, iPad, and Mac — one note each. Pinned in no particular order. Tap a corner of my world.</p>
+  </div>
+
+  <main class="wall">
+
+    <!-- intro -->
+    <article class="note n-butter t1">
+      <span class="dots">•••</span>
+      <div class="pad">Hello</div>
+      <h2>Hi, I'm Hayden.</h2>
+      <p class="tag">I design &amp; build small, careful software.</p>
+      <p class="desc">I sit at the seam of operations and product — turning fuzzy goals into shipped things. Lately: native apps, end to end.</p>
+      <div class="meta"><span class="plat">h4yd3n</span><span class="when">pinned</span></div>
+    </article>
+
+    <!-- ConstantFloat -->
+    <article class="note n-peach t2">
+      <span class="dots">•••</span>
+      <div class="pad">Daily note · iPhone</div>
+      <div class="logo"><img src="assets/logos/constantfloat.png" alt="ConstantFloat" /></div>
+      <p class="tag">One calm daily note, for a life that won't sit still.</p>
+      <p class="desc">A private, once-a-day note that answers the whole person — not just your to-do list. One warm signal each morning, then you close the app.</p>
+      <div class="meta"><span class="plat">iPhone</span><span class="when">in the works</span></div>
+    </article>
+
+    <!-- Washidoc -->
+    <article class="note n-sage t3">
+      <span class="dots">•••</span>
+      <div class="pad">PDF editor · Mac · iPhone</div>
+      <div class="logo"><img src="assets/logos/washidoc.svg" alt="Washidoc" /></div>
+      <div class="shot phone"><img src="assets/washidoc.png" alt="Washidoc document desk" /></div>
+      <p class="tag" style="margin-top:10px">Fix this PDF in 30 seconds.</p>
+      <p class="desc">A fast, native document editor. Edit the real text — not sticky notes over it — sign, redact, OCR, and ship.</p>
+      <div class="meta"><span class="plat">Mac · iPhone</span><span class="when">in the works</span></div>
+    </article>
+
+    <!-- Washipad (meta) -->
+    <article class="note n-sky t4">
+      <span class="dots">•••</span>
+      <div class="pad">Note wall · Mac · iPhone</div>
+      <div class="logo"><img src="assets/logos/washipad.svg" alt="Washipad" /></div>
+      <div class="shot phone"><img src="assets/washipad.png" alt="Washipad sticky-note wall" /></div>
+      <p class="tag" style="margin-top:10px">Just paper.</p>
+      <p class="desc">A simple sticky-note wall. Peel a sheet, jot a thought, arrange it. <em>(You're looking at its design right now.)</em></p>
+      <div class="meta"><span class="plat">Mac · iPhone</span><span class="when">in the works</span></div>
+    </article>
+
+    <!-- personal statement -->
+    <article class="note n-lavender t1">
+      <span class="dots">•••</span>
+      <div class="pad">Why work with me</div>
+      <p class="quote">I would be honored to share my unique blend of creativity, management, analytical ability and high degree of technical fluency to advance your mission of augmenting those who aspire to create and build something great and unique for the world.</p>
+    </article>
+
+    <!-- SoriSpeak -->
+    <article class="note n-coral t2">
+      <span class="dots">•••</span>
+      <div class="pad">Creator tool · iPhone</div>
+      <div class="logo"><img src="assets/logos/sorispeak.png" alt="SoriSpeak" /></div>
+      <div class="shot phone"><img src="assets/sorispeak.png" alt="SoriSpeak turning an idea into a script" /></div>
+      <p class="tag" style="margin-top:10px">From rough idea to ready-to-record.</p>
+      <p class="desc">Turns a messy idea into a creator-ready script and lets you hear it performed before you record — rewrite, voice preview, teleprompter, captions.</p>
+      <div class="meta"><span class="plat">iPhone</span><span class="when">in the works</span></div>
+    </article>
+
+    <!-- SoriStory -->
+    <article class="note n-butter t3">
+      <span class="dots">•••</span>
+      <div class="pad">Family stories · iPhone · Android</div>
+      <div class="logo"><img src="assets/logos/soristory.png" alt="SoriStory" /></div>
+      <div class="shot phone"><img src="assets/soristory-home.png" alt="SoriStory home screen" /></div>
+      <p class="tag" style="margin-top:10px">Stories worth hearing, in a voice worth remembering.</p>
+      <p class="desc">AI storytelling for families. Generate stories or adapt folk tales, narrated in a calm AI voice — or a cloned one you love — across 23 languages.</p>
+      <div class="meta"><span class="plat">iPhone · Android</span><span class="when">in the works</span></div>
+    </article>
+
+    <!-- contact -->
+    <article class="note n-sage t4" id="contact">
+      <span class="dots">•••</span>
+      <div class="pad">Say hi</div>
+      <h2>Let's talk.</h2>
+      <p class="desc">The best way to reach me is email. I read everything.</p>
+      <a class="mailbtn" href="mailto:hyl107@gmail.com">hyl107@gmail.com</a>
+      <div class="meta"><span class="plat">h4yd3n</span><span class="when">always open</span></div>
+    </article>
+
+  </main>
+</div>
+
+<footer>Hayden Lee · © 2026</footer>
+
+<script>
+  // True masonry: build exactly N columns per breakpoint and drop each note into
+  // the shortest column — guarantees the count (5 on a laptop, 2 on a phone) and
+  // keeps the independently-packed, staggered look of the real Washipad wall.
+  (function(){
+    var wall = document.querySelector('.wall');
+    var notes = Array.prototype.slice.call(wall.querySelectorAll('.note')); // source order, kept
+    function colCount(){
+      var w = window.innerWidth;
+      if (w <= 660) return 2;   // tablet & phone — like the app
+      if (w <= 880) return 3;
+      if (w <= 1080) return 4;
+      return 5;                 // laptop & up — never more than 5
+    }
+    var current = -1;
+    function layout(){
+      var n = colCount();
+      if (n === current) return;        // only rebuild when the count actually changes
+      current = n;
+      wall.innerHTML = '';
+      var cols = [];
+      for (var i = 0; i < n; i++){
+        var c = document.createElement('div');
+        c.className = 'col';
+        wall.appendChild(c);
+        cols.push(c);
+      }
+      notes.forEach(function(note){
+        var shortest = cols[0];
+        for (var j = 1; j < cols.length; j++){
+          if (cols[j].offsetHeight < shortest.offsetHeight) shortest = cols[j];
+        }
+        shortest.appendChild(note);
+      });
+    }
+    layout();
+    var t;
+    window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(layout, 120); });
+    window.addEventListener('load', function(){ current = -1; layout(); }); // re-pack once images set heights
+  })();
+</script>
+
+</body>
+</html>

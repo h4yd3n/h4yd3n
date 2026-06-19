@@ -1,0 +1,14 @@
+<svg viewBox="0 0 300 70" width="300" height="70" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(8,6) scale(0.56)">
+    <path d="M19 30 L37 78 L50 44 L63 78 L81 30" fill="none" stroke="#29261F" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="rotate(-21 30 22)">
+      <rect x="7" y="13.5" width="46" height="17" rx="3" fill="#C73E2D" fill-opacity="0.84"/>
+      <circle cx="18" cy="22" r="2.6" fill="#FDFBF5"/>
+      <circle cx="30" cy="22" r="2.6" fill="#FDFBF5"/>
+      <circle cx="42" cy="22" r="2.6" fill="#FDFBF5"/>
+    </g>
+  </g>
+  <text x="50" y="52.5" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="37" font-weight="600">
+    <tspan fill="#29261F">ashi</tspan><tspan fill="#C73E2D"> · </tspan><tspan fill="#29261F">doc</tspan>
+  </text>
+</svg>
