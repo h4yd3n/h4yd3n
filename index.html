@@ -69,6 +69,8 @@
   .note h2{font-size:18px;font-weight:800;letter-spacing:-.01em;margin-top:6px;line-height:1.12}
   /* brand wordmark in place of a plain text title — transparent, sits straight on the paper */
   .note .logo{margin-top:9px;margin-bottom:1px}
+  .note .logo a{display:inline-block;transition:opacity .15s ease}
+  .note .logo a:hover{opacity:.6}
   .note .logo img{height:34px;width:auto;max-width:100%;display:block}
   .note .tag{font-size:13.5px;font-weight:600;margin-top:7px;line-height:1.3}
   .note .desc{font-size:12.5px;color:var(--note-muted);margin-top:8px;line-height:1.5}
@@ -78,6 +80,9 @@
 
   .shot{margin-top:11px;border-radius:8px;overflow:hidden;border:1px solid rgba(41,38,31,.12);background:#fff}
   .shot img{display:block;width:100%}
+  .shot a{display:block}
+  .shot a img{transition:transform .2s ease}
+  .shot a:hover img{transform:scale(1.025)}
   /* phone shots look better letterboxed on a tinted ground */
   .shot.phone{background:linear-gradient(160deg,#fbf8f0,#efe7d4);padding:10px 20px 0;border:1px solid rgba(41,38,31,.10)}
   .shot.phone img{border-radius:11px 11px 0 0;box-shadow:0 8px 18px -12px rgba(41,38,31,.5)}
@@ -136,7 +141,7 @@
     <article class="note n-peach t2">
       <span class="dots">•••</span>
       <div class="pad">Daily note · iPhone</div>
-      <div class="logo"><img src="assets/logos/constantfloat.png" alt="ConstantFloat" /></div>
+      <div class="logo"><a href="https://constantfloat.com" target="_blank" rel="noopener"><img src="assets/logos/constantfloat.png" alt="ConstantFloat" /></a></div>
       <p class="tag">One calm daily note, for a life that won't sit still.</p>
       <p class="desc">A private, once-a-day note that answers the whole person — not just your to-do list. One warm signal each morning, then you close the app.</p>
       <div class="meta"><span class="plat">iPhone</span><span class="when">in the works</span></div>
@@ -146,8 +151,8 @@
     <article class="note n-sage t3">
       <span class="dots">•••</span>
       <div class="pad">PDF editor · Mac · iPhone</div>
-      <div class="logo"><img src="assets/logos/washidoc.svg" alt="Washidoc" /></div>
-      <div class="shot phone"><img src="assets/washidoc.png" alt="Washidoc document desk" /></div>
+      <div class="logo"><a href="https://washidoc.com" target="_blank" rel="noopener"><img src="assets/logos/washidoc.svg" alt="Washidoc" /></a></div>
+      <div class="shot phone"><a href="https://washidoc.com" target="_blank" rel="noopener"><img src="assets/washidoc.png" alt="Washidoc document desk" /></a></div>
       <p class="tag" style="margin-top:10px">Fix this PDF in 30 seconds.</p>
       <p class="desc">A fast, native document editor. Edit the real text — not sticky notes over it — sign, redact, OCR, and ship.</p>
       <div class="meta"><span class="plat">Mac · iPhone</span><span class="when">in the works</span></div>
@@ -157,8 +162,8 @@
     <article class="note n-sky t4">
       <span class="dots">•••</span>
       <div class="pad">Note wall · Mac · iPhone</div>
-      <div class="logo"><img src="assets/logos/washipad.svg" alt="Washipad" /></div>
-      <div class="shot phone"><img src="assets/washipad.png" alt="Washipad sticky-note wall" /></div>
+      <div class="logo"><a href="https://washipad.com" target="_blank" rel="noopener"><img src="assets/logos/washipad.svg" alt="Washipad" /></a></div>
+      <div class="shot phone"><a href="https://washipad.com" target="_blank" rel="noopener"><img src="assets/washipad.png" alt="Washipad sticky-note wall" /></a></div>
       <p class="tag" style="margin-top:10px">Just paper.</p>
       <p class="desc">A simple sticky-note wall. Peel a sheet, jot a thought, arrange it. <em>(You're looking at its design right now.)</em></p>
       <div class="meta"><span class="plat">Mac · iPhone</span><span class="when">in the works</span></div>
@@ -175,8 +180,8 @@
     <article class="note n-coral t2">
       <span class="dots">•••</span>
       <div class="pad">Creator tool · iPhone</div>
-      <div class="logo"><img src="assets/logos/sorispeak.png" alt="SoriSpeak" /></div>
-      <div class="shot phone"><img src="assets/sorispeak.png" alt="SoriSpeak turning an idea into a script" /></div>
+      <div class="logo"><a href="https://sorispeak.com" target="_blank" rel="noopener"><img src="assets/logos/sorispeak.png" alt="SoriSpeak" /></a></div>
+      <div class="shot phone"><a href="https://sorispeak.com" target="_blank" rel="noopener"><img src="assets/sorispeak.png" alt="SoriSpeak turning an idea into a script" /></a></div>
       <p class="tag" style="margin-top:10px">From rough idea to ready-to-record.</p>
       <p class="desc">Turns a messy idea into a creator-ready script and lets you hear it performed before you record — rewrite, voice preview, teleprompter, captions.</p>
       <div class="meta"><span class="plat">iPhone</span><span class="when">in the works</span></div>
@@ -186,8 +191,8 @@
     <article class="note n-butter t3">
       <span class="dots">•••</span>
       <div class="pad">Family stories · iPhone · Android</div>
-      <div class="logo"><img src="assets/logos/soristory.png" alt="SoriStory" /></div>
-      <div class="shot phone"><img src="assets/soristory-home.png" alt="SoriStory home screen" /></div>
+      <div class="logo"><a href="https://soristory.com" target="_blank" rel="noopener"><img src="assets/logos/soristory.png" alt="SoriStory" /></a></div>
+      <div class="shot phone"><a href="https://soristory.com" target="_blank" rel="noopener"><img src="assets/soristory-home.png" alt="SoriStory home screen" /></a></div>
       <p class="tag" style="margin-top:10px">Stories worth hearing, in a voice worth remembering.</p>
       <p class="desc">AI storytelling for families. Generate stories or adapt folk tales, narrated in a calm AI voice — or a cloned one you love — across 23 languages.</p>
       <div class="meta"><span class="plat">iPhone · Android</span><span class="when">in the works</span></div>
