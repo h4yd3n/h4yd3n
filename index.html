@@ -77,6 +77,8 @@
   .note .meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;font-size:11px;color:var(--note-muted)}
   .note .meta .plat{font-weight:700}
   .note .meta .when{font-style:italic;white-space:nowrap}
+  .note .meta a.when.live{font-style:normal;font-weight:800;color:var(--note-ink);text-decoration:none;border-bottom:1.5px solid var(--vermillion);transition:color .15s ease}
+  .note .meta a.when.live:hover{color:var(--vermillion)}
 
   .shot{margin-top:11px;border-radius:8px;overflow:hidden;border:1px solid rgba(41,38,31,.12);background:#fff}
   .shot img{display:block;width:100%}
@@ -198,7 +200,7 @@
       <div class="shot phone"><a href="https://soristory.com" target="_blank" rel="noopener"><img src="assets/soristory-home.png" alt="SoriStory home screen" /></a></div>
       <p class="tag" style="margin-top:10px">Stories worth hearing, in a voice worth remembering.</p>
       <p class="desc">AI storytelling for families. Generate stories or adapt folk tales, narrated in a calm AI voice — or a cloned one you love — across 23 languages.</p>
-      <div class="meta"><span class="plat">iPhone · Android</span><span class="when">in the works</span></div>
+      <div class="meta"><span class="plat">iPhone · Android</span><a class="when live" href="https://apps.apple.com/us/app/soristory-your-storyteller/id6762029388" target="_blank" rel="noopener">App Store ↗</a><a class="when live" href="https://play.google.com/store/apps/details?id=com.soristory.app" target="_blank" rel="noopener">Google Play ↗</a></div>
     </article>
 
     <!-- contact -->
