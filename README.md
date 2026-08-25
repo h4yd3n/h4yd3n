@@ -9,9 +9,13 @@ Building calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, an
 - 🎤 [SoriSpeak](https://sorispeak.com) — a teleprompter for creators *(in progress)*
 - 🌊 [ConstantFloat](https://constantfloat.com) — a mental health app built against engagement *(in progress)*
 
+🛠️ **Stack:** Swift/SwiftUI, Kotlin, Firebase, Cloudflare — Claude, Gemini, and Codex for the AI layer, ElevenLabs for voice cloning.
+
 🎖️ Before this: Chief of Staff / Head of Ops at high-growth startups, Trust & Safety at TikTok, and a few years in the Army.
 
 [LinkedIn](https://www.linkedin.com/in/h4yd3n) · [h4yd3n.com](https://h4yd3n.com)
+
+*Production code stays in private repos — the apps above are live and free to try.*
 
 ---
 
