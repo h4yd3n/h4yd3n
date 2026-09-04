@@ -5,8 +5,8 @@ Building calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, an
 - 🌙 [SoriStory](https://soristory.com) — AI-narrated bedtime stories with voice cloning
 - 📄 [Washidoc](https://washidoc.com) — a fast, free PDF editor
 - 🗒️ [Washipad](https://washipad.com) — a simple sticky-note wall
-- 🎨 [SoriToon](https://soritoon.com) — an AI-illustrated webtoon *(in progress)*
-- 🎤 [SoriSpeak](https://sorispeak.com) — a teleprompter for creators *(in progress)*
+- 🎨 [SoriToon](https://soritoon.com) — an AI-illustrated webtoon
+- 🎤 [SoriSpeak](https://sorispeak.com) — a teleprompter for creators
 - 🌊 [ConstantFloat](https://constantfloat.com) — a mental health app built against engagement *(in progress)*
 
 🛠️ **Stack:** Swift/SwiftUI, Kotlin, Firebase, Cloudflare — Claude, Gemini, and Codex for the AI layer, ElevenLabs for voice cloning.
