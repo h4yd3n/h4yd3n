@@ -223,6 +223,14 @@
       text-align: center;
       position: relative;
     }
+    body.tab-under-construction .hero {
+      min-height: calc(100vh - 160px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 70px 24px;
+    }
     .hero-eyebrow {
       display: inline-flex;
       align-items: center;
@@ -748,18 +756,20 @@
 
     <div class="hero-ctas">
       <a href="#quickstart" class="btn btn-primary" id="hero-primary-cta" style="padding:10px 20px; font-size:14px;">Deploy Local Wall (make run-cop)</a>
-      <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:10px 20px; font-size:14px;">Browse Source on GitHub</a>
-      <a href="https://h4yd3n.com" class="btn btn-secondary" style="padding:10px 20px; font-size:14px;">Creator Portfolio (h4yd3n.com)</a>
+      <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-secondary" id="hero-secondary-cta" style="padding:10px 20px; font-size:14px;">Browse Source on GitHub</a>
+      <a href="https://h4yd3n.com" class="btn btn-secondary" id="hero-tertiary-cta" style="padding:10px 20px; font-size:14px;">Creator Portfolio (h4yd3n.com)</a>
     </div>
 
     <div style="margin-top:-20px; margin-bottom:20px;">
       <div style="font-family:var(--mono); font-size:12px; color:var(--text-muted); display:inline-flex; align-items:center; gap:8px; background:rgba(59,130,246,0.08); border:1px dashed rgba(59,130,246,0.3); padding:8px 18px; border-radius:999px;">
         <span>🤝</span>
-        <span><strong>Collaborators wanted:</strong> I'd love to get collaborators who are interested in working on this open-source project with me — <a href="#collaborate" style="color:var(--brand-accent); text-decoration:underline; font-weight:600;">join us ↓</a></span>
+        <span><strong>Collaborators wanted:</strong> I'd love to get collaborators who are interested in working on this open-source project with me — <a id="collab-pill-link" href="#collaborate" style="color:var(--brand-accent); text-decoration:underline; font-weight:600;">join us ↓</a></span>
       </div>
     </div>
   </header>
 
+  <!-- COPTOC Body Content (Wall, Features, Doctrine, Collab section, Quickstart) - hidden on SIGTOC & MODTOC -->
+  <div id="coptoc-body-content">
   <!-- Interactive Mockup Window -->
   <main class="mockup-container">
     <div class="window-frame">
@@ -1073,6 +1083,7 @@
       </pre>
     </div>
   </section>
+  </div> <!-- /#coptoc-body-content -->
 
   <!-- Footer -->
   <footer>
@@ -1102,10 +1113,18 @@
         eyebrow: 'COPTOC · THE COMMON OPERATING PICTURE',
         title: 'One common operating picture. Built the way a military staff runs one.',
         lead: 'The wall a Battle Captain runs a 12-hour shift from. Fuses S1 Personnel, S2 Intel, S3 Operations, and S6 Communications onto a single pane of glass — with zero external keys required to run locally.',
-        btnText: 'Deploy Local Wall',
+        btnText: 'Launch Wall',
         btnHref: '#quickstart',
-        heroBtnText: 'Deploy Local Wall (make run-cop)',
-        heroBtnHref: '#quickstart',
+        btnTarget: '_self',
+        primaryCtaText: 'Deploy Local Wall (make run-cop)',
+        primaryCtaHref: '#quickstart',
+        primaryCtaTarget: '_self',
+        secondaryCtaText: 'Browse Source on GitHub',
+        secondaryCtaHref: 'https://github.com/h4yd3n/toc',
+        secondaryCtaTarget: '_blank',
+        pillLinkText: 'join us ↓',
+        pillLinkHref: '#collaborate',
+        pillLinkTarget: '_self',
         featTag: 'COPTOC CAPABILITIES',
         featTitle: 'Engineered for the 24/7 Watch Floor',
         cards: [
@@ -1120,32 +1139,40 @@
       sigtoc: {
         accent: '#f59e0b',
         glow: 'rgba(245, 158, 11, 0.25)',
-        badge: 'SIGTOC · UNDER CONSTRUCTION',
-        badgeClass: 'badge-sigtoc',
-        windowName: 'SIGTOC · Under Construction · S2 Intelligence Fusion Pipeline (:8002)',
-        displayLabel: '🚧 UNDER CONSTRUCTION · NO GUI YET',
         eyebrow: 'SIGTOC · UNDER CONSTRUCTION · S2 INTEL FUSION ENGINE',
         title: 'Autonomous intelligence fusion engine. Under construction.',
-        lead: 'SIGTOC currently runs as a headless backend service and Python library. It ingests open feeds, maps them into STIX 2.1 graphs, and streams threat entities directly into COPTOC. We do not have a standalone GUI built yet — the workbench is under construction and we are looking for collaborators.',
-        btnText: 'Collaborate on S2',
-        btnHref: '#collaborate',
-        heroBtnText: 'Collaborate on SIGTOC',
-        heroBtnHref: '#collaborate'
+        lead: 'SIGTOC currently runs as a headless backend service and Python library. It ingests open feeds, maps them into STIX 2.1 graphs, and streams threat entities directly into COPTOC. We do not have a GUI built yet — the workbench is under construction and we are looking for collaborators.',
+        btnText: 'Collaborate on GitHub',
+        btnHref: 'https://github.com/h4yd3n/toc',
+        btnTarget: '_blank',
+        primaryCtaText: 'Collaborate on GitHub ↗',
+        primaryCtaHref: 'https://github.com/h4yd3n/toc',
+        primaryCtaTarget: '_blank',
+        secondaryCtaText: 'Message on LinkedIn ↗',
+        secondaryCtaHref: 'https://www.linkedin.com/in/h4yd3n',
+        secondaryCtaTarget: '_blank',
+        pillLinkText: 'get involved on GitHub ↗',
+        pillLinkHref: 'https://github.com/h4yd3n/toc',
+        pillLinkTarget: '_blank'
       },
       modtoc: {
         accent: '#c084fc',
         glow: 'rgba(192, 132, 252, 0.25)',
-        badge: 'MODTOC · UNDER CONSTRUCTION',
-        badgeClass: 'badge-modtoc',
-        windowName: 'MODTOC · Under Construction · Trust & Safety RFC & Specification',
-        displayLabel: '🚧 UNDER CONSTRUCTION',
         eyebrow: 'MODTOC · UNDER CONSTRUCTION · WE HAVEN\'T BUILT THIS YET',
         title: 'Trust & Safety content moderation. Under construction.',
         lead: 'We haven’t built out the MODTOC engine or GUI yet — it is currently in the open-source planning and specification phase. We are looking for Trust & Safety practitioners, policy leads, and engineers to collaborate with us and build it from the ground up.',
-        btnText: 'Join Working Group',
-        btnHref: '#collaborate',
-        heroBtnText: 'Join MODTOC Working Group',
-        heroBtnHref: '#collaborate'
+        btnText: 'Collaborate on GitHub',
+        btnHref: 'https://github.com/h4yd3n/toc',
+        btnTarget: '_blank',
+        primaryCtaText: 'Collaborate on GitHub ↗',
+        primaryCtaHref: 'https://github.com/h4yd3n/toc',
+        primaryCtaTarget: '_blank',
+        secondaryCtaText: 'Message on LinkedIn ↗',
+        secondaryCtaHref: 'https://www.linkedin.com/in/h4yd3n',
+        secondaryCtaTarget: '_blank',
+        pillLinkText: 'get involved on GitHub ↗',
+        pillLinkHref: 'https://github.com/h4yd3n/toc',
+        pillLinkTarget: '_blank'
       }
     };
 
@@ -1156,11 +1183,6 @@
       // Update pills
       document.querySelectorAll('.tab-pill').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tab === tabId);
-      });
-
-      // Update tab views
-      document.querySelectorAll('.tab-view').forEach(view => {
-        view.classList.toggle('active', view.id === `view-${tabId}`);
       });
 
       // Update CSS variables
@@ -1176,24 +1198,45 @@
       document.getElementById('hero-title').textContent = data.title;
       document.getElementById('hero-lead').textContent = data.lead;
 
-      // Update Window frame
-      const badge = document.getElementById('window-badge');
-      badge.textContent = data.badge;
-      badge.className = `badge ${data.badgeClass}`;
-      document.getElementById('window-name').textContent = data.windowName;
-      const dispLabel = document.getElementById('display-label');
-      if (dispLabel) dispLabel.textContent = data.displayLabel;
+      // Toggle everything after that line:
+      // Only COPTOC displays the full body content (wall, features, doctrine, collaborate section, quickstart)
+      // SIGTOC and MODTOC delete everything after that line
+      const coptocBody = document.getElementById('coptoc-body-content');
+      if (coptocBody) {
+        coptocBody.style.display = tabId === 'coptoc' ? 'block' : 'none';
+      }
+      document.body.classList.toggle('tab-under-construction', tabId !== 'coptoc');
 
-      // Toggle Features section: only displayed for COPTOC (SIGTOC and MODTOC are under construction)
-      const featSec = document.getElementById('coptoc-features');
-      if (featSec) {
-        featSec.style.display = tabId === 'coptoc' ? 'block' : 'none';
+      // Update Header CTA button (navbar)
+      const heroBtn = document.getElementById('hero-btn');
+      if (heroBtn && data.btnText) {
+        heroBtn.textContent = data.btnText;
+        heroBtn.href = data.btnHref;
+        heroBtn.target = data.btnTarget || '_self';
       }
 
-      // Toggle Quickstart section: only displayed for COPTOC (SIGTOC and MODTOC delete everything after collabs wanted)
-      const quickSec = document.getElementById('quickstart');
-      if (quickSec) {
-        quickSec.style.display = tabId === 'coptoc' ? 'block' : 'none';
+      // Update Hero Primary CTA button
+      const heroPrimary = document.getElementById('hero-primary-cta');
+      if (heroPrimary && data.primaryCtaText) {
+        heroPrimary.textContent = data.primaryCtaText;
+        heroPrimary.href = data.primaryCtaHref;
+        heroPrimary.target = data.primaryCtaTarget || '_self';
+      }
+
+      // Update Hero Secondary CTA button
+      const heroSecondary = document.getElementById('hero-secondary-cta');
+      if (heroSecondary && data.secondaryCtaText) {
+        heroSecondary.textContent = data.secondaryCtaText;
+        heroSecondary.href = data.secondaryCtaHref;
+        heroSecondary.target = data.secondaryCtaTarget || '_self';
+      }
+
+      // Update Collaborators Wanted pill link
+      const pillLink = document.getElementById('collab-pill-link');
+      if (pillLink && data.pillLinkText) {
+        pillLink.textContent = data.pillLinkText;
+        pillLink.href = data.pillLinkHref;
+        pillLink.target = data.pillLinkTarget || '_self';
       }
 
       // If switching to COPTOC, ensure capability cards are populated
@@ -1201,27 +1244,15 @@
         document.getElementById('feat-tag').textContent = data.featTag;
         document.getElementById('feat-title').textContent = data.featTitle;
         const grid = document.getElementById('feat-grid');
-        grid.innerHTML = data.cards.map(c => `
-          <div class="card">
-            <div class="card-icon">${c.icon}</div>
-            <div class="card-title">${c.title} <span class="card-code">${c.code}</span></div>
-            <p class="card-desc">${c.desc}</p>
-          </div>
-        `).join('');
-      }
-
-      // Update Header CTA button (navbar)
-      const heroBtn = document.getElementById('hero-btn');
-      if (heroBtn && data.btnText) {
-        heroBtn.textContent = data.btnText;
-        heroBtn.href = data.btnHref;
-      }
-
-      // Update Hero Primary CTA button
-      const heroPrimary = document.getElementById('hero-primary-cta');
-      if (heroPrimary && data.heroBtnText) {
-        heroPrimary.textContent = data.heroBtnText;
-        heroPrimary.href = data.heroBtnHref;
+        if (grid) {
+          grid.innerHTML = data.cards.map(c => `
+            <div class="card">
+              <div class="card-icon">${c.icon}</div>
+              <div class="card-title">${c.title} <span class="card-code">${c.code}</span></div>
+              <p class="card-desc">${c.desc}</p>
+            </div>
+          `).join('');
+        }
       }
 
       // Update URL hash without scroll
