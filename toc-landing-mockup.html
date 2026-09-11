@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TOC — Tactical Operations Center (COPTOC · SIGTOC · MODTOC)</title>
+  <meta name="description" content="An open-source Tactical Operations Center for corporate security and Trust & Safety. COPTOC (Common Operating Picture), SIGTOC (Intelligence Fusion), and MODTOC (Content Moderation)." />
+  <link rel="icon" type="image/svg+xml" href="assets/mark.svg" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111821;
+      --panel-hover: #16202c;
+      --panel-active: #1a2634;
+      --border: #223041;
+      --border-bright: #2f435b;
+      --text: #dce4ee;
+      --text-muted: #7b8aa0;
+      --text-dim: #4d5b6e;
+      --blue: #3b82f6;
+      --blue-glow: rgba(59, 130, 246, 0.25);
+      --amber: #f59e0b;
+      --amber-glow: rgba(245, 158, 11, 0.25);
+      --purple: #c084fc;
+      --purple-glow: rgba(192, 132, 252, 0.25);
+      --red: #ef4444;
+      --green: #22c55e;
+      --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --brand-accent: var(--blue);
+      --brand-glow: var(--blue-glow);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background-color: var(--bg); }
+    body {
+      font-family: var(--sans);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Top Utility Header */
+    .top-strip {
+      background: #080c10;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 6px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.05em;
+    }
+    .top-strip .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--green);
+    }
+    .top-strip .status-pill::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    /* Sticky Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 15, 20, 0.88);
+      backdrop-filter: blur(14px) saturate(1.3);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      transition: transform 0.2s ease;
+    }
+    .brand-lockup:hover .brand-mark {
+      transform: scale(1.08);
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-title {
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+    .brand-sub {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Washidoc-style Product Tabs */
+    .tab-pills {
+      display: flex;
+      align-items: center;
+      background: #0d131a;
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      gap: 4px;
+    }
+    .tab-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      background: transparent;
+    }
+    .tab-pill:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .tab-pill .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .tab-pill.active {
+      background: var(--panel);
+      color: #ffffff;
+      border-color: var(--border-bright);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .tab-pill[data-tab="coptoc"].active .dot {
+      background: var(--blue);
+      box-shadow: 0 0 8px var(--blue);
+    }
+    .tab-pill[data-tab="sigtoc"].active .dot {
+      background: var(--amber);
+      box-shadow: 0 0 8px var(--amber);
+    }
+    .tab-pill[data-tab="modtoc"].active .dot {
+      background: var(--purple);
+      box-shadow: 0 0 8px var(--purple);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .btn-secondary {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: var(--panel-hover);
+      border-color: var(--border-bright);
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 16px var(--blue-glow);
+    }
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 24px var(--blue-glow);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 60px 24px 30px;
+      text-align: center;
+      position: relative;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: rgba(34, 48, 65, 0.5);
+      border: 1px solid var(--border);
+      color: var(--brand-accent);
+      margin-bottom: 20px;
+      transition: color 0.3s;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+      max-width: 22ch;
+      margin: 0 auto 18px;
+      color: #ffffff;
+    }
+    .hero p.lead {
+      font-size: clamp(16px, 2.2vw, 19px);
+      color: var(--text-muted);
+      max-width: 58ch;
+      margin: 0 auto 32px;
+      line-height: 1.5;
+    }
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    /* Interactive Wall & Mockup Frame */
+    .mockup-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+    .window-frame {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+    .window-header {
+      background: #0e141c;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .window-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+    .window-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .window-title .badge {
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 9px;
+      letter-spacing: 0.05em;
+    }
+    .badge-coptoc { background: rgba(59, 130, 246, 0.2); color: var(--blue); border: 1px solid var(--blue); }
+    .badge-sigtoc { background: rgba(245, 158, 11, 0.2); color: var(--amber); border: 1px solid var(--amber); }
+    .badge-modtoc { background: rgba(192, 132, 252, 0.2); color: var(--purple); border: 1px solid var(--purple); }
+
+    /* Tab View Content */
+    .tab-view {
+      display: none;
+      animation: fadeIn 0.25s ease forwards;
+    }
+    .tab-view.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .screenshot-hero {
+      position: relative;
+      width: 100%;
+      background: #000000;
+    }
+    .screenshot-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    /* Hotspot callouts on screenshot */
+    .hotspot-bar {
+      background: #0e141c;
+      border-top: 1px solid var(--border);
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      font-family: var(--mono);
+    }
+    .hotspot-item {
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 11px;
+    }
+    .hotspot-label {
+      font-weight: 700;
+      color: var(--brand-accent);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.04em;
+    }
+    .hotspot-desc {
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Features Grid */
+    .features-section {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 30px 24px 80px;
+    }
+    .section-header {
+      margin-bottom: 40px;
+      text-align: left;
+    }
+    .section-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brand-accent);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+      background: var(--panel-hover);
+    }
+    .card-icon {
+      font-size: 24px;
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-title .card-code {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--brand-accent);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Doctrine & Founder Section */
+    .doctrine-section {
+      background: #080c10;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 24px;
+    }
+    .doctrine-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 840px) {
+      .doctrine-inner { grid-template-columns: 1fr; }
+    }
+    .doctrine-quote {
+      border-left: 3px solid var(--brand-accent);
+      padding-left: 20px;
+      font-size: 18px;
+      line-height: 1.55;
+      font-style: italic;
+      color: var(--text);
+    }
+    .doctrine-author {
+      margin-top: 16px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .doctrine-author strong {
+      color: #ffffff;
+      font-size: 13px;
+    }
+    .doctrine-rules {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .rule-item {
+      display: flex;
+      gap: 14px;
+      font-size: 14px;
+    }
+    .rule-num {
+      font-family: var(--mono);
+      font-weight: 700;
+      color: var(--brand-accent);
+      flex-shrink: 0;
+    }
+    .rule-body strong {
+      color: #ffffff;
+    }
+    .rule-body p {
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Terminal Quickstart */
+    .terminal-section {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 70px 24px;
+    }
+    .terminal-box {
+      background: #080c10;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: var(--mono);
+    }
+    .terminal-bar {
+      background: #111821;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .terminal-code {
+      padding: 20px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #a5d6ff;
+      overflow-x: auto;
+    }
+    .terminal-code .comment { color: var(--text-dim); }
+    .terminal-code .cmd { color: #58a6ff; font-weight: 600; }
+
+    /* Mobile Watch Station Showcase */
+    .mobile-section {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 30px 24px 70px;
+    }
+    .mobile-container {
+      background: linear-gradient(180deg, #0f1622 0%, #0a0f16 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 52px;
+      align-items: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+    @media (max-width: 920px) {
+      .mobile-container {
+        grid-template-columns: 1fr;
+        padding: 32px 20px;
+        gap: 36px;
+      }
+    }
+    .phone-mockup-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+    .phone-bezel {
+      width: 100%;
+      max-width: 300px;
+      aspect-ratio: 9 / 19.5;
+      background: #000;
+      border-radius: 46px;
+      padding: 9px;
+      box-shadow: 0 30px 70px -10px rgba(0,0,0,0.9), 0 0 0 2px #2a3848, 0 0 0 4px #121922;
+      position: relative;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 38px;
+      overflow: hidden;
+      position: relative;
+      background: #06090d;
+    }
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mobile-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .mobile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .mobile-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .mobile-card-title {
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mobile-card-desc {
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Collab Section */
+    .collab-section {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 20px 24px 70px;
+    }
+    .collab-box {
+      background: linear-gradient(180deg, rgba(17, 24, 33, 0.95) 0%, rgba(11, 16, 23, 0.98) 100%);
+      border: 1px solid var(--border-bright);
+      border-radius: 12px;
+      padding: 48px 36px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+    .collab-roles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+      text-align: left;
+    }
+    .collab-role-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .collab-role-card .role-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .collab-role-card .role-title {
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+    .collab-role-card .role-desc {
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: #080c10;
+      padding: 40px 24px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .footer-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Strip -->
+  <div class="top-strip">
+    <div class="status-pill">TACTICAL OPERATIONS CENTER · V1.0 RECON</div>
+    <div>APACHE 2.0 OPEN SOURCE · FASTAPI · REACT · SWIFTUI · KOTLIN</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <div class="brand-lockup" onclick="switchTab('coptoc')">
+        <svg class="brand-mark" viewBox="0 0 1024 1024">
+          <polygon points="190,834 214,788 858,214 834,190 810,236 166,810" id="nav-slash" fill="#3b82f6" opacity="0.8"/>
+          <path d="M512 182L644 314M667 337L687 357M710 380L842 512M842 512L710 644M687 667L667 687M644 710L512 842M512 842L380 710M357 687L337 667M314 644L182 512M182 512L314 380M337 357L357 337M380 314L512 182" stroke="#dce4ee" stroke-width="48" fill="none"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-title">TOC</span>
+          <span class="brand-sub">Tactical Operations Center</span>
+        </div>
+      </div>
+
+      <!-- Module Switcher Tabs -->
+      <div class="tab-pills">
+        <button class="tab-pill active" data-tab="coptoc" onclick="switchTab('coptoc')">
+          <span class="dot"></span> COPTOC
+        </button>
+        <button class="tab-pill" data-tab="sigtoc" onclick="switchTab('sigtoc')">
+          <span class="dot"></span> SIGTOC
+        </button>
+        <button class="tab-pill" data-tab="modtoc" onclick="switchTab('modtoc')">
+          <span class="dot"></span> MODTOC
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="nav-actions">
+        <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          GitHub
+        </a>
+        <a href="#quickstart" class="btn btn-primary" id="hero-btn">Launch Wall</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-eyebrow" id="hero-eyebrow">COPTOC · THE COMMON OPERATING PICTURE</div>
+    <h1 id="hero-title">One common operating picture. Built the way a military staff runs one.</h1>
+    <p class="lead" id="hero-lead">
+      The wall a Battle Captain runs a 12-hour shift from. Fuses S1 Personnel, S2 Intel, S3 Operations, and S6 Communications onto a single pane of glass — with zero external keys required to run locally.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#quickstart" class="btn btn-primary" style="padding:10px 20px; font-size:14px;">Deploy Local Wall (make run-cop)</a>
+      <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:10px 20px; font-size:14px;">Browse Source on GitHub</a>
+      <a href="https://h4yd3n.com" class="btn btn-secondary" style="padding:10px 20px; font-size:14px;">Creator Portfolio (h4yd3n.com)</a>
+    </div>
+
+    <div style="margin-top:-20px; margin-bottom:20px;">
+      <div style="font-family:var(--mono); font-size:12px; color:var(--text-muted); display:inline-flex; align-items:center; gap:8px; background:rgba(59,130,246,0.08); border:1px dashed rgba(59,130,246,0.3); padding:8px 18px; border-radius:999px;">
+        <span>🤝</span>
+        <span><strong>Collaborators wanted:</strong> I'd love to get collaborators who are interested in working on this open-source project with me — <a href="#collaborate" style="color:var(--brand-accent); text-decoration:underline; font-weight:600;">join us ↓</a></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Mockup Window -->
+  <main class="mockup-container">
+    <div class="window-frame">
+      <div class="window-header">
+        <div class="window-dots">
+          <div class="window-dot"></div>
+          <div class="window-dot"></div>
+          <div class="window-dot"></div>
+        </div>
+        <div class="window-title">
+          <span id="window-badge" class="badge badge-coptoc">COPTOC</span>
+          <span id="window-name">Tactical Operations Wall · Dublin Watch · Posture: Critical</span>
+        </div>
+        <div>1920 × 1080 FULL DISPLAY</div>
+      </div>
+
+      <!-- Tab View 1: COPTOC -->
+      <div class="tab-view active" id="view-coptoc">
+        <div class="screenshot-hero">
+          <img src="assets/wall.png" alt="COPTOC Common Operating Picture Full Wall" />
+        </div>
+        <div class="hotspot-bar">
+          <div class="hotspot-item">
+            <div class="hotspot-label"><span style="color:var(--red);">●</span> FLASH ALERT BAR</div>
+            <div class="hotspot-desc">High-priority red alert bar triggers upon verified threat. Requires explicit human role acknowledgment.</div>
+          </div>
+          <div class="hotspot-item">
+            <div class="hotspot-label"><span style="color:var(--blue);">●</span> S1 PERSONNEL</div>
+            <div class="hotspot-desc">Blue-force tracker, site present/assigned tallies, traveler check-ins with 2-hour freshness chips.</div>
+          </div>
+          <div class="hotspot-item">
+            <div class="hotspot-label"><span style="color:var(--amber);">●</span> S2 INTEL FUSION</div>
+            <div class="hotspot-desc">Requirements coverage, live natural hazard feeds (GDACS, USGS, NOAA), and pending warnings awaiting release.</div>
+          </div>
+          <div class="hotspot-item">
+            <div class="hotspot-label"><span style="color:var(--purple);">●</span> S3 &amp; BATTLE LOG</div>
+            <div class="hotspot-desc">90-day operation cards, travel schedules, and an immutable, hash-chained ledger of every watch event.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab View 2: SIGTOC -->
+      <div class="tab-view" id="view-sigtoc">
+        <div style="background: #0c1219; padding: 40px; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+          <div style="max-width: 780px;">
+            <div style="display:inline-block; font-family:var(--mono); font-size:12px; color:var(--amber); padding:4px 10px; border:1px solid var(--amber); border-radius:4px; margin-bottom:18px;">
+              S2 INTELLIGENCE FUSION WORKSPACE
+            </div>
+            <h2 style="font-size:32px; font-weight:800; color:#ffffff; margin-bottom:14px;">The requirements write themselves from the wall.</h2>
+            <p style="color:var(--text-muted); font-size:16px; margin-bottom:28px;">
+              SIGTOC connects live threat indicators directly to operational trips and sites. When an executive flies to Riyadh or London, SIGTOC automatically spins up collection tasks, monitors live sensors, and alerts on anomalies.
+            </p>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; text-align:left; font-family:var(--mono); font-size:12px;">
+              <div style="background:#111821; border:1px solid var(--border); padding:14px; border-radius:6px;">
+                <div style="color:var(--amber); font-weight:700; margin-bottom:4px;">6 KEYLESS COLLECTORS</div>
+                <div style="color:var(--text-muted)">USGS earthquakes, GDACS hazards, NWS/NOAA alerts, WHO outbreaks, State Dept &amp; FCDO advisories.</div>
+              </div>
+              <div style="background:#111821; border:1px solid var(--border); padding:14px; border-radius:6px;">
+                <div style="color:var(--amber); font-weight:700; margin-bottom:4px;">AREA ASSESSMENT</div>
+                <div style="color:var(--text-muted)">Side-by-side indicator matrix with reported, quiet, and not-collected cells — no arbitrary machine score.</div>
+              </div>
+              <div style="background:#111821; border:1px solid var(--border); padding:14px; border-radius:6px;">
+                <div style="color:var(--amber); font-weight:700; margin-bottom:4px;">DAILY INTSUM</div>
+                <div style="color:var(--text-muted)">Automated 24h intelligence summary drafted at a fixed hour, released only on Battle Captain signature.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hotspot-bar">
+          <div class="hotspot-item">
+            <div class="hotspot-label" style="color:var(--amber);">COLLECTION ENGINE</div>
+            <div class="hotspot-desc">Autonomous polling without rate limits or API key blockers for all foundational feeds.</div>
+          </div>
+          <div class="hotspot-item">
+            <div class="hotspot-label" style="color:var(--amber);">CONFIDENCE SEPARATION</div>
+            <div class="hotspot-desc">Source reliability (A–F) and analytic confidence (1–6) are strictly kept separate.</div>
+          </div>
+          <div class="hotspot-item">
+            <div class="hotspot-label" style="color:var(--amber);">POLICY OVERLAY</div>
+            <div class="hotspot-desc">Bridges real-world geopolitical and safety intelligence into platform trust policies.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab View 3: MODTOC -->
+      <div class="tab-view" id="view-modtoc">
+        <div style="background: #110d18; padding: 40px; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+          <div style="max-width: 780px;">
+            <div style="display:inline-block; font-family:var(--mono); font-size:12px; color:var(--purple); padding:4px 10px; border:1px solid var(--purple); border-radius:4px; margin-bottom:18px;">
+              CONTENT MODERATION &amp; PLATFORM INTEGRITY
+            </div>
+            <h2 style="font-size:32px; font-weight:800; color:#ffffff; margin-bottom:14px;">Policy-as-code on the same immutable ledger.</h2>
+            <p style="color:var(--text-muted); font-size:16px; margin-bottom:28px;">
+              Built from years leading coordinated inauthentic behavior (CIB) and integrity operations at TikTok. Evaluates policy revisions against recorded diffs, runs severity-by-reach gates, and logs every human decision.
+            </p>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; text-align:left; font-family:var(--mono); font-size:12px;">
+              <div style="background:#171122; border:1px solid #332047; padding:14px; border-radius:6px;">
+                <div style="color:var(--purple); font-weight:700; margin-bottom:4px;">POLICY-AS-CODE</div>
+                <div style="color:var(--text-muted)">Declarative YAML rules with automated eval regression test harness (<code>make diff</code>).</div>
+              </div>
+              <div style="background:#171122; border:1px solid #332047; padding:14px; border-radius:6px;">
+                <div style="color:var(--purple); font-weight:700; margin-bottom:4px;">SEVERITY × REACH</div>
+                <div style="color:var(--text-muted)">Prioritizes queues by virality, velocity, and harm potential before escalation.</div>
+              </div>
+              <div style="background:#171122; border:1px solid #332047; padding:14px; border-radius:6px;">
+                <div style="color:var(--purple); font-weight:700; margin-bottom:4px;">SHARED LEDGER</div>
+                <div style="color:var(--text-muted)">Integrates seamlessly with TOC's hash-chained audit spine for complete regulatory defensibility.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hotspot-bar">
+          <div class="hotspot-item">
+            <div class="hotspot-label" style="color:var(--purple);">EVAL SUITE</div>
+            <div class="hotspot-desc">Benchmark policy changes before publishing to ensure zero unintended regression.</div>
+          </div>
+          <div class="hotspot-item">
+            <div class="hotspot-label" style="color:var(--purple);">ROOST-READY</div>
+            <div class="hotspot-desc">Engineered to work alongside industry open standards like ROOST for platform moderation.</div>
+          </div>
+          <div class="hotspot-item">
+            <div class="hotspot-label" style="color:var(--purple);">AUDIT DEFENSE</div>
+            <div class="hotspot-desc">Never guess who approved an enforcement action or why a queue route was bypassed.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Mobile Watch Station Showcase -->
+  <section class="mobile-section">
+    <div class="mobile-container">
+      <div class="phone-mockup-wrapper">
+        <div class="phone-bezel">
+          <div class="phone-screen">
+            <img src="assets/coptoc-ios.png" alt="TOC Mobile Watch Station running live in San Francisco" />
+          </div>
+        </div>
+      </div>
+      <div class="mobile-details">
+        <div class="section-tag" style="align-self:flex-start;">NATIVE IOS &amp; ANDROID · SWIFTUI &amp; KOTLIN</div>
+        <h2 style="font-size: clamp(24px, 3vw, 34px); font-weight: 800; color: #ffffff; line-height: 1.15; letter-spacing: -0.01em;">
+          The Common Operating Picture in your pocket. Live in San Francisco.
+        </h2>
+        <p style="color: var(--text-muted); font-size: 15px; line-height: 1.6;">
+          When an incident breaks out or a VIP steps off a flight, the watch floor doesn't stay tethered to a desk. The native TOC mobile app runs the identical operational picture natively on iOS and Android with zero cloud dependencies.
+        </p>
+        <div class="mobile-grid">
+          <div class="mobile-card">
+            <div class="mobile-card-title"><span style="color:var(--amber);">⚡</span> DEFCON &amp; Posture Strips</div>
+            <div class="mobile-card-desc">Live DEFCON 3 escalation banner, threat counts, and instant single-tap role acknowledgments.</div>
+          </div>
+          <div class="mobile-card">
+            <div class="mobile-card-title"><span style="color:var(--blue);">🌐</span> Bay Area Geofencing</div>
+            <div class="mobile-card-desc">Facility perimeters, travel corridors, executive protection safe zones, and live personnel clusters across San Francisco.</div>
+          </div>
+          <div class="mobile-card">
+            <div class="mobile-card-title"><span style="color:var(--purple);">📋</span> S1–S3 Tactical Drawers</div>
+            <div class="mobile-card-desc">Bottom navigation tabs for S1 Personnel rosters, S2 SIGTOC intelligence feeds, and S3 Operations timelines.</div>
+          </div>
+          <div class="mobile-card">
+            <div class="mobile-card-title"><span style="color:#10b981;">🛡️</span> Offline Mesh &amp; Verification</div>
+            <div class="mobile-card-desc">Full local cache of critical contacts, travel legs, and hash-chained audit trails that sync seamlessly upon reconnect.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features-section">
+    <div class="section-header">
+      <div class="section-tag" id="feat-tag">COPTOC CAPABILITIES</div>
+      <h2 class="section-title" id="feat-title">Engineered for the 24/7 Watch Floor</h2>
+    </div>
+
+    <div class="grid-3" id="feat-grid">
+      <div class="card">
+        <div class="card-icon">🗺️</div>
+        <div class="card-title">Full-Bleed Dynamic Map <span class="card-code">MAPLIBRE</span></div>
+        <p class="card-desc">Dark vector basemap rendering corporate facilities, personnel blue-force tracks, travel corridors, and threat polygons with zero UI clutter.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">The FLASH Warning <span class="card-code">DOCTRINE</span></div>
+        <p class="card-desc">A single critical alarm strip across all screens. Releases simultaneously over SMS and chat (simulated or Twilio/Slack) and demands verified sign-off.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⏱️</div>
+        <div class="card-title">The 15-Minute Rule <span class="card-code">S6 COMMS</span></div>
+        <p class="card-desc">Automated roll-call accountability. Unresponsive personnel float to the top after 15 minutes, triggering escalation procedures automatically.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">Battle Captain Handover <span class="card-code">THE WATCH</span></div>
+        <p class="card-desc">The incoming watch officer must review and individually acknowledge every incident and intelligence shift that occurred during the handover overlap.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <div class="card-title">Hash-Chained Ledger <span class="card-code">CRYPTO LOG</span></div>
+        <p class="card-desc">Every status change, radio report, and command decision is stored in an immutable, cryptographically chained audit log for post-incident review.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <div class="card-title">Native iOS &amp; Android <span class="card-code">SWIFTUI · KOTLIN</span></div>
+        <p class="card-desc">The same operations wall rendered natively on mobile devices. Full offline cache, push check-ins, and biometric role authorization.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Author Narrative & Doctrine -->
+  <section class="doctrine-section">
+    <div class="doctrine-inner">
+      <div>
+        <div class="section-tag" style="margin-bottom:12px;">DOCTRINE &amp; ORIGIN</div>
+        <blockquote class="doctrine-quote">
+          "The entire concept of this COP was born from my years working in 24/7 tactical operations centers in the US Army. In Iraq, I worked as the S2 hand-in-hand with Ops. Ops feeds Intel and Intel feeds Ops. TOC brings that discipline to corporate security."
+        </blockquote>
+        <div class="doctrine-author">
+          <strong>Hayden Lee</strong> · Creator of TOC<br />
+          Former US Army Military Intelligence Officer (S2, Battle Captain) · Former TikTok Trust &amp; Safety
+        </div>
+      </div>
+
+      <div class="doctrine-rules">
+        <div class="rule-item">
+          <div class="rule-num">01</div>
+          <div class="rule-body">
+            <strong>Separate Source Reliability &amp; Analytic Confidence</strong>
+            <p>Never blend them into an opaque machine score. Humans make the call; machines gather the signal.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">02</div>
+          <div class="rule-body">
+            <strong>Brief What Would Have to be True to be Wrong</strong>
+            <p>Every assessment includes alternative hypotheses and indicators that would falsify the current read.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-num">03</div>
+          <div class="rule-body">
+            <strong>Hand Over on the Record</strong>
+            <p>No loose shift handoffs. Incoming officers acknowledge the delta so accountability never lapses.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Source Call for Collaborators -->
+  <section class="collab-section" id="collaborate">
+    <div class="collab-box">
+      <div class="section-tag" style="display:inline-block; margin-bottom:12px; border-color:var(--brand-accent); color:var(--brand-accent);">OPEN SOURCE · APACHE 2.0</div>
+      <h2 style="font-size: clamp(24px, 3.2vw, 36px); font-weight: 800; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.01em;">
+        Collaborators Wanted: Build TOC Together
+      </h2>
+      <p style="font-size: 16px; color: var(--text-muted); line-height: 1.6; max-width: 68ch; margin: 0 auto 24px;">
+        I’m building COPTOC, SIGTOC, and MODTOC completely in the open to give security operations, crisis response, and Trust &amp; Safety teams a better common operating picture. 
+        <strong style="color: #ffffff;">I would love to get collaborators who are interested in working on this open-source project with me.</strong>
+      </p>
+
+      <div class="collab-roles">
+        <div class="collab-role-card">
+          <div class="role-icon">💻</div>
+          <div class="role-title">Engineers &amp; Architects</div>
+          <div class="role-desc">Python &amp; FastAPI backend services, React / MapLibre geospatial walls, and native SwiftUI &amp; Kotlin mobile apps.</div>
+        </div>
+        <div class="collab-role-card">
+          <div class="role-icon">📡</div>
+          <div class="role-title">Threat Intel Analysts</div>
+          <div class="role-desc">Designing keyless collection pipelines (GDACS, USGS, NOAA, FCDO), STIX/TAXII bridges, and automated INTSUM doctrine.</div>
+        </div>
+        <div class="collab-role-card">
+          <div class="role-icon">⚖️</div>
+          <div class="role-title">Trust &amp; Safety Leads</div>
+          <div class="role-desc">MODTOC policy-as-code evaluations, virality/severity reach scoring, ROOST standard alignment, and audit log defenses.</div>
+        </div>
+      </div>
+
+      <div class="hero-ctas" style="margin-top: 32px; margin-bottom: 0;">
+        <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 10px 22px; font-size: 14px;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          Collaborate on GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/h4yd3n" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 10px 22px; font-size: 14px;">
+          Message on LinkedIn
+        </a>
+        <a href="mailto:hayden@h4yd3n.com" class="btn btn-secondary" style="padding: 10px 22px; font-size: 14px;">
+          Email hayden@h4yd3n.com
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quickstart Terminal -->
+  <section class="terminal-section" id="quickstart">
+    <div class="section-header">
+      <div class="section-tag">OPEN SOURCE RUNTIME</div>
+      <h2 class="section-title">Up and Running in 60 Seconds</h2>
+    </div>
+
+    <div class="terminal-box">
+      <div class="terminal-bar">
+        <span>bash — toc-quickstart</span>
+        <span>NO API KEYS NEEDED TO START</span>
+      </div>
+      <pre class="terminal-code">
+<span class="comment"># 1. Clone repository</span>
+<span class="cmd">git clone</span> https://github.com/h4yd3n/toc.git &amp;&amp; <span class="cmd">cd</span> toc
+
+<span class="comment"># 2. Run test suite</span>
+<span class="cmd">make</span> test
+
+<span class="comment"># 3. Launch COPTOC (FastAPI backend on :8000 + React Wall on :5173)</span>
+<span class="cmd">make</span> run-cop
+
+<span class="comment"># 4. (Optional) Run SIGTOC standalone on :8002</span>
+<span class="cmd">make</span> run-s2
+
+<span class="comment"># 5. (Optional) Run MODTOC Content Moderation Engine on :8001</span>
+<span class="cmd">make</span> run-mod
+      </pre>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <strong>TOC</strong> — Open-source Tactical Operations Center · Apache 2.0 License
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/h4yd3n/toc/blob/main/PRD.md" target="_blank" rel="noopener">PRD Doctrine</a>
+        <a href="https://coptoc.com" target="_blank" rel="noopener">coptoc.com</a>
+        <a href="https://sigtoc.com" target="_blank" rel="noopener">sigtoc.com</a>
+        <a href="https://h4yd3n.com" target="_blank" rel="noopener">h4yd3n.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const tabs = {
+      coptoc: {
+        accent: '#3b82f6',
+        glow: 'rgba(59, 130, 246, 0.25)',
+        badge: 'COPTOC',
+        badgeClass: 'badge-coptoc',
+        windowName: 'Tactical Operations Wall · Dublin Watch · Posture: Critical',
+        eyebrow: 'COPTOC · THE COMMON OPERATING PICTURE',
+        title: 'One common operating picture. Built the way a military staff runs one.',
+        lead: 'The wall a Battle Captain runs a 12-hour shift from. Fuses S1 Personnel, S2 Intel, S3 Operations, and S6 Communications onto a single pane of glass — with zero external keys required to run locally.',
+        featTag: 'COPTOC CAPABILITIES',
+        featTitle: 'Engineered for the 24/7 Watch Floor',
+        cards: [
+          { icon: '🗺️', title: 'Full-Bleed Dynamic Map', code: 'MAPLIBRE', desc: 'Dark vector basemap rendering corporate facilities, personnel blue-force tracks, travel corridors, and threat polygons with zero UI clutter.' },
+          { icon: '⚡', title: 'The FLASH Warning', code: 'DOCTRINE', desc: 'A single critical alarm strip across all screens. Releases simultaneously over SMS and chat (simulated or Twilio/Slack) and demands verified sign-off.' },
+          { icon: '⏱️', title: 'The 15-Minute Rule', code: 'S6 COMMS', desc: 'Automated roll-call accountability. Unresponsive personnel float to the top after 15 minutes, triggering escalation procedures automatically.' },
+          { icon: '🛡️', title: 'Battle Captain Handover', code: 'THE WATCH', desc: 'The incoming watch officer must review and individually acknowledge every incident and intelligence shift that occurred during the handover overlap.' },
+          { icon: '🔗', title: 'Hash-Chained Ledger', code: 'CRYPTO LOG', desc: 'Every status change, radio report, and command decision is stored in an immutable, cryptographically chained audit log for post-incident review.' },
+          { icon: '📱', title: 'Native iOS & Android', code: 'SWIFTUI · KOTLIN', desc: 'The same operations wall rendered natively on mobile devices. Full offline cache, push check-ins, and biometric role authorization.' }
+        ]
+      },
+      sigtoc: {
+        accent: '#f59e0b',
+        glow: 'rgba(245, 158, 11, 0.25)',
+        badge: 'SIGTOC',
+        badgeClass: 'badge-sigtoc',
+        windowName: 'S2 Intelligence Collection · Active Requirements: 44 · 92% Coverage',
+        eyebrow: 'SIGTOC · THE S2 INTELLIGENCE FUSION ENGINE',
+        title: 'Requirements that write themselves from the wall. Live collectors, zero keys.',
+        lead: 'Ops feeds Intel, and Intel feeds Ops. Automatically pairs live hazard feeds (USGS, GDACS, NOAA, WHO, State Dept) with your people and upcoming trips to produce verified assessments and daily INTSUMs.',
+        featTag: 'SIGTOC CAPABILITIES',
+        featTitle: 'Autonomous Intelligence with Human-Verified Judgment',
+        cards: [
+          { icon: '📡', title: 'Autonomous Collection Plan', code: '6 FEEDS', desc: 'Six keyless, rate-limit-free live collectors: USGS quakes, GDACS disasters, NOAA severe weather, WHO outbreaks, State Dept & FCDO advisories.' },
+          { icon: '📊', title: 'Area Assessment Matrix', code: 'S2 MATRIX', desc: 'Side-by-side indicator matrix comparing destination cities (e.g. Lisbon vs. Porto) with reported, quiet, and not-collected cells — no arbitrary machine scores.' },
+          { icon: '📝', title: 'Daily INTSUM Drafter', code: '0500Z BRIEF', desc: 'Drafted automatically at a fixed hour, compiling the 24h operational diff and requiring explicit Battle Captain signature before dissemination.' },
+          { icon: '🧭', title: 'Suggest-then-Confirm Graph', code: 'EVIDENCE', desc: 'Entities, threats, and events suggest relations with cited confidence, requiring human analysts to confirm or dismiss.' },
+          { icon: '🌐', title: 'Commercial Intel Bridges', code: 'ACLED · CLSTR', desc: 'Plug in ACLED, CLSTR, or proprietary threat intelligence APIs with instant fallback to simulated feeds when offline.' },
+          { icon: '⚖️', title: 'Analytic Confidence Separation', code: 'MIL-STD', desc: 'Evaluates source reliability (A–F) and analytic confidence (1–6) on distinct axes, preventing dangerous false certainty.' }
+        ]
+      },
+      modtoc: {
+        accent: '#c084fc',
+        glow: 'rgba(192, 132, 252, 0.25)',
+        badge: 'MODTOC',
+        badgeClass: 'badge-modtoc',
+        windowName: 'Content Moderation Engine · Policy-as-Code · Audit Ledger',
+        eyebrow: 'MODTOC · TRUST & SAFETY CONTENT MODERATION',
+        title: 'Content moderation engine sharing the same immutable ledger.',
+        lead: 'Policy-as-code and reproducible diff evaluations born from high-stakes platform integrity operations. Designed to route queues by virality and harm potential while maintaining a tamper-proof audit trail.',
+        featTag: 'MODTOC CAPABILITIES',
+        featTitle: 'Defensible Platform Integrity for Modern Operations',
+        cards: [
+          { icon: '📜', title: 'Policy-as-Code', code: 'YAML RULES', desc: 'Express trust & safety guidelines as version-controlled code, allowing teams to review, fork, and test rules before going live.' },
+          { icon: '🧪', title: 'Eval Regression Harness', code: 'MAKE DIFF', desc: 'Benchmark proposed policy changes against historical incident test suites to measure false positives and catch regressions.' },
+          { icon: '🚦', title: 'Severity × Reach Gates', code: 'ROUTING', desc: 'Dynamically routes moderation queues by content velocity, audience reach, and potential harm severity.' },
+          { icon: '🔏', title: 'Cryptographic Audit Trail', code: 'LEDGER', desc: 'Every review decision, human override, and bulk enforcement action is hashed and recorded forever on the TOC ledger.' },
+          { icon: '🤝', title: 'ROOST Compatibility', code: 'OPEN STANDARD', desc: 'Architected to work seamlessly with ROOST and other emerging trust and safety open source ecosystems.' },
+          { icon: '🔄', title: 'Threat-to-Policy Bridge', code: 'SIGTOC LINK', desc: 'Direct pipeline linking real-world geopolitical intelligence from SIGTOC into platform enforcement posture.' }
+        ]
+      }
+    };
+
+    function switchTab(tabId) {
+      const data = tabs[tabId];
+      if (!data) return;
+
+      // Update pills
+      document.querySelectorAll('.tab-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+      });
+
+      // Update tab views
+      document.querySelectorAll('.tab-view').forEach(view => {
+        view.classList.toggle('active', view.id === `view-${tabId}`);
+      });
+
+      // Update CSS variables
+      document.documentElement.style.setProperty('--brand-accent', data.accent);
+      document.documentElement.style.setProperty('--brand-glow', data.glow);
+
+      // Update Nav slash SVG color
+      const navSlash = document.getElementById('nav-slash');
+      if (navSlash) navSlash.setAttribute('fill', data.accent);
+
+      // Update Hero text
+      document.getElementById('hero-eyebrow').textContent = data.eyebrow;
+      document.getElementById('hero-title').textContent = data.title;
+      document.getElementById('hero-lead').textContent = data.lead;
+
+      // Update Window frame
+      const badge = document.getElementById('window-badge');
+      badge.textContent = data.badge;
+      badge.className = `badge ${data.badgeClass}`;
+      document.getElementById('window-name').textContent = data.windowName;
+
+      // Update Features section
+      document.getElementById('feat-tag').textContent = data.featTag;
+      document.getElementById('feat-title').textContent = data.featTitle;
+
+      const grid = document.getElementById('feat-grid');
+      grid.innerHTML = data.cards.map(c => `
+        <div class="card">
+          <div class="card-icon">${c.icon}</div>
+          <div class="card-title">${c.title} <span class="card-code">${c.code}</span></div>
+          <p class="card-desc">${c.desc}</p>
+        </div>
+      `).join('');
+
+      // Update URL hash without scroll
+      if (history.replaceState) {
+        history.replaceState(null, null, `#${tabId}`);
+      }
+    }
+
+    // Auto-detect hash on load (#coptoc, #sigtoc, #modtoc)
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (tabs[hash]) {
+        switchTab(hash);
+      }
+    });
+  </script>
+</body>
+</html>

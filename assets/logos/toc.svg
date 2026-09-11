@@ -1,0 +1,15 @@
+<svg viewBox="0 0 320 70" width="320" height="70" xmlns="http://www.w3.org/2000/svg">
+  <!-- Recon Diamond with Blue Slash -->
+  <g transform="translate(8, 7) scale(0.055)">
+    <!-- Blue slash with glow -->
+    <polygon points="190,834 214,788 858,214 834,190 810,236 166,810" fill="#2563eb" opacity="0.3" transform="scale(1.02) translate(-10, -10)" />
+    <!-- Diamond broken border -->
+    <path d="M512 182L644 314M667 337L687 357M710 380L842 512M842 512L710 644M687 667L667 687M644 710L512 842M512 842L380 710M357 687L337 667M314 644L182 512M182 512L314 380M337 357L357 337M380 314L512 182" stroke="#111827" stroke-width="48" fill="none" stroke-linecap="square"/>
+    <!-- Slash solid -->
+    <polygon points="190,834 214,788 858,214 834,190 810,236 166,810" fill="#2563eb"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="74" y="41" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="2.5" fill="#111827">TOC</text>
+  <text x="75" y="56" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="8.5" font-weight="700" letter-spacing="1.8" fill="#4b5563">TACTICAL OPERATIONS CENTER</text>
+</svg>
