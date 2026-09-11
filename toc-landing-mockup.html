@@ -720,10 +720,10 @@
           <span class="dot"></span> COPTOC
         </button>
         <button class="tab-pill" data-tab="sigtoc" onclick="switchTab('sigtoc')">
-          <span class="dot"></span> SIGTOC
+          <span class="dot"></span> SIGTOC <span style="font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(245, 158, 11, 0.15); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.3); font-weight: 700; margin-left: 4px;">ENGINE</span>
         </button>
         <button class="tab-pill" data-tab="modtoc" onclick="switchTab('modtoc')">
-          <span class="dot"></span> MODTOC
+          <span class="dot"></span> MODTOC <span style="font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(192, 132, 252, 0.15); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.3); font-weight: 700; margin-left: 4px;">UNDER CONSTRUCTION</span>
         </button>
       </div>
 
@@ -771,9 +771,9 @@
         </div>
         <div class="window-title">
           <span id="window-badge" class="badge badge-coptoc">COPTOC</span>
-          <span id="window-name">Tactical Operations Wall · Dublin Watch · Posture: Critical</span>
+          <span id="window-name">Tactical Operations Wall · San Francisco Watch · Posture: Elevated</span>
         </div>
-        <div>1920 × 1080 FULL DISPLAY</div>
+        <div id="display-label">LIVE WALL &amp; CLIENT APPS</div>
       </div>
 
       <!-- Tab View 1: COPTOC -->
@@ -799,137 +799,174 @@
             <div class="hotspot-desc">90-day operation cards, travel schedules, and an immutable, hash-chained ledger of every watch event.</div>
           </div>
         </div>
+
+        <!-- COPTOC Native Mobile Watch Station -->
+        <div style="background: #080c10; border-top: 1px solid var(--border); padding: 40px 24px;">
+          <div class="mobile-container" style="max-width: 1080px; margin: 0 auto; box-shadow: none; border: 1px solid var(--border);">
+            <div class="phone-mockup-wrapper">
+              <div class="phone-bezel">
+                <div class="phone-screen">
+                  <img src="assets/coptoc-ios.png" alt="COPTOC Mobile Watch Station running live in San Francisco" />
+                </div>
+              </div>
+            </div>
+            <div class="mobile-details">
+              <div class="section-tag" style="align-self:flex-start;">COPTOC MOBILE CLIENT · SWIFTUI &amp; KOTLIN</div>
+              <h3 style="font-size: clamp(22px, 2.8vw, 30px); font-weight: 800; color: #ffffff; line-height: 1.2; letter-spacing: -0.01em;">
+                The Common Operating Picture in your pocket. Live in San Francisco.
+              </h3>
+              <p style="color: var(--text-muted); font-size: 14.5px; line-height: 1.55;">
+                When an incident breaks out or an executive travels, the watch floor doesn't stay tethered to a desk. The native COPTOC mobile app renders the live operational picture natively on iOS and Android with zero cloud dependencies.
+              </p>
+              <div class="mobile-grid">
+                <div class="mobile-card">
+                  <div class="mobile-card-title"><span style="color:var(--amber);">⚡</span> DEFCON 3 Alerting</div>
+                  <div class="mobile-card-desc">Live escalation banner, real-time threat tallies, and single-tap verified acknowledgments.</div>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-title"><span style="color:var(--blue);">🌐</span> Bay Area Geofencing</div>
+                  <div class="mobile-card-desc">Facility perimeters, travel corridors, executive protection zones, and live personnel clusters.</div>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-title"><span style="color:var(--purple);">📋</span> S1–S3 Tactical Drawers</div>
+                  <div class="mobile-card-desc">Bottom navigation tabs for Personnel rosters, SIGTOC intelligence feeds, and Ops timelines.</div>
+                </div>
+                <div class="mobile-card">
+                  <div class="mobile-card-title"><span style="color:#10b981;">🛡️</span> Offline Mesh &amp; Signing</div>
+                  <div class="mobile-card-desc">Full local cache of critical contacts, travel legs, and hash-chained audit trails.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Tab View 2: SIGTOC -->
       <div class="tab-view" id="view-sigtoc">
-        <div style="background: #0c1219; padding: 40px; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-          <div style="max-width: 780px;">
-            <div style="display:inline-block; font-family:var(--mono); font-size:12px; color:var(--amber); padding:4px 10px; border:1px solid var(--amber); border-radius:4px; margin-bottom:18px;">
-              S2 INTELLIGENCE FUSION WORKSPACE
+        <div style="background: #090e15; padding: 48px 30px; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+          <div style="max-width: 820px; width: 100%;">
+            <div style="display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; font-weight:700; color:var(--amber); padding:6px 14px; border:1px solid var(--amber); background:rgba(245, 158, 11, 0.1); border-radius:4px; margin-bottom:20px; letter-spacing:0.08em; text-transform:uppercase;">
+              <span>⚡</span> S2 FUSION ENGINE · HEADLESS REST API (NO STANDALONE GUI YET)
             </div>
-            <h2 style="font-size:32px; font-weight:800; color:#ffffff; margin-bottom:14px;">The requirements write themselves from the wall.</h2>
-            <p style="color:var(--text-muted); font-size:16px; margin-bottom:28px;">
-              SIGTOC connects live threat indicators directly to operational trips and sites. When an executive flies to Riyadh or London, SIGTOC automatically spins up collection tasks, monitors live sensors, and alerts on anomalies.
+            <h2 style="font-size:32px; font-weight:800; color:#ffffff; margin-bottom:14px; letter-spacing:-0.01em;">
+              Runs as the intelligence backend for COPTOC.
+            </h2>
+            <p style="color:var(--text-muted); font-size:16px; margin-bottom:24px; line-height:1.6;">
+              SIGTOC does not have its own standalone web GUI built yet. Instead, it operates as an autonomous background service (<code style="color:var(--amber);">sigtoc.api:app</code> on <code style="color:var(--amber);">:8002</code>) ingesting open feeds, normalizing them into STIX 2.1 graphs, and streaming threat entities directly onto the COPTOC wall. A dedicated analyst workbench GUI is currently in design.
             </p>
 
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; text-align:left; font-family:var(--mono); font-size:12px;">
-              <div style="background:#111821; border:1px solid var(--border); padding:14px; border-radius:6px;">
+            <!-- Real API preview terminal box -->
+            <div style="background:#04070a; border:1px solid var(--border); border-radius:8px; padding:18px 20px; text-align:left; font-family:var(--mono); font-size:12.5px; color:#a5d6ff; line-height:1.6; margin-bottom:28px; box-shadow:inset 0 2px 8px rgba(0,0,0,0.6);">
+              <div style="color:var(--text-dim); margin-bottom:6px;"># Querying live standing requirements and STIX entity coverage (:8002)</div>
+              <div style="color:#58a6ff;">$ curl -s http://localhost:8002/v1/intel/requirements | jq .</div>
+              <div style="color:#7ee787;">{</div>
+              <div style="padding-left:16px; color:#c9d1d9;">"standing_requirements": 14,</div>
+              <div style="padding-left:16px; color:#c9d1d9;">"active_collectors": ["usgs_earthquakes", "gdacs_hazards", "nws_noaa", "who_outbreaks", "fcdo_advisories"],</div>
+              <div style="padding-left:16px; color:#c9d1d9;">"stix_entities_indexed": 412,</div>
+              <div style="padding-left:16px; color:#c9d1d9;">"coptoc_wall_stream": "active",</div>
+              <div style="padding-left:16px; color:var(--amber);">"standalone_analyst_gui": "in design / planned"</div>
+              <div style="color:#7ee787;">}</div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; text-align:left; font-family:var(--mono); font-size:12px;">
+              <div style="background:#0f1722; border:1px solid var(--border); padding:16px; border-radius:6px;">
                 <div style="color:var(--amber); font-weight:700; margin-bottom:4px;">6 KEYLESS COLLECTORS</div>
-                <div style="color:var(--text-muted)">USGS earthquakes, GDACS hazards, NWS/NOAA alerts, WHO outbreaks, State Dept &amp; FCDO advisories.</div>
+                <div style="color:var(--text-muted)">Autonomous polling for USGS, GDACS, NOAA, WHO, and FCDO feeds with zero rate limits or API key requirements.</div>
               </div>
-              <div style="background:#111821; border:1px solid var(--border); padding:14px; border-radius:6px;">
-                <div style="color:var(--amber); font-weight:700; margin-bottom:4px;">AREA ASSESSMENT</div>
-                <div style="color:var(--text-muted)">Side-by-side indicator matrix with reported, quiet, and not-collected cells — no arbitrary machine score.</div>
+              <div style="background:#0f1722; border:1px solid var(--border); padding:16px; border-radius:6px;">
+                <div style="color:var(--amber); font-weight:700; margin-bottom:4px;">STIX 2.1 GRAPH NORMALIZER</div>
+                <div style="color:var(--text-muted)">Unifies disparate alert feeds into standard STIX 2.1 threat objects, indicator links, and confidence-rated sightings.</div>
               </div>
-              <div style="background:#111821; border:1px solid var(--border); padding:14px; border-radius:6px;">
-                <div style="color:var(--amber); font-weight:700; margin-bottom:4px;">DAILY INTSUM</div>
-                <div style="color:var(--text-muted)">Automated 24h intelligence summary drafted at a fixed hour, released only on Battle Captain signature.</div>
+              <div style="background:#0f1722; border:1px solid var(--border); padding:16px; border-radius:6px;">
+                <div style="color:var(--amber); font-weight:700; margin-bottom:4px;">AUTOMATED INTSUM PIPELINE</div>
+                <div style="color:var(--text-muted)">Drafts 24h intelligence summaries at fixed intervals, awaiting release authorization on Battle Captain signature.</div>
               </div>
             </div>
           </div>
         </div>
         <div class="hotspot-bar">
           <div class="hotspot-item">
-            <div class="hotspot-label" style="color:var(--amber);">COLLECTION ENGINE</div>
-            <div class="hotspot-desc">Autonomous polling without rate limits or API key blockers for all foundational feeds.</div>
+            <div class="hotspot-label" style="color:var(--amber);">RUN STANDALONE</div>
+            <div class="hotspot-desc"><code>make run-s2</code> spins up the headless FastAPI service on port 8002.</div>
           </div>
           <div class="hotspot-item">
-            <div class="hotspot-label" style="color:var(--amber);">CONFIDENCE SEPARATION</div>
-            <div class="hotspot-desc">Source reliability (A–F) and analytic confidence (1–6) are strictly kept separate.</div>
+            <div class="hotspot-label" style="color:var(--amber);">STANDALONE GUI STATUS</div>
+            <div class="hotspot-desc">In design — intelligence analyst workbench GUI RFC open on GitHub.</div>
           </div>
           <div class="hotspot-item">
-            <div class="hotspot-label" style="color:var(--amber);">POLICY OVERLAY</div>
-            <div class="hotspot-desc">Bridges real-world geopolitical and safety intelligence into platform trust policies.</div>
+            <div class="hotspot-label" style="color:var(--amber);">COPTOC INTEGRATION</div>
+            <div class="hotspot-desc">Powers the S2 layer of the live COPTOC operations wall today.</div>
           </div>
         </div>
       </div>
 
       <!-- Tab View 3: MODTOC -->
       <div class="tab-view" id="view-modtoc">
-        <div style="background: #110d18; padding: 40px; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-          <div style="max-width: 780px;">
-            <div style="display:inline-block; font-family:var(--mono); font-size:12px; color:var(--purple); padding:4px 10px; border:1px solid var(--purple); border-radius:4px; margin-bottom:18px;">
-              CONTENT MODERATION &amp; PLATFORM INTEGRITY
+        <div style="background: #110d18; padding: 48px 30px; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+          <div style="max-width: 820px; width: 100%;">
+            <div style="display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; font-weight:700; color:var(--purple); padding:6px 14px; border:1px solid var(--purple); background:rgba(192, 132, 252, 0.1); border-radius:4px; margin-bottom:20px; letter-spacing:0.08em; text-transform:uppercase;">
+              <span>🚧</span> UNDER CONSTRUCTION · WE HAVEN'T BUILT THIS YET
             </div>
-            <h2 style="font-size:32px; font-weight:800; color:#ffffff; margin-bottom:14px;">Policy-as-code on the same immutable ledger.</h2>
-            <p style="color:var(--text-muted); font-size:16px; margin-bottom:28px;">
-              Built from years leading coordinated inauthentic behavior (CIB) and integrity operations at TikTok. Evaluates policy revisions against recorded diffs, runs severity-by-reach gates, and logs every human decision.
+            <h2 style="font-size:32px; font-weight:800; color:#ffffff; margin-bottom:14px; letter-spacing:-0.01em;">
+              MODTOC is under construction. Let's build it together.
+            </h2>
+            <p style="color:var(--text-muted); font-size:16px; margin-bottom:24px; line-height:1.6;">
+              We haven't built out the MODTOC engine or GUI yet — it is an open-source initiative in the planning and RFC specification phase. The goal is to bring <strong>policy-as-code regression testing, virality × severity routing, and tamper-proof audit trails</strong> to Trust &amp; Safety queues. We are looking for practitioners and engineers to collaborate with us.
             </p>
 
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; text-align:left; font-family:var(--mono); font-size:12px;">
-              <div style="background:#171122; border:1px solid #332047; padding:14px; border-radius:6px;">
-                <div style="color:var(--purple); font-weight:700; margin-bottom:4px;">POLICY-AS-CODE</div>
-                <div style="color:var(--text-muted)">Declarative YAML rules with automated eval regression test harness (<code>make diff</code>).</div>
+            <!-- Conceptual RFC box -->
+            <div style="background:#09050d; border:1px solid #332047; border-radius:8px; padding:18px 20px; text-align:left; font-family:var(--mono); font-size:12.5px; color:#e9d5ff; line-height:1.6; margin-bottom:28px; box-shadow:inset 0 2px 8px rgba(0,0,0,0.6);">
+              <div style="color:var(--text-dim); margin-bottom:6px;"># modtoc/policies/hate_speech.yaml (RFC Specification Draft)</div>
+              <div style="color:#c084fc;">policy: <span style="color:#fff;">hate_speech_v2</span></div>
+              <div style="color:#c084fc;">status: <span style="color:var(--purple); font-weight:700;">under_construction</span></div>
+              <div style="color:#c084fc;">eval_dataset: <span style="color:#fff;">modtoc/evals/golden_sets/hate_speech_golden.json</span></div>
+              <div style="color:#c084fc;">reach_routing:</div>
+              <div style="padding-left:16px; color:#c084fc;">severity_threshold: <span style="color:#fff;">0.85</span></div>
+              <div style="padding-left:16px; color:#c084fc;">velocity_gate: <span style="color:#fff;">fast_path_human_review</span></div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; text-align:left; font-family:var(--mono); font-size:12px;">
+              <div style="background:#171122; border:1px solid #332047; padding:16px; border-radius:6px;">
+                <div style="color:var(--purple); font-weight:700; margin-bottom:4px;">POLICY-AS-CODE [PROPOSED]</div>
+                <div style="color:var(--text-muted)">Declarative YAML rules with regression test harnesses (<code style="color:var(--purple);">make diff</code>) to benchmark policy changes before deploying.</div>
               </div>
-              <div style="background:#171122; border:1px solid #332047; padding:14px; border-radius:6px;">
-                <div style="color:var(--purple); font-weight:700; margin-bottom:4px;">SEVERITY × REACH</div>
-                <div style="color:var(--text-muted)">Prioritizes queues by virality, velocity, and harm potential before escalation.</div>
+              <div style="background:#171122; border:1px solid #332047; padding:16px; border-radius:6px;">
+                <div style="color:var(--purple); font-weight:700; margin-bottom:4px;">SEVERITY × REACH [RFC]</div>
+                <div style="color:var(--text-muted)">Prioritize moderation queues by audience scale and real-world harm potential rather than static timestamps.</div>
               </div>
-              <div style="background:#171122; border:1px solid #332047; padding:14px; border-radius:6px;">
-                <div style="color:var(--purple); font-weight:700; margin-bottom:4px;">SHARED LEDGER</div>
-                <div style="color:var(--text-muted)">Integrates seamlessly with TOC's hash-chained audit spine for complete regulatory defensibility.</div>
+              <div style="background:#171122; border:1px solid #332047; padding:16px; border-radius:6px;">
+                <div style="color:var(--purple); font-weight:700; margin-bottom:4px;">COLLABORATORS WANTED</div>
+                <div style="color:var(--text-muted)">Looking for Trust &amp; Safety specialists and open-source engineers to co-author the spec and build the engine.</div>
               </div>
+            </div>
+
+            <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:28px;">
+              <a href="#collaborate" class="btn btn-primary" style="background:var(--purple); border-color:rgba(255,255,255,0.2); box-shadow:0 0 16px rgba(192,132,252,0.3); padding:10px 22px;">
+                Join the MODTOC Working Group
+              </a>
+              <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:10px 22px;">
+                View RFC on GitHub ↗
+              </a>
             </div>
           </div>
         </div>
         <div class="hotspot-bar">
           <div class="hotspot-item">
-            <div class="hotspot-label" style="color:var(--purple);">EVAL SUITE</div>
-            <div class="hotspot-desc">Benchmark policy changes before publishing to ensure zero unintended regression.</div>
+            <div class="hotspot-label" style="color:var(--purple);">STATUS</div>
+            <div class="hotspot-desc">Under Construction — we haven't built anything for MODTOC yet.</div>
           </div>
           <div class="hotspot-item">
-            <div class="hotspot-label" style="color:var(--purple);">ROOST-READY</div>
-            <div class="hotspot-desc">Engineered to work alongside industry open standards like ROOST for platform moderation.</div>
+            <div class="hotspot-label" style="color:var(--purple);">ROOST ALIGNMENT</div>
+            <div class="hotspot-desc">Designing to complement emerging open standards for platform moderation.</div>
           </div>
           <div class="hotspot-item">
-            <div class="hotspot-label" style="color:var(--purple);">AUDIT DEFENSE</div>
-            <div class="hotspot-desc">Never guess who approved an enforcement action or why a queue route was bypassed.</div>
+            <div class="hotspot-label" style="color:var(--purple);">GET INVOLVED</div>
+            <div class="hotspot-desc">Open for contributions from Trust &amp; Safety and security engineers.</div>
           </div>
         </div>
       </div>
     </div>
   </main>
-
-  <!-- Mobile Watch Station Showcase -->
-  <section class="mobile-section">
-    <div class="mobile-container">
-      <div class="phone-mockup-wrapper">
-        <div class="phone-bezel">
-          <div class="phone-screen">
-            <img src="assets/coptoc-ios.png" alt="TOC Mobile Watch Station running live in San Francisco" />
-          </div>
-        </div>
-      </div>
-      <div class="mobile-details">
-        <div class="section-tag" style="align-self:flex-start;">NATIVE IOS &amp; ANDROID · SWIFTUI &amp; KOTLIN</div>
-        <h2 style="font-size: clamp(24px, 3vw, 34px); font-weight: 800; color: #ffffff; line-height: 1.15; letter-spacing: -0.01em;">
-          The Common Operating Picture in your pocket. Live in San Francisco.
-        </h2>
-        <p style="color: var(--text-muted); font-size: 15px; line-height: 1.6;">
-          When an incident breaks out or a VIP steps off a flight, the watch floor doesn't stay tethered to a desk. The native TOC mobile app runs the identical operational picture natively on iOS and Android with zero cloud dependencies.
-        </p>
-        <div class="mobile-grid">
-          <div class="mobile-card">
-            <div class="mobile-card-title"><span style="color:var(--amber);">⚡</span> DEFCON &amp; Posture Strips</div>
-            <div class="mobile-card-desc">Live DEFCON 3 escalation banner, threat counts, and instant single-tap role acknowledgments.</div>
-          </div>
-          <div class="mobile-card">
-            <div class="mobile-card-title"><span style="color:var(--blue);">🌐</span> Bay Area Geofencing</div>
-            <div class="mobile-card-desc">Facility perimeters, travel corridors, executive protection safe zones, and live personnel clusters across San Francisco.</div>
-          </div>
-          <div class="mobile-card">
-            <div class="mobile-card-title"><span style="color:var(--purple);">📋</span> S1–S3 Tactical Drawers</div>
-            <div class="mobile-card-desc">Bottom navigation tabs for S1 Personnel rosters, S2 SIGTOC intelligence feeds, and S3 Operations timelines.</div>
-          </div>
-          <div class="mobile-card">
-            <div class="mobile-card-title"><span style="color:#10b981;">🛡️</span> Offline Mesh &amp; Verification</div>
-            <div class="mobile-card-desc">Full local cache of critical contacts, travel legs, and hash-chained audit trails that sync seamlessly upon reconnect.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Features Grid -->
   <section class="features-section">
@@ -1111,7 +1148,8 @@
         glow: 'rgba(59, 130, 246, 0.25)',
         badge: 'COPTOC',
         badgeClass: 'badge-coptoc',
-        windowName: 'Tactical Operations Wall · Dublin Watch · Posture: Critical',
+        windowName: 'Tactical Operations Wall · San Francisco Watch · Posture: Elevated',
+        displayLabel: 'LIVE WALL & CLIENT APPS',
         eyebrow: 'COPTOC · THE COMMON OPERATING PICTURE',
         title: 'One common operating picture. Built the way a military staff runs one.',
         lead: 'The wall a Battle Captain runs a 12-hour shift from. Fuses S1 Personnel, S2 Intel, S3 Operations, and S6 Communications onto a single pane of glass — with zero external keys required to run locally.',
@@ -1129,41 +1167,43 @@
       sigtoc: {
         accent: '#f59e0b',
         glow: 'rgba(245, 158, 11, 0.25)',
-        badge: 'SIGTOC',
+        badge: 'SIGTOC · S2 ENGINE',
         badgeClass: 'badge-sigtoc',
-        windowName: 'S2 Intelligence Collection · Active Requirements: 44 · 92% Coverage',
-        eyebrow: 'SIGTOC · THE S2 INTELLIGENCE FUSION ENGINE',
-        title: 'Requirements that write themselves from the wall. Live collectors, zero keys.',
-        lead: 'Ops feeds Intel, and Intel feeds Ops. Automatically pairs live hazard feeds (USGS, GDACS, NOAA, WHO, State Dept) with your people and upcoming trips to produce verified assessments and daily INTSUMs.',
-        featTag: 'SIGTOC CAPABILITIES',
-        featTitle: 'Autonomous Intelligence with Human-Verified Judgment',
+        windowName: 'S2 Intelligence Fusion Pipeline (REST API :8002) · Standalone GUI in Development',
+        displayLabel: 'BACKEND SERVICE (:8002) · NO GUI YET',
+        eyebrow: 'SIGTOC · S2 INTELLIGENCE FUSION ENGINE (BACKEND & API)',
+        title: 'Autonomous intelligence fusion engine. Feeding the S2 wall.',
+        lead: 'SIGTOC currently runs as a headless backend service and Python library. It ingests open feeds, maps them into STIX 2.1 graphs, and streams threat entities directly into COPTOC. A dedicated standalone intelligence workbench GUI is in development.',
+        featTag: 'SIGTOC S2 ENGINE CAPABILITIES',
+        featTitle: 'Open-Source Threat Intelligence Fusion Engine',
         cards: [
-          { icon: '📡', title: 'Autonomous Collection Plan', code: '6 FEEDS', desc: 'Six keyless, rate-limit-free live collectors: USGS quakes, GDACS disasters, NOAA severe weather, WHO outbreaks, State Dept & FCDO advisories.' },
-          { icon: '📊', title: 'Area Assessment Matrix', code: 'S2 MATRIX', desc: 'Side-by-side indicator matrix comparing destination cities (e.g. Lisbon vs. Porto) with reported, quiet, and not-collected cells — no arbitrary machine scores.' },
-          { icon: '📝', title: 'Daily INTSUM Drafter', code: '0500Z BRIEF', desc: 'Drafted automatically at a fixed hour, compiling the 24h operational diff and requiring explicit Battle Captain signature before dissemination.' },
-          { icon: '🧭', title: 'Suggest-then-Confirm Graph', code: 'EVIDENCE', desc: 'Entities, threats, and events suggest relations with cited confidence, requiring human analysts to confirm or dismiss.' },
-          { icon: '🌐', title: 'Commercial Intel Bridges', code: 'ACLED · CLSTR', desc: 'Plug in ACLED, CLSTR, or proprietary threat intelligence APIs with instant fallback to simulated feeds when offline.' },
-          { icon: '⚖️', title: 'Analytic Confidence Separation', code: 'MIL-STD', desc: 'Evaluates source reliability (A–F) and analytic confidence (1–6) on distinct axes, preventing dangerous false certainty.' }
+          { icon: '📡', title: '6 Keyless Collectors', code: 'AUTONOMOUS', desc: 'Direct ingestion from USGS, GDACS, NWS/NOAA, WHO Disease Outbreaks, US State Dept, and UK FCDO without API keys.' },
+          { icon: '🗂️', title: 'STIX 2.1 Graph Normalizer', code: 'SCHEMA', desc: 'Normalizes diverse open-source incident feeds into standard STIX 2.1 objects: Threat Actors, Indicators, and Observed Data.' },
+          { icon: '🗺️', title: 'COPTOC S2 Feed Bridge', code: 'API :8002', desc: 'Feeds live intelligence, threat clusters, and confidence assessments directly into the COPTOC operational wall.' },
+          { icon: '📑', title: 'Automated 24h INTSUM', code: 'REPORTING', desc: 'Drafts periodic intelligence summaries of new and updated threat entities, requiring human Battle Captain release.' },
+          { icon: '⚖️', title: 'Analytic Confidence Separation', code: 'MIL-STD', desc: 'Evaluates source reliability (A–F) and analytic confidence (1–6) on distinct axes, preventing dangerous false certainty.' },
+          { icon: '🖥️', title: 'Standalone Analyst Workbench', code: 'GUI IN PROGRESS', desc: 'A dedicated standalone web GUI for threat analysts to review sightings, link actors, and manage taskings is in development.' }
         ]
       },
       modtoc: {
         accent: '#c084fc',
         glow: 'rgba(192, 132, 252, 0.25)',
-        badge: 'MODTOC',
+        badge: 'MODTOC · UNDER CONSTRUCTION',
         badgeClass: 'badge-modtoc',
-        windowName: 'Content Moderation Engine · Policy-as-Code · Audit Ledger',
-        eyebrow: 'MODTOC · TRUST & SAFETY CONTENT MODERATION',
-        title: 'Content moderation engine sharing the same immutable ledger.',
-        lead: 'Policy-as-code and reproducible diff evaluations born from high-stakes platform integrity operations. Designed to route queues by virality and harm potential while maintaining a tamper-proof audit trail.',
-        featTag: 'MODTOC CAPABILITIES',
-        featTitle: 'Defensible Platform Integrity for Modern Operations',
+        windowName: 'MODTOC · Under Construction · Trust & Safety RFC & Specification',
+        displayLabel: '🚧 UNDER CONSTRUCTION',
+        eyebrow: 'MODTOC · UNDER CONSTRUCTION · WE HAVEN\'T BUILT THIS YET',
+        title: 'Trust & Safety content moderation. Under construction.',
+        lead: 'We haven’t built out the MODTOC engine or GUI yet — it is currently in the open-source planning and specification phase. We are looking for Trust & Safety practitioners, policy leads, and engineers to collaborate with us and build it from the ground up.',
+        featTag: 'MODTOC PROPOSED SPEC & ROADMAP',
+        featTitle: 'Planned Architecture for Defensible Platform Moderation',
         cards: [
-          { icon: '📜', title: 'Policy-as-Code', code: 'YAML RULES', desc: 'Express trust & safety guidelines as version-controlled code, allowing teams to review, fork, and test rules before going live.' },
-          { icon: '🧪', title: 'Eval Regression Harness', code: 'MAKE DIFF', desc: 'Benchmark proposed policy changes against historical incident test suites to measure false positives and catch regressions.' },
-          { icon: '🚦', title: 'Severity × Reach Gates', code: 'ROUTING', desc: 'Dynamically routes moderation queues by content velocity, audience reach, and potential harm severity.' },
-          { icon: '🔏', title: 'Cryptographic Audit Trail', code: 'LEDGER', desc: 'Every review decision, human override, and bulk enforcement action is hashed and recorded forever on the TOC ledger.' },
-          { icon: '🤝', title: 'ROOST Compatibility', code: 'OPEN STANDARD', desc: 'Architected to work seamlessly with ROOST and other emerging trust and safety open source ecosystems.' },
-          { icon: '🔄', title: 'Threat-to-Policy Bridge', code: 'SIGTOC LINK', desc: 'Direct pipeline linking real-world geopolitical intelligence from SIGTOC into platform enforcement posture.' }
+          { icon: '🚧', title: 'Policy-as-Code [SPEC]', code: 'PLANNED', desc: 'Express trust & safety guidelines as version-controlled code, allowing teams to review, fork, and test rules before going live.' },
+          { icon: '🧪', title: 'Eval Regression Harness [SPEC]', code: 'PROTOTYPE', desc: 'Benchmark proposed policy changes against historical incident test suites to measure false positives and catch regressions.' },
+          { icon: '🚦', title: 'Severity × Reach Gates [RFC]', code: 'DESIGN', desc: 'Dynamically routes moderation queues by content velocity, audience reach, and potential harm severity rather than first-in-first-out.' },
+          { icon: '🔏', title: 'Cryptographic Audit Trail [PLANNED]', code: 'LEDGER RFC', desc: 'Every review decision, human override, and bulk enforcement action is hashed and recorded forever on the TOC ledger.' },
+          { icon: '🤝', title: 'ROOST Alignment [SPEC]', code: 'OPEN STANDARD', desc: 'Architected to work seamlessly with ROOST and other emerging trust and safety open source ecosystems.' },
+          { icon: '👥', title: 'Collaborators Wanted', code: 'JOIN US', desc: 'Help us write the RFCs, define the data models, and build the moderation engine and review interface.' }
         ]
       }
     };
@@ -1200,6 +1240,14 @@
       badge.textContent = data.badge;
       badge.className = `badge ${data.badgeClass}`;
       document.getElementById('window-name').textContent = data.windowName;
+      const dispLabel = document.getElementById('display-label');
+      if (dispLabel) dispLabel.textContent = data.displayLabel;
+
+      // Toggle Mobile Showcase: only visible for COPTOC
+      const mob = document.getElementById('coptoc-mobile');
+      if (mob) {
+        mob.style.display = tabId === 'coptoc' ? 'block' : 'none';
+      }
 
       // Update Features section
       document.getElementById('feat-tag').textContent = data.featTag;
