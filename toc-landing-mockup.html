@@ -747,7 +747,7 @@
     </p>
 
     <div class="hero-ctas">
-      <a href="#quickstart" class="btn btn-primary" style="padding:10px 20px; font-size:14px;">Deploy Local Wall (make run-cop)</a>
+      <a href="#quickstart" class="btn btn-primary" id="hero-primary-cta" style="padding:10px 20px; font-size:14px;">Deploy Local Wall (make run-cop)</a>
       <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:10px 20px; font-size:14px;">Browse Source on GitHub</a>
       <a href="https://h4yd3n.com" class="btn btn-secondary" style="padding:10px 20px; font-size:14px;">Creator Portfolio (h4yd3n.com)</a>
     </div>
@@ -1102,6 +1102,10 @@
         eyebrow: 'COPTOC · THE COMMON OPERATING PICTURE',
         title: 'One common operating picture. Built the way a military staff runs one.',
         lead: 'The wall a Battle Captain runs a 12-hour shift from. Fuses S1 Personnel, S2 Intel, S3 Operations, and S6 Communications onto a single pane of glass — with zero external keys required to run locally.',
+        btnText: 'Deploy Local Wall',
+        btnHref: '#quickstart',
+        heroBtnText: 'Deploy Local Wall (make run-cop)',
+        heroBtnHref: '#quickstart',
         featTag: 'COPTOC CAPABILITIES',
         featTitle: 'Engineered for the 24/7 Watch Floor',
         cards: [
@@ -1124,7 +1128,9 @@
         title: 'Autonomous intelligence fusion engine. Under construction.',
         lead: 'SIGTOC currently runs as a headless backend service and Python library. It ingests open feeds, maps them into STIX 2.1 graphs, and streams threat entities directly into COPTOC. We do not have a standalone GUI built yet — the workbench is under construction and we are looking for collaborators.',
         btnText: 'Collaborate on S2',
-        btnHref: '#collaborate'
+        btnHref: '#collaborate',
+        heroBtnText: 'Collaborate on SIGTOC',
+        heroBtnHref: '#collaborate'
       },
       modtoc: {
         accent: '#c084fc',
@@ -1137,7 +1143,9 @@
         title: 'Trust & Safety content moderation. Under construction.',
         lead: 'We haven’t built out the MODTOC engine or GUI yet — it is currently in the open-source planning and specification phase. We are looking for Trust & Safety practitioners, policy leads, and engineers to collaborate with us and build it from the ground up.',
         btnText: 'Join Working Group',
-        btnHref: '#collaborate'
+        btnHref: '#collaborate',
+        heroBtnText: 'Join MODTOC Working Group',
+        heroBtnHref: '#collaborate'
       }
     };
 
@@ -1182,6 +1190,12 @@
         featSec.style.display = tabId === 'coptoc' ? 'block' : 'none';
       }
 
+      // Toggle Quickstart section: only displayed for COPTOC (SIGTOC and MODTOC delete everything after collabs wanted)
+      const quickSec = document.getElementById('quickstart');
+      if (quickSec) {
+        quickSec.style.display = tabId === 'coptoc' ? 'block' : 'none';
+      }
+
       // If switching to COPTOC, ensure capability cards are populated
       if (tabId === 'coptoc' && data.cards) {
         document.getElementById('feat-tag').textContent = data.featTag;
@@ -1196,11 +1210,18 @@
         `).join('');
       }
 
-      // Update Header CTA button
+      // Update Header CTA button (navbar)
       const heroBtn = document.getElementById('hero-btn');
       if (heroBtn && data.btnText) {
         heroBtn.textContent = data.btnText;
         heroBtn.href = data.btnHref;
+      }
+
+      // Update Hero Primary CTA button
+      const heroPrimary = document.getElementById('hero-primary-cta');
+      if (heroPrimary && data.heroBtnText) {
+        heroPrimary.textContent = data.heroBtnText;
+        heroPrimary.href = data.heroBtnHref;
       }
 
       // Update URL hash without scroll
