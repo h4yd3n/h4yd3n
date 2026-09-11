@@ -178,6 +178,44 @@
       background: var(--purple);
       box-shadow: 0 0 8px var(--purple);
     }
+    .tab-pill-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 2px 6px 2px 2px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-left: 2px;
+    }
+    .tab-shared-badge {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      margin-left: 4px;
+      user-select: none;
+    }
+    .tab-shared-badge.active-sigtoc {
+      color: var(--amber);
+      background: rgba(245, 158, 11, 0.14);
+      border-color: rgba(245, 158, 11, 0.35);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+    }
+    .tab-shared-badge.active-modtoc {
+      color: var(--purple);
+      background: rgba(192, 132, 252, 0.14);
+      border-color: rgba(192, 132, 252, 0.35);
+      box-shadow: 0 0 10px rgba(192, 132, 252, 0.2);
+    }
 
     .nav-actions {
       display: flex;
@@ -727,12 +765,15 @@
         <button class="tab-pill active" data-tab="coptoc" onclick="switchTab('coptoc')">
           <span class="dot"></span> COPTOC
         </button>
-        <button class="tab-pill" data-tab="sigtoc" onclick="switchTab('sigtoc')">
-          <span class="dot"></span> SIGTOC <span style="font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(245, 158, 11, 0.15); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.3); font-weight: 700; margin-left: 4px;">UNDER CONSTRUCTION</span>
-        </button>
-        <button class="tab-pill" data-tab="modtoc" onclick="switchTab('modtoc')">
-          <span class="dot"></span> MODTOC <span style="font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(192, 132, 252, 0.15); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.3); font-weight: 700; margin-left: 4px;">UNDER CONSTRUCTION</span>
-        </button>
+        <div class="tab-pill-group">
+          <button class="tab-pill" data-tab="sigtoc" onclick="switchTab('sigtoc')">
+            <span class="dot"></span> SIGTOC
+          </button>
+          <button class="tab-pill" data-tab="modtoc" onclick="switchTab('modtoc')">
+            <span class="dot"></span> MODTOC
+          </button>
+          <span class="tab-shared-badge" id="tab-shared-badge">UNDER CONSTRUCTION</span>
+        </div>
       </div>
 
       <!-- Action Buttons -->
@@ -1184,6 +1225,13 @@
       document.querySelectorAll('.tab-pill').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tab === tabId);
       });
+
+      // Update shared under construction badge state
+      const sharedBadge = document.getElementById('tab-shared-badge');
+      if (sharedBadge) {
+        sharedBadge.classList.toggle('active-sigtoc', tabId === 'sigtoc');
+        sharedBadge.classList.toggle('active-modtoc', tabId === 'modtoc');
+      }
 
       // Update CSS variables
       document.documentElement.style.setProperty('--brand-accent', data.accent);
