@@ -7,6 +7,7 @@ Building calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, an
 - 🗒️ [Washipad](https://washipad.com) — a simple sticky-note wall
 - 🎨 [SoriToon](https://soritoon.com) — an AI-illustrated webtoon
 - 🎤 [SoriSpeak](https://sorispeak.com) — a teleprompter for creators
+- 🛡️ [TOC](https://github.com/h4yd3n/toc) — building COPTOC, SIGTOC, and MODTOC as open-source tools to give Trust & Safety teams a better common operating picture of threats, moderation activity, escalations, and response
 - 🌊 [ConstantFloat](https://constantfloat.com) — a mental health app built against engagement *(in progress)*
 
 🛠️ **Stack:** Swift/SwiftUI, Kotlin, Firebase, Cloudflare — Claude, Gemini, and Codex for the AI layer, ElevenLabs for voice cloning.
@@ -16,7 +17,3 @@ Building calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, an
 [LinkedIn](https://www.linkedin.com/in/h4yd3n) · [h4yd3n.com](https://h4yd3n.com)
 
 *Production code stays in private repos — the apps above are live and free to try.*
-
----
-
-This repo is the source for [h4yd3n.com](https://h4yd3n.com) — a static single page styled after Washipad.
