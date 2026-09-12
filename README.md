@@ -1,8 +1,8 @@
 # Hayden Lee
 
-🛡️ [TOC](https://github.com/h4yd3n/toc) — building open-source tools to give Trust & Safety teams a better common operating picture of threats, moderation activity, escalations, and response. *I'd love to connect with collaborators who are interested in working on this open-source project with me — PRs, issues, and discussions welcome!*
+🛡️ [TOC](https://github.com/h4yd3n/toc) — building open-source tools to give security and Trust & Safety teams a better common operating picture of threats, moderation activity, escalations, and response. (in progress) *I'd love to connect with collaborators who are interested in working on this open-source project with me*
 
-Building calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, and Codex.
+Calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, and Codex.
 
 - 🌙 [SoriStory](https://soristory.com) — AI-narrated bedtime stories with voice cloning
 - 📄 [Washidoc](https://washidoc.com) — a fast, free PDF editor
