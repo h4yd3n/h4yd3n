@@ -8,23 +8,23 @@
   <link rel="icon" type="image/svg+xml" href="assets/mark.svg" />
   <style>
     :root {
-      --bg: #0b0f14;
-      --panel: #111821;
-      --panel-hover: #16202c;
-      --panel-active: #1a2634;
-      --border: #223041;
-      --border-bright: #2f435b;
-      --text: #dce4ee;
-      --text-muted: #7b8aa0;
-      --text-dim: #4d5b6e;
-      --blue: #3b82f6;
-      --blue-glow: rgba(59, 130, 246, 0.25);
-      --amber: #f59e0b;
-      --amber-glow: rgba(245, 158, 11, 0.25);
-      --purple: #c084fc;
-      --purple-glow: rgba(192, 132, 252, 0.25);
-      --red: #ef4444;
-      --green: #22c55e;
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --panel-hover: #f1f5f9;
+      --panel-active: #e2e8f0;
+      --border: #e2e8f0;
+      --border-bright: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #94a3b8;
+      --blue: #2563eb;
+      --blue-glow: rgba(37, 99, 235, 0.15);
+      --amber: #d97706;
+      --amber-glow: rgba(217, 119, 6, 0.15);
+      --purple: #7c3aed;
+      --purple-glow: rgba(124, 58, 237, 0.15);
+      --red: #dc2626;
+      --green: #16a34a;
       --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
       --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       --brand-accent: var(--blue);
@@ -45,7 +45,7 @@
 
     /* Top Utility Header */
     .top-strip {
-      background: #080c10;
+      background: #f1f5f9;
       border-bottom: 1px solid var(--border);
       font-family: var(--mono);
       font-size: 11px;
@@ -61,6 +61,7 @@
       align-items: center;
       gap: 6px;
       color: var(--green);
+      font-weight: 600;
     }
     .top-strip .status-pill::before {
       content: "";
@@ -68,7 +69,7 @@
       height: 7px;
       background: var(--green);
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--green);
+      box-shadow: 0 0 8px rgba(22, 163, 74, 0.5);
     }
 
     /* Sticky Navigation */
@@ -76,8 +77,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(11, 15, 20, 0.88);
+      background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(14px) saturate(1.3);
+      -webkit-backdrop-filter: blur(14px) saturate(1.3);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
@@ -112,7 +114,7 @@
       font-weight: 800;
       font-size: 18px;
       letter-spacing: 0.12em;
-      color: #ffffff;
+      color: #0f172a;
       line-height: 1.1;
     }
     .brand-sub {
@@ -121,6 +123,7 @@
       letter-spacing: 0.16em;
       color: var(--text-muted);
       text-transform: uppercase;
+      font-weight: 600;
     }
 
     /* Product Tabs */
@@ -133,7 +136,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
+      padding: 7px 16px;
       border-radius: 999px;
       font-family: var(--mono);
       font-size: 12px;
@@ -147,7 +150,7 @@
     }
     .tab-pill:hover {
       color: var(--text);
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(15, 23, 42, 0.04);
     }
     .tab-pill .dot {
       width: 8px;
@@ -158,21 +161,21 @@
     }
     .tab-pill.active {
       background: var(--panel);
-      color: #ffffff;
+      color: #0f172a;
       border-color: var(--border-bright);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
     .tab-pill[data-tab="coptoc"].active .dot {
       background: var(--blue);
-      box-shadow: 0 0 8px var(--blue);
+      box-shadow: 0 0 6px var(--blue);
     }
     .tab-pill[data-tab="sigtoc"].active .dot {
       background: var(--amber);
-      box-shadow: 0 0 8px var(--amber);
+      box-shadow: 0 0 6px var(--amber);
     }
     .tab-pill[data-tab="modtoc"].active .dot {
       background: var(--purple);
-      box-shadow: 0 0 8px var(--purple);
+      box-shadow: 0 0 6px var(--purple);
     }
 
     .nav-actions {
@@ -194,21 +197,22 @@
     .btn-secondary {
       background: var(--panel);
       color: var(--text);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-bright);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
     .btn-secondary:hover {
       background: var(--panel-hover);
-      border-color: var(--border-bright);
+      border-color: #94a3b8;
     }
     .btn-primary {
-      background: var(--blue);
+      background: var(--brand-accent);
       color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 0 16px var(--blue-glow);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px var(--brand-glow);
     }
     .btn-primary:hover {
-      filter: brightness(1.1);
-      box-shadow: 0 0 24px var(--blue-glow);
+      filter: brightness(1.08);
+      box-shadow: 0 4px 14px var(--brand-glow);
     }
 
     /* Hero Section */
@@ -238,8 +242,8 @@
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      background: rgba(34, 48, 65, 0.5);
-      border: 1px solid var(--border);
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.25);
       color: var(--brand-accent);
       margin-bottom: 20px;
       transition: color 0.3s;
@@ -251,7 +255,7 @@
       font-weight: 800;
       max-width: 22ch;
       margin: 0 auto 18px;
-      color: #ffffff;
+      color: #0f172a;
     }
     .hero p.lead {
       font-size: clamp(16px, 2.2vw, 19px);
@@ -279,11 +283,11 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.05);
       position: relative;
     }
     .window-header {
-      background: #0e141c;
+      background: #f8fafc;
       padding: 10px 16px;
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -301,7 +305,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: var(--border);
+      background: #cbd5e1;
     }
     .window-title {
       display: flex;
@@ -316,9 +320,9 @@
       font-size: 9px;
       letter-spacing: 0.05em;
     }
-    .badge-coptoc { background: rgba(59, 130, 246, 0.2); color: var(--blue); border: 1px solid var(--blue); }
-    .badge-sigtoc { background: rgba(245, 158, 11, 0.2); color: var(--amber); border: 1px solid var(--amber); }
-    .badge-modtoc { background: rgba(192, 132, 252, 0.2); color: var(--purple); border: 1px solid var(--purple); }
+    .badge-coptoc { background: rgba(37, 99, 235, 0.1); color: var(--blue); border: 1px solid rgba(37, 99, 235, 0.3); }
+    .badge-sigtoc { background: rgba(217, 119, 6, 0.1); color: var(--amber); border: 1px solid rgba(217, 119, 6, 0.3); }
+    .badge-modtoc { background: rgba(124, 58, 237, 0.1); color: var(--purple); border: 1px solid rgba(124, 58, 237, 0.3); }
 
     /* Tab View Content */
     .tab-view {
@@ -336,7 +340,7 @@
     .screenshot-hero {
       position: relative;
       width: 100%;
-      background: #000000;
+      background: #f8fafc;
     }
     .screenshot-hero img {
       width: 100%;
@@ -373,24 +377,24 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: rgba(10, 15, 22, 0.9);
-      border: 1.5px solid var(--accent, var(--blue));
-      color: #ffffff;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid var(--accent, var(--blue));
+      color: #0f172a;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--mono);
       font-size: 10px;
       font-weight: 700;
-      box-shadow: 0 0 12px var(--glow, rgba(59, 130, 246, 0.4)), inset 0 0 6px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
       transition: all 0.2s ease;
     }
     .map-hotspot:hover .hotspot-dot,
     .map-hotspot.active .hotspot-dot {
       transform: scale(1.18);
       background: var(--accent, var(--blue));
-      color: #080c10;
-      box-shadow: 0 0 20px var(--glow, rgba(59, 130, 246, 0.8));
+      color: #ffffff;
+      box-shadow: 0 0 16px var(--glow, rgba(37, 99, 235, 0.8));
     }
     @keyframes beacon-pulse {
       0% { transform: scale(0.85); opacity: 0.95; }
@@ -401,9 +405,9 @@
     .hotspot-tooltip {
       position: absolute;
       width: 270px;
-      background: rgba(8, 12, 18, 0.96);
-      border: 1px solid var(--border-bright);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-radius: 8px;
@@ -485,13 +489,13 @@
     }
     .tooltip-desc {
       font-size: 11px;
-      color: var(--text-muted);
+      color: #94a3b8;
       line-height: 1.45;
     }
 
     /* Hotspot callouts bar on screenshot */
     .hotspot-bar {
-      background: #090e15;
+      background: #f8fafc;
       border-top: 1px solid var(--border);
       padding: 14px 16px;
       display: grid;
@@ -514,27 +518,29 @@
     }
     .hotspot-item {
       padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.02);
+      background: #ffffff;
       border: 1px solid var(--border);
       border-radius: 6px;
       font-size: 11px;
       cursor: pointer;
       transition: all 0.2s ease;
       text-align: left;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
     }
     .hotspot-item:hover,
     .hotspot-item.active {
-      background: rgba(255, 255, 255, 0.05);
+      background: #f1f5f9;
       border-color: var(--border-bright);
       transform: translateY(-1px);
     }
     .hotspot-item.active {
+      background: #ffffff;
       border-color: var(--item-accent, var(--blue));
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.25);
+      box-shadow: 0 0 0 1px var(--item-accent, var(--blue)), 0 4px 12px rgba(0, 0, 0, 0.06);
     }
     .hotspot-label {
       font-weight: 700;
-      color: #ffffff;
+      color: #0f172a;
       margin-bottom: 4px;
       display: flex;
       align-items: center;
@@ -564,13 +570,13 @@
     .section-title {
       font-size: clamp(24px, 3.5vw, 36px);
       font-weight: 800;
-      color: #ffffff;
+      color: #0f172a;
       letter-spacing: -0.01em;
     }
 
     /* Doctrine & Founder Section */
     .doctrine-section {
-      background: #080c10;
+      background: #ffffff;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       padding: 80px 24px;
@@ -592,7 +598,7 @@
       font-size: 18px;
       line-height: 1.55;
       font-style: italic;
-      color: var(--text);
+      color: #0f172a;
     }
     .doctrine-author {
       margin-top: 16px;
@@ -601,7 +607,7 @@
       color: var(--text-muted);
     }
     .doctrine-author strong {
-      color: #ffffff;
+      color: #0f172a;
       font-size: 13px;
     }
     .doctrine-rules {
@@ -621,7 +627,7 @@
       flex-shrink: 0;
     }
     .rule-body strong {
-      color: #ffffff;
+      color: #0f172a;
     }
     .rule-body p {
       color: var(--text-muted);
@@ -635,21 +641,22 @@
       padding: 70px 24px;
     }
     .terminal-box {
-      background: #080c10;
-      border: 1px solid var(--border);
+      background: #0f172a;
+      border: 1px solid #1e293b;
       border-radius: 8px;
       overflow: hidden;
       font-family: var(--mono);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
     }
     .terminal-bar {
-      background: #111821;
+      background: #1e293b;
       padding: 8px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid #334155;
       font-size: 11px;
-      color: var(--text-muted);
+      color: #94a3b8;
     }
     .terminal-code {
       padding: 20px;
@@ -668,7 +675,7 @@
       padding: 30px 24px 70px;
     }
     .mobile-container {
-      background: linear-gradient(180deg, #0f1622 0%, #0a0f16 100%);
+      background: #ffffff;
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 48px 40px;
@@ -676,7 +683,7 @@
       grid-template-columns: 340px 1fr;
       gap: 52px;
       align-items: center;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
     }
     @media (max-width: 920px) {
       .mobile-container {
@@ -698,7 +705,7 @@
       background: #000;
       border-radius: 46px;
       padding: 9px;
-      box-shadow: 0 30px 70px -10px rgba(0,0,0,0.9), 0 0 0 2px #2a3848, 0 0 0 4px #121922;
+      box-shadow: 0 20px 50px -10px rgba(0,0,0,0.3), 0 0 0 2px #cbd5e1, 0 0 0 4px #e2e8f0;
       position: relative;
     }
     .phone-screen {
@@ -730,7 +737,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      background: rgba(13, 19, 26, 0.85);
+      background: #f1f5f9;
       border: 1px solid var(--border);
       padding: 4px;
       border-radius: 999px;
@@ -753,13 +760,13 @@
     }
     .phone-tab-btn:hover {
       color: var(--text);
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.04);
     }
     .phone-tab-btn.active {
-      background: var(--panel);
-      color: #ffffff;
+      background: #ffffff;
+      color: #0f172a;
       border-color: var(--border-bright);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     }
     .phone-tab-dot {
       width: 6px;
@@ -769,9 +776,9 @@
       transition: background 0.2s, box-shadow 0.2s;
     }
     .phone-tab-btn[data-tab-idx="0"].active .phone-tab-dot { background: var(--blue); box-shadow: 0 0 6px var(--blue); }
-    .phone-tab-btn[data-tab-idx="1"].active .phone-tab-dot { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+    .phone-tab-btn[data-tab-idx="1"].active .phone-tab-dot { background: #0284c7; box-shadow: 0 0 6px #0284c7; }
     .phone-tab-btn[data-tab-idx="2"].active .phone-tab-dot { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
-    .phone-tab-btn[data-tab-idx="3"].active .phone-tab-dot { background: #10b981; box-shadow: 0 0 6px #10b981; }
+    .phone-tab-btn[data-tab-idx="3"].active .phone-tab-dot { background: #059669; box-shadow: 0 0 6px #059669; }
 
     .mobile-details {
       display: flex;
@@ -785,7 +792,7 @@
       margin-top: 10px;
     }
     .mobile-card {
-      background: rgba(255, 255, 255, 0.02);
+      background: #ffffff;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 16px;
@@ -794,20 +801,21 @@
       cursor: pointer;
       transition: all 0.25s ease;
       text-align: left;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }
     .mobile-card:hover,
     .mobile-card.active {
-      background: rgba(255, 255, 255, 0.05);
+      background: #f8fafc;
       border-color: var(--border-bright);
       transform: translateY(-2px);
     }
     .mobile-card.active {
       border-color: var(--card-accent, var(--blue));
-      box-shadow: 0 0 16px rgba(59, 130, 246, 0.2);
+      box-shadow: 0 0 0 1px var(--card-accent, var(--blue)), 0 4px 12px rgba(0, 0, 0, 0.06);
     }
     .mobile-card-title {
       font-weight: 700;
-      color: #fff;
+      color: #0f172a;
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -818,12 +826,10 @@
       line-height: 1.45;
     }
 
-
-
     /* Footer */
     footer {
       border-top: 1px solid var(--border);
-      background: #080c10;
+      background: #f1f5f9;
       padding: 40px 24px;
       font-family: var(--mono);
       font-size: 12px;
@@ -838,12 +844,16 @@
       align-items: center;
       gap: 16px;
     }
+    .footer-inner strong {
+      color: #0f172a;
+    }
     .footer-links {
       display: flex;
       gap: 20px;
     }
     .footer-links a:hover {
-      color: #ffffff;
+      color: #0f172a;
+    }
     }
   </style>
 </head>
@@ -860,8 +870,8 @@
     <div class="nav-inner">
       <div class="brand-lockup" onclick="switchTab('coptoc')">
         <svg class="brand-mark" viewBox="0 0 1024 1024">
-          <polygon points="190,834 214,788 858,214 834,190 810,236 166,810" id="nav-slash" fill="#3b82f6" opacity="0.8"/>
-          <path d="M512 182L644 314M667 337L687 357M710 380L842 512M842 512L710 644M687 667L667 687M644 710L512 842M512 842L380 710M357 687L337 667M314 644L182 512M182 512L314 380M337 357L357 337M380 314L512 182" stroke="#dce4ee" stroke-width="48" fill="none"/>
+          <polygon points="190,834 214,788 858,214 834,190 810,236 166,810" id="nav-slash" fill="#2563eb" opacity="0.9"/>
+          <path d="M512 182L644 314M667 337L687 357M710 380L842 512M842 512L710 644M687 667L667 687M644 710L512 842M512 842L380 710M357 687L337 667M314 644L182 512M182 512L314 380M337 357L357 337M380 314L512 182" stroke="#0f172a" stroke-width="48" fill="none"/>
         </svg>
         <div class="brand-text">
           <span class="brand-title">TOC</span>
@@ -908,7 +918,7 @@
     </div>
 
     <div style="margin-top:-20px; margin-bottom:20px;">
-      <div style="font-family:var(--mono); font-size:12px; color:var(--text-muted); display:inline-flex; align-items:center; gap:8px; background:rgba(59,130,246,0.08); border:1px dashed rgba(59,130,246,0.3); padding:8px 18px; border-radius:999px;">
+      <div style="font-family:var(--mono); font-size:12px; color:#1e40af; display:inline-flex; align-items:center; gap:8px; background:#eff6ff; border:1px dashed #bfdbfe; padding:8px 18px; border-radius:999px;">
         <span>🤝</span>
         <span><strong>Collaborators wanted:</strong> I'd love to get collaborators who are interested in working on this open-source project with me — <a id="collab-pill-link" href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" style="color:var(--brand-accent); text-decoration:underline; font-weight:600;">collaborate on GitHub ↗</a></span>
       </div>
@@ -1045,7 +1055,7 @@
         </div>
 
         <!-- COPTOC Native Mobile Watch Station -->
-        <div style="background: #080c10; border-top: 1px solid var(--border); padding: 40px 24px;">
+        <div style="background: #f8fafc; border-top: 1px solid var(--border); padding: 40px 24px;">
           <div class="mobile-container" style="max-width: 1080px; margin: 0 auto; box-shadow: none; border: 1px solid var(--border);">
             <div class="phone-mockup-wrapper">
               <div class="phone-bezel">
@@ -1073,7 +1083,7 @@
             </div>
             <div class="mobile-details">
               <div class="section-tag" style="align-self:flex-start;">COPTOC MOBILE CLIENT · SWIFTUI &amp; KOTLIN</div>
-              <h3 style="font-size: clamp(22px, 2.8vw, 30px); font-weight: 800; color: #ffffff; line-height: 1.2; letter-spacing: -0.01em;">
+              <h3 style="font-size: clamp(22px, 2.8vw, 30px); font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -0.01em;">
                 The Common Operating Picture in your pocket. Live in San Francisco.
               </h3>
               <p style="color: var(--text-muted); font-size: 14.5px; line-height: 1.55;">
@@ -1084,16 +1094,16 @@
                   <div class="mobile-card-title"><span style="color:var(--blue);">🗺️</span> COP Tactical Map</div>
                   <div class="mobile-card-desc">Live posture escalation, Bay Area geofences, facility clusters, and real-time live asset tracking.</div>
                 </div>
-                <div class="mobile-card" data-slide-idx="1" style="--card-accent: #38bdf8;" onclick="setMobileSlide(1); startMobileSlideRotation();">
-                  <div class="mobile-card-title"><span style="color:#38bdf8;">👥</span> S1 Personnel Roster</div>
+                <div class="mobile-card" data-slide-idx="1" style="--card-accent: #0284c7;" onclick="setMobileSlide(1); startMobileSlideRotation();">
+                  <div class="mobile-card-title"><span style="color:#0284c7;">👥</span> S1 Personnel Roster</div>
                   <div class="mobile-card-desc">Real-time agent roll calls, duty stations, protection detail rosters, and active tasking queues.</div>
                 </div>
                 <div class="mobile-card" data-slide-idx="2" style="--card-accent: var(--amber);" onclick="setMobileSlide(2); startMobileSlideRotation();">
                   <div class="mobile-card-title"><span style="color:var(--amber);">📡</span> S2 Intel &amp; INTSUM</div>
                   <div class="mobile-card-desc">Keyless collector feeds, threat warnings, rule evaluations, and draft intelligence summaries.</div>
                 </div>
-                <div class="mobile-card" data-slide-idx="3" style="--card-accent: #10b981;" onclick="setMobileSlide(3); startMobileSlideRotation();">
-                  <div class="mobile-card-title"><span style="color:#10b981;">⏱️</span> S3 Operations &amp; Travel</div>
+                <div class="mobile-card" data-slide-idx="3" style="--card-accent: #059669;" onclick="setMobileSlide(3); startMobileSlideRotation();">
+                  <div class="mobile-card-title"><span style="color:#059669;">⏱️</span> S3 Operations &amp; Travel</div>
                   <div class="mobile-card-desc">90-day operational calendar, active travel missions (Riyadh, Tokyo), and dispatch logs.</div>
                 </div>
               </div>
@@ -1104,31 +1114,31 @@
 
       <!-- Tab View 2: SIGTOC -->
       <div class="tab-view" id="view-sigtoc">
-        <div style="background: #090e15; padding: 56px 30px; min-height: 480px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <div style="background: #fffdf5; border-top: 1px solid #fde68a; padding: 56px 30px; min-height: 480px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
           <div style="max-width: 780px; width: 100%;">
-            <div style="display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; font-weight:700; color:var(--amber); padding:6px 14px; border:1px solid var(--amber); background:rgba(245, 158, 11, 0.1); border-radius:4px; margin-bottom:20px; letter-spacing:0.08em; text-transform:uppercase;">
+            <div style="display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; font-weight:700; color:#b45309; padding:6px 14px; border:1px solid #fcd34d; background:rgba(245, 158, 11, 0.12); border-radius:4px; margin-bottom:20px; letter-spacing:0.08em; text-transform:uppercase;">
               <span>🚧</span> UNDER CONSTRUCTION · S2 INTEL FUSION ENGINE
             </div>
-            <h2 style="font-size: clamp(26px, 3.5vw, 34px); font-weight:800; color:#ffffff; margin-bottom:14px; letter-spacing:-0.01em;">
+            <h2 style="font-size: clamp(26px, 3.5vw, 34px); font-weight:800; color:#78350f; margin-bottom:14px; letter-spacing:-0.01em;">
               SIGTOC is under construction.
             </h2>
-            <p style="color:var(--text-muted); font-size:16px; margin-bottom:28px; line-height:1.6;">
+            <p style="color:#92400e; font-size:16px; margin-bottom:28px; line-height:1.6;">
               SIGTOC is being built as an autonomous threat intelligence fusion engine. It ingests open feeds (USGS, GDACS, NOAA, WHO, FCDO), maps them into STIX 2.1 graphs, and feeds intelligence directly into the operations picture. The standalone intelligence workbench GUI and live collector pipelines are actively in development.
             </p>
 
             <!-- Real API preview terminal box -->
-            <div style="background:#04070a; border:1px solid var(--border); border-radius:8px; padding:18px 20px; text-align:left; font-family:var(--mono); font-size:12.5px; color:#a5d6ff; line-height:1.6; margin-bottom:28px; box-shadow:inset 0 2px 8px rgba(0,0,0,0.6);">
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:8px; padding:18px 20px; text-align:left; font-family:var(--mono); font-size:12.5px; color:#a5d6ff; line-height:1.6; margin-bottom:28px; box-shadow:0 10px 30px -10px rgba(0,0,0,0.15);">
               <div style="color:var(--text-dim); margin-bottom:6px;"># sigtoc service &amp; collectors runtime (:8002)</div>
               <div style="color:#58a6ff;">$ make run-s2</div>
               <div style="color:#c9d1d9;">INFO:     Started server process [sigtoc.api:app]</div>
               <div style="color:#c9d1d9;">INFO:     Waiting for application startup.</div>
               <div style="color:#7ee787;">[sigtoc]  6 keyless collectors registered: usgs, gdacs, nws, who, fcdo, wiki</div>
               <div style="color:#7ee787;">[sigtoc]  STIX 2.1 graph mapper loaded</div>
-              <div style="color:var(--amber);">[sigtoc]  status: under_construction — standalone analyst workbench in design</div>
+              <div style="color:#fbbf24;">[sigtoc]  status: under_construction — standalone analyst workbench in design</div>
             </div>
 
             <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
-              <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--amber); border-color:rgba(255,255,255,0.2); box-shadow:0 0 16px rgba(245,158,11,0.3); padding:10px 22px;">
+              <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-primary" style="background:#d97706; border-color:rgba(0,0,0,0.1); box-shadow:0 2px 8px rgba(217,119,6,0.25); padding:10px 22px;">
                 Collaborate on GitHub ↗
               </a>
               <a href="https://github.com/h4yd3n/toc/tree/main/sigtoc" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:10px 22px;">
@@ -1141,23 +1151,23 @@
 
       <!-- Tab View 3: MODTOC -->
       <div class="tab-view" id="view-modtoc">
-        <div style="background: #110d18; padding: 56px 30px; min-height: 480px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <div style="background: #fdf4ff; border-top: 1px solid #f5d0fe; padding: 56px 30px; min-height: 480px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
           <div style="max-width: 780px; width: 100%;">
-            <div style="display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; font-weight:700; color:var(--purple); padding:6px 14px; border:1px solid var(--purple); background:rgba(192, 132, 252, 0.1); border-radius:4px; margin-bottom:20px; letter-spacing:0.08em; text-transform:uppercase;">
+            <div style="display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; font-weight:700; color:#7e22ce; padding:6px 14px; border:1px solid #e9d5ff; background:rgba(124, 58, 237, 0.12); border-radius:4px; margin-bottom:20px; letter-spacing:0.08em; text-transform:uppercase;">
               <span>🚧</span> UNDER CONSTRUCTION · WE HAVEN'T BUILT THIS YET
             </div>
-            <h2 style="font-size: clamp(26px, 3.5vw, 34px); font-weight:800; color:#ffffff; margin-bottom:14px; letter-spacing:-0.01em;">
+            <h2 style="font-size: clamp(26px, 3.5vw, 34px); font-weight:800; color:#581c87; margin-bottom:14px; letter-spacing:-0.01em;">
               MODTOC is under construction.
             </h2>
-            <p style="color:var(--text-muted); font-size:16px; margin-bottom:28px; line-height:1.6;">
-              We haven't built out the MODTOC engine or GUI yet — it is currently an open-source RFC and specification. Born from years leading integrity operations and coordinated inauthentic behavior (CIB) at TikTok, MODTOC is being designed to bring <strong>policy-as-code evaluations (<code style="color:var(--purple);">make diff</code>), severity × reach queue gating, and hash-chained audit trails</strong> to platform safety teams. We are looking for practitioners and engineers to collaborate with us.
+            <p style="color:#6b21a8; font-size:16px; margin-bottom:28px; line-height:1.6;">
+              We haven't built out the MODTOC engine or GUI yet — it is currently an open-source RFC and specification. Born from years leading integrity operations and coordinated inauthentic behavior (CIB) at TikTok, MODTOC is being designed to bring <strong>policy-as-code evaluations (<code style="color:#7e22ce;">make diff</code>), severity × reach queue gating, and hash-chained audit trails</strong> to platform safety teams. We are looking for practitioners and engineers to collaborate with us.
             </p>
 
             <!-- Conceptual RFC box -->
-            <div style="background:#09050d; border:1px solid #332047; border-radius:8px; padding:18px 20px; text-align:left; font-family:var(--mono); font-size:12.5px; color:#e9d5ff; line-height:1.6; margin-bottom:28px; box-shadow:inset 0 2px 8px rgba(0,0,0,0.6);">
+            <div style="background:#0f172a; border:1px solid #1e293b; border-radius:8px; padding:18px 20px; text-align:left; font-family:var(--mono); font-size:12.5px; color:#e9d5ff; line-height:1.6; margin-bottom:28px; box-shadow:0 10px 30px -10px rgba(0,0,0,0.15);">
               <div style="color:var(--text-dim); margin-bottom:6px;"># modtoc/policies/hate_speech.yaml (RFC Specification Draft)</div>
               <div style="color:#c084fc;">policy: <span style="color:#fff;">hate_speech_v2</span></div>
-              <div style="color:#c084fc;">status: <span style="color:var(--purple); font-weight:700;">under_construction</span></div>
+              <div style="color:#c084fc;">status: <span style="color:#c084fc; font-weight:700;">under_construction</span></div>
               <div style="color:#c084fc;">eval_dataset: <span style="color:#fff;">modtoc/evals/golden_sets/hate_speech_golden.json</span></div>
               <div style="color:#c084fc;">reach_routing:</div>
               <div style="padding-left:16px; color:#c084fc;">severity_threshold: <span style="color:#fff;">0.85</span></div>
@@ -1165,7 +1175,7 @@
             </div>
 
             <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
-              <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--purple); border-color:rgba(255,255,255,0.2); box-shadow:0 0 16px rgba(192,132,252,0.3); padding:10px 22px;">
+              <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-primary" style="background:#7c3aed; border-color:rgba(0,0,0,0.1); box-shadow:0 2px 8px rgba(124,58,237,0.25); padding:10px 22px;">
                 Join on GitHub ↗
               </a>
               <a href="https://github.com/h4yd3n/toc/tree/main/modtoc" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:10px 22px;">
@@ -1271,8 +1281,8 @@
   <script>
     const tabs = {
       coptoc: {
-        accent: '#3b82f6',
-        glow: 'rgba(59, 130, 246, 0.25)',
+        accent: '#2563eb',
+        glow: 'rgba(37, 99, 235, 0.15)',
         badge: 'COPTOC',
         badgeClass: 'badge-coptoc',
         windowName: 'Tactical Operations Wall · San Francisco Watch · Posture: Elevated',
@@ -1293,8 +1303,8 @@
         pillLinkTarget: '_blank'
       },
       sigtoc: {
-        accent: '#f59e0b',
-        glow: 'rgba(245, 158, 11, 0.25)',
+        accent: '#d97706',
+        glow: 'rgba(217, 119, 6, 0.15)',
         eyebrow: 'SIGTOC · UNDER CONSTRUCTION · S2 INTEL FUSION ENGINE',
         title: 'Autonomous intelligence fusion engine. Under construction.',
         lead: 'SIGTOC currently runs as a headless backend service and Python library. It ingests open feeds, maps them into STIX 2.1 graphs, and streams threat entities directly into COPTOC. We do not have a GUI built yet — the workbench is under construction and we are looking for collaborators.',
@@ -1312,8 +1322,8 @@
         pillLinkTarget: '_blank'
       },
       modtoc: {
-        accent: '#c084fc',
-        glow: 'rgba(192, 132, 252, 0.25)',
+        accent: '#7c3aed',
+        glow: 'rgba(124, 58, 237, 0.15)',
         eyebrow: 'MODTOC · UNDER CONSTRUCTION · WE HAVEN\'T BUILT THIS YET',
         title: 'Trust & Safety content moderation. Under construction.',
         lead: 'We haven’t built out the MODTOC engine or GUI yet — it is currently in the open-source planning and specification phase. We are looking for Trust & Safety practitioners, policy leads, and engineers to collaborate with us and build it from the ground up.',
