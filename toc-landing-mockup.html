@@ -87,10 +87,10 @@
       margin: 0 auto;
       padding: 0 24px;
       height: 64px;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
     }
     .brand-lockup {
       display: flex;
@@ -98,6 +98,7 @@
       gap: 12px;
       cursor: pointer;
       user-select: none;
+      justify-self: start;
     }
     .brand-mark {
       width: 38px;
@@ -123,6 +124,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      justify-self: center;
     }
     .tab-pill {
       display: inline-flex;
@@ -174,6 +176,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      justify-self: end;
     }
     .btn {
       display: inline-flex;
@@ -501,9 +504,12 @@
       }
     }
     @media (max-width: 720px) {
+      .nav-inner {
+        padding: 0 16px;
+        gap: 8px;
+      }
       .brand-title {
-        font-size: 12px;
-        letter-spacing: 0.03em;
+        display: none;
       }
       .hotspot-bar {
         grid-template-columns: 1fr;
@@ -1308,7 +1314,7 @@
         glow: 'rgba(124, 58, 237, 0.15)',
         eyebrow: 'MODTOC · UNDER CONSTRUCTION · WE HAVEN\'T BUILT THIS YET',
         title: 'Trust & Safety content moderation. Under construction.',
-        lead: 'We haven’t built out the MODTOC engine or GUI yet — it is currently in the open-source planning and specification phase. We are looking for Trust & Safety practitioners, policy leads, and engineers to collaborate with us and build it from the ground up.',
+        lead: 'We haven’t built out the MODTOC engine or GUI yet — it is currently in the open-source planning and specification phase.',
         btnText: 'Collaborate on GitHub',
         btnHref: 'https://github.com/h4yd3n/toc',
         btnTarget: '_blank',
