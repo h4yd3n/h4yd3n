@@ -97,16 +97,25 @@
       align-items: center;
       gap: 12px;
       cursor: pointer;
-      text-decoration: none;
       user-select: none;
     }
     .brand-mark {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
       transition: transform 0.2s ease;
     }
     .brand-lockup:hover .brand-mark {
       transform: scale(1.08);
+    }
+    .brand-title {
+      font-weight: 750;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      color: #0f172a;
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     /* Product Tabs */
@@ -492,6 +501,10 @@
       }
     }
     @media (max-width: 720px) {
+      .brand-title {
+        font-size: 12px;
+        letter-spacing: 0.03em;
+      }
       .hotspot-bar {
         grid-template-columns: 1fr;
       }
@@ -853,9 +866,10 @@
     <div class="nav-inner">
       <div class="brand-lockup" onclick="switchTab('coptoc')">
         <svg class="brand-mark" viewBox="0 0 1024 1024">
-          <polygon points="170,854 220,770 870,170 820,254" id="nav-slash" fill="#2563eb"/>
-          <path d="M512 160L864 512L512 864L160 512Z" stroke="#0f172a" stroke-width="88" stroke-linejoin="miter" fill="none"/>
+          <polygon points="864,228 796,160 160,796 228,864" id="nav-slash" fill="#2563eb"/>
+          <path d="M512 160L864 512L512 864L160 512Z" stroke="#0f172a" stroke-width="96" stroke-linejoin="miter" fill="none"/>
         </svg>
+        <span class="brand-title">Tactical Operations Center</span>
       </div>
 
       <!-- Module Switcher Tabs -->
@@ -888,13 +902,7 @@
     <h1 id="hero-title">One common operating picture. Built the way a military staff runs one.</h1>
     <p class="lead" id="hero-lead" style="display:none;"></p>
 
-    <div class="hero-ctas">
-      <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-primary" id="hero-primary-cta" style="padding:10px 20px; font-size:14px;">Deploy Local Wall (make run-cop)</a>
-      <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-secondary" id="hero-secondary-cta" style="padding:10px 20px; font-size:14px;">Browse Source on GitHub</a>
-      <a href="https://h4yd3n.com" target="_blank" rel="noopener" class="btn btn-secondary" id="hero-tertiary-cta" style="padding:10px 20px; font-size:14px;">Creator Portfolio (h4yd3n.com)</a>
-    </div>
-
-    <div style="margin-top:-20px; margin-bottom:20px;">
+    <div style="margin-top:24px; margin-bottom:20px;">
       <div style="font-family:var(--mono); font-size:12px; color:#1e40af; display:inline-flex; align-items:center; gap:8px; background:#eff6ff; border:1px dashed #bfdbfe; padding:8px 18px; border-radius:999px;">
         <span>🤝</span>
         <span><strong>Collaborators wanted:</strong> I'd love to get collaborators who are interested in working on this open-source project with me — <a id="collab-pill-link" href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" style="color:var(--brand-accent); text-decoration:underline; font-weight:600;">collaborate on GitHub ↗</a></span>
@@ -1346,8 +1354,10 @@
       if (navSlash) navSlash.setAttribute('fill', data.accent);
 
       // Update Hero text
-      document.getElementById('hero-eyebrow').textContent = data.eyebrow;
-      document.getElementById('hero-title').textContent = data.title;
+      const heroEyebrow = document.getElementById('hero-eyebrow');
+      if (heroEyebrow) heroEyebrow.textContent = data.eyebrow;
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle) heroTitle.textContent = data.title;
       const heroLead = document.getElementById('hero-lead');
       if (heroLead) {
         heroLead.textContent = data.lead || '';
