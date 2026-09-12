@@ -687,7 +687,9 @@
     }
     .phone-mockup-wrapper {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
     }
     .phone-bezel {
       width: 100%;
@@ -707,12 +709,70 @@
       position: relative;
       background: #06090d;
     }
-    .phone-screen img {
+    .phone-slide {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      opacity: 0;
+      transform: scale(1.02);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
     }
+    .phone-slide.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+    .phone-tab-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(13, 19, 26, 0.85);
+      border: 1px solid var(--border);
+      padding: 4px;
+      border-radius: 999px;
+      font-family: var(--mono);
+    }
+    .phone-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .phone-tab-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .phone-tab-btn.active {
+      background: var(--panel);
+      color: #ffffff;
+      border-color: var(--border-bright);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    .phone-tab-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-dim);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .phone-tab-btn[data-tab-idx="0"].active .phone-tab-dot { background: var(--blue); box-shadow: 0 0 6px var(--blue); }
+    .phone-tab-btn[data-tab-idx="1"].active .phone-tab-dot { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+    .phone-tab-btn[data-tab-idx="2"].active .phone-tab-dot { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+    .phone-tab-btn[data-tab-idx="3"].active .phone-tab-dot { background: #10b981; box-shadow: 0 0 6px #10b981; }
+
     .mobile-details {
       display: flex;
       flex-direction: column;
@@ -731,6 +791,19 @@
       padding: 16px;
       font-family: var(--mono);
       font-size: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: left;
+    }
+    .mobile-card:hover,
+    .mobile-card.active {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+    }
+    .mobile-card.active {
+      border-color: var(--card-accent, var(--blue));
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.2);
     }
     .mobile-card-title {
       font-weight: 700;
@@ -977,8 +1050,25 @@
             <div class="phone-mockup-wrapper">
               <div class="phone-bezel">
                 <div class="phone-screen">
-                  <img src="assets/coptoc-ios.png" alt="COPTOC Mobile Watch Station running live in San Francisco" />
+                  <img class="phone-slide active" src="assets/coptoc-ios.png" alt="COPTOC Mobile COP Map · Live in San Francisco" data-slide-idx="0" />
+                  <img class="phone-slide" src="assets/coptoc-ios-s1.png" alt="COPTOC S1 Personnel Roster & Roll Calls" data-slide-idx="1" />
+                  <img class="phone-slide" src="assets/coptoc-ios-s2.png" alt="COPTOC S2 Intelligence Workbench & Warnings" data-slide-idx="2" />
+                  <img class="phone-slide" src="assets/coptoc-ios-s3.png" alt="COPTOC S3 Operations Timeline & Travel Missions" data-slide-idx="3" />
                 </div>
+              </div>
+              <div class="phone-tab-nav" role="tablist" aria-label="Mobile app screen selector">
+                <button class="phone-tab-btn active" data-tab-idx="0" onclick="setMobileSlide(0); startMobileSlideRotation();" title="Tactical COP Map">
+                  <span class="phone-tab-dot"></span> COP
+                </button>
+                <button class="phone-tab-btn" data-tab-idx="1" onclick="setMobileSlide(1); startMobileSlideRotation();" title="S1 Personnel Roster">
+                  <span class="phone-tab-dot"></span> S1
+                </button>
+                <button class="phone-tab-btn" data-tab-idx="2" onclick="setMobileSlide(2); startMobileSlideRotation();" title="S2 Intel & INTSUM">
+                  <span class="phone-tab-dot"></span> S2
+                </button>
+                <button class="phone-tab-btn" data-tab-idx="3" onclick="setMobileSlide(3); startMobileSlideRotation();" title="S3 Operations Timeline">
+                  <span class="phone-tab-dot"></span> S3
+                </button>
               </div>
             </div>
             <div class="mobile-details">
@@ -990,21 +1080,21 @@
                 When an incident breaks out or an executive travels, the watch floor doesn't stay tethered to a desk. The native COPTOC mobile app renders the live operational picture natively on iOS and Android with zero cloud dependencies.
               </p>
               <div class="mobile-grid">
-                <div class="mobile-card">
-                  <div class="mobile-card-title"><span style="color:var(--amber);">⚡</span> DEFCON 3 Alerting</div>
-                  <div class="mobile-card-desc">Live escalation banner, real-time threat tallies, and single-tap verified acknowledgments.</div>
+                <div class="mobile-card active" data-slide-idx="0" style="--card-accent: var(--blue);" onclick="setMobileSlide(0); startMobileSlideRotation();">
+                  <div class="mobile-card-title"><span style="color:var(--blue);">🗺️</span> COP Tactical Map</div>
+                  <div class="mobile-card-desc">Live DEFCON 3 escalation, Bay Area geofences, facility clusters, and real-time live asset tracking.</div>
                 </div>
-                <div class="mobile-card">
-                  <div class="mobile-card-title"><span style="color:var(--blue);">🌐</span> Bay Area Geofencing</div>
-                  <div class="mobile-card-desc">Facility perimeters, travel corridors, executive protection zones, and live personnel clusters.</div>
+                <div class="mobile-card" data-slide-idx="1" style="--card-accent: #38bdf8;" onclick="setMobileSlide(1); startMobileSlideRotation();">
+                  <div class="mobile-card-title"><span style="color:#38bdf8;">👥</span> S1 Personnel Roster</div>
+                  <div class="mobile-card-desc">Real-time agent roll calls, duty stations, protection detail rosters, and active tasking queues.</div>
                 </div>
-                <div class="mobile-card">
-                  <div class="mobile-card-title"><span style="color:var(--purple);">📋</span> S1–S3 Tactical Drawers</div>
-                  <div class="mobile-card-desc">Bottom navigation tabs for Personnel rosters, SIGTOC intelligence feeds, and Ops timelines.</div>
+                <div class="mobile-card" data-slide-idx="2" style="--card-accent: var(--amber);" onclick="setMobileSlide(2); startMobileSlideRotation();">
+                  <div class="mobile-card-title"><span style="color:var(--amber);">📡</span> S2 Intel &amp; INTSUM</div>
+                  <div class="mobile-card-desc">Keyless collector feeds, threat warnings, rule evaluations, and draft intelligence summaries.</div>
                 </div>
-                <div class="mobile-card">
-                  <div class="mobile-card-title"><span style="color:#10b981;">🛡️</span> Offline Mesh &amp; Signing</div>
-                  <div class="mobile-card-desc">Full local cache of critical contacts, travel legs, and hash-chained audit trails.</div>
+                <div class="mobile-card" data-slide-idx="3" style="--card-accent: #10b981;" onclick="setMobileSlide(3); startMobileSlideRotation();">
+                  <div class="mobile-card-title"><span style="color:#10b981;">⏱️</span> S3 Operations &amp; Travel</div>
+                  <div class="mobile-card-desc">90-day operational calendar, active travel missions (Riyadh, Tokyo), and dispatch logs.</div>
                 </div>
               </div>
             </div>
@@ -1320,7 +1410,46 @@
       }
     }
 
-    // Auto-detect hash on load (#coptoc, #sigtoc, #modtoc) & bind hotspot interactions
+    // Mobile Screenshot Slideshow Rotation (COP, S1, S2, S3)
+    let mobileSlideIndex = 0;
+    let mobileSlideTimer = null;
+    const MOBILE_SLIDE_COUNT = 4;
+    const MOBILE_SLIDE_INTERVAL = 4000;
+
+    function setMobileSlide(idx) {
+      mobileSlideIndex = (idx + MOBILE_SLIDE_COUNT) % MOBILE_SLIDE_COUNT;
+
+      // Update phone slide images
+      document.querySelectorAll('.phone-slide').forEach((img, i) => {
+        img.classList.toggle('active', i === mobileSlideIndex);
+      });
+
+      // Update phone tab buttons
+      document.querySelectorAll('.phone-tab-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === mobileSlideIndex);
+      });
+
+      // Update feature cards
+      document.querySelectorAll('.mobile-card').forEach((card, i) => {
+        card.classList.toggle('active', i === mobileSlideIndex);
+      });
+    }
+
+    function startMobileSlideRotation() {
+      if (mobileSlideTimer) clearInterval(mobileSlideTimer);
+      mobileSlideTimer = setInterval(() => {
+        setMobileSlide(mobileSlideIndex + 1);
+      }, MOBILE_SLIDE_INTERVAL);
+    }
+
+    function pauseMobileSlideRotation() {
+      if (mobileSlideTimer) {
+        clearInterval(mobileSlideTimer);
+        mobileSlideTimer = null;
+      }
+    }
+
+    // Auto-detect hash on load (#coptoc, #sigtoc, #modtoc) & bind interactions
     window.addEventListener('DOMContentLoaded', () => {
       // Hotspot interactive synchronization
       document.querySelectorAll('.hotspot-item').forEach(item => {
@@ -1331,6 +1460,16 @@
         const id = pin.getAttribute('data-hotspot');
         pin.addEventListener('mouseenter', () => selectHotspot(id));
       });
+
+      // Mobile carousel initialization & pause on hover
+      setMobileSlide(0);
+      startMobileSlideRotation();
+
+      const mobileContainer = document.querySelector('.mobile-container');
+      if (mobileContainer) {
+        mobileContainer.addEventListener('mouseenter', pauseMobileSlideRotation);
+        mobileContainer.addEventListener('mouseleave', startMobileSlideRotation);
+      }
 
       const hash = window.location.hash.replace('#', '');
       if (tabs[hash]) {
