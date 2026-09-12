@@ -628,50 +628,7 @@
       line-height: 1.45;
     }
 
-    /* Collab Section */
-    .collab-section {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 20px 24px 70px;
-    }
-    .collab-box {
-      background: linear-gradient(180deg, rgba(17, 24, 33, 0.95) 0%, rgba(11, 16, 23, 0.98) 100%);
-      border: 1px solid var(--border-bright);
-      border-radius: 12px;
-      padding: 48px 36px;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-    }
-    .collab-roles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin-top: 28px;
-      text-align: left;
-    }
-    .collab-role-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px;
-      font-family: var(--mono);
-      font-size: 12px;
-    }
-    .collab-role-card .role-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-    .collab-role-card .role-title {
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 6px;
-      font-size: 13px;
-    }
-    .collab-role-card .role-desc {
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
+
 
     /* Footer */
     footer {
@@ -763,7 +720,7 @@
     <div style="margin-top:-20px; margin-bottom:20px;">
       <div style="font-family:var(--mono); font-size:12px; color:var(--text-muted); display:inline-flex; align-items:center; gap:8px; background:rgba(59,130,246,0.08); border:1px dashed rgba(59,130,246,0.3); padding:8px 18px; border-radius:999px;">
         <span>🤝</span>
-        <span><strong>Collaborators wanted:</strong> I'd love to get collaborators who are interested in working on this open-source project with me — <a id="collab-pill-link" href="#collaborate" style="color:var(--brand-accent); text-decoration:underline; font-weight:600;">join us ↓</a></span>
+        <span><strong>Collaborators wanted:</strong> I'd love to get collaborators who are interested in working on this open-source project with me — <a id="collab-pill-link" href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" style="color:var(--brand-accent); text-decoration:underline; font-weight:600;">collaborate on GitHub ↗</a></span>
       </div>
     </div>
   </header>
@@ -877,8 +834,8 @@
             </div>
 
             <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
-              <a href="#collaborate" class="btn btn-primary" style="background:var(--amber); border-color:rgba(255,255,255,0.2); box-shadow:0 0 16px rgba(245,158,11,0.3); padding:10px 22px;">
-                Collaborate on SIGTOC Engine
+              <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--amber); border-color:rgba(255,255,255,0.2); box-shadow:0 0 16px rgba(245,158,11,0.3); padding:10px 22px;">
+                Collaborate on GitHub ↗
               </a>
               <a href="https://github.com/h4yd3n/toc/tree/main/sigtoc" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:10px 22px;">
                 View S2 Code on GitHub ↗
@@ -914,8 +871,8 @@
             </div>
 
             <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
-              <a href="#collaborate" class="btn btn-primary" style="background:var(--purple); border-color:rgba(255,255,255,0.2); box-shadow:0 0 16px rgba(192,132,252,0.3); padding:10px 22px;">
-                Join the MODTOC Working Group
+              <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--purple); border-color:rgba(255,255,255,0.2); box-shadow:0 0 16px rgba(192,132,252,0.3); padding:10px 22px;">
+                Join on GitHub ↗
               </a>
               <a href="https://github.com/h4yd3n/toc/tree/main/modtoc" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:10px 22px;">
                 View RFC on GitHub ↗
@@ -1008,50 +965,7 @@
     </div>
   </section>
 
-  <!-- Open Source Call for Collaborators -->
-  <section class="collab-section" id="collaborate">
-    <div class="collab-box">
-      <div class="section-tag" style="display:inline-block; margin-bottom:12px; border-color:var(--brand-accent); color:var(--brand-accent);">OPEN SOURCE · APACHE 2.0</div>
-      <h2 style="font-size: clamp(24px, 3.2vw, 36px); font-weight: 800; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.01em;">
-        Collaborators Wanted: Build TOC Together
-      </h2>
-      <p style="font-size: 16px; color: var(--text-muted); line-height: 1.6; max-width: 68ch; margin: 0 auto 24px;">
-        I’m building COPTOC, SIGTOC, and MODTOC completely in the open to give security operations, crisis response, and Trust &amp; Safety teams a better common operating picture. 
-        <strong style="color: #ffffff;">I would love to get collaborators who are interested in working on this open-source project with me.</strong>
-      </p>
 
-      <div class="collab-roles">
-        <div class="collab-role-card">
-          <div class="role-icon">💻</div>
-          <div class="role-title">Engineers &amp; Architects</div>
-          <div class="role-desc">Python &amp; FastAPI backend services, React / MapLibre geospatial walls, and native SwiftUI &amp; Kotlin mobile apps.</div>
-        </div>
-        <div class="collab-role-card">
-          <div class="role-icon">📡</div>
-          <div class="role-title">Threat Intel Analysts</div>
-          <div class="role-desc">Designing keyless collection pipelines (GDACS, USGS, NOAA, FCDO), STIX/TAXII bridges, and automated INTSUM doctrine.</div>
-        </div>
-        <div class="collab-role-card">
-          <div class="role-icon">⚖️</div>
-          <div class="role-title">Trust &amp; Safety Leads</div>
-          <div class="role-desc">MODTOC policy-as-code evaluations, virality/severity reach scoring, ROOST standard alignment, and audit log defenses.</div>
-        </div>
-      </div>
-
-      <div class="hero-ctas" style="margin-top: 32px; margin-bottom: 0;">
-        <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 10px 22px; font-size: 14px;">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-          Collaborate on GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/h4yd3n" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 10px 22px; font-size: 14px;">
-          Message on LinkedIn
-        </a>
-        <a href="mailto:hayden@h4yd3n.com" class="btn btn-secondary" style="padding: 10px 22px; font-size: 14px;">
-          Email hayden@h4yd3n.com
-        </a>
-      </div>
-    </div>
-  </section>
 
   <!-- Quickstart Terminal -->
   <section class="terminal-section" id="quickstart">
@@ -1121,10 +1035,9 @@
         primaryCtaTarget: '_self',
         secondaryCtaText: 'Browse Source on GitHub',
         secondaryCtaHref: 'https://github.com/h4yd3n/toc',
-        secondaryCtaTarget: '_blank',
-        pillLinkText: 'join us ↓',
-        pillLinkHref: '#collaborate',
-        pillLinkTarget: '_self',
+        pillLinkText: 'collaborate on GitHub ↗',
+        pillLinkHref: 'https://github.com/h4yd3n/toc',
+        pillLinkTarget: '_blank',
         featTag: 'COPTOC CAPABILITIES',
         featTitle: 'Engineered for the 24/7 Watch Floor',
         cards: [
