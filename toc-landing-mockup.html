@@ -97,33 +97,48 @@
       align-items: center;
       gap: 12px;
       cursor: pointer;
+      text-decoration: none;
+      user-select: none;
+    }
+    .brand-icon-tile {
+      width: 38px;
+      height: 38px;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(15, 23, 42, 0.14);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      flex-shrink: 0;
+    }
+    .brand-lockup:hover .brand-icon-tile {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
     }
     .brand-mark {
-      width: 32px;
-      height: 32px;
-      transition: transform 0.2s ease;
-    }
-    .brand-lockup:hover .brand-mark {
-      transform: scale(1.08);
+      width: 24px;
+      height: 24px;
     }
     .brand-text {
       display: flex;
       flex-direction: column;
     }
     .brand-title {
-      font-weight: 800;
-      font-size: 18px;
-      letter-spacing: 0.12em;
+      font-weight: 850;
+      font-size: 19px;
+      letter-spacing: 0.08em;
       color: #0f172a;
       line-height: 1.1;
     }
     .brand-sub {
       font-family: var(--mono);
-      font-size: 8.5px;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: #334155;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     /* Product Tabs */
@@ -869,10 +884,13 @@
   <nav>
     <div class="nav-inner">
       <div class="brand-lockup" onclick="switchTab('coptoc')">
-        <svg class="brand-mark" viewBox="0 0 1024 1024">
-          <polygon points="190,834 214,788 858,214 834,190 810,236 166,810" id="nav-slash" fill="#2563eb" opacity="0.9"/>
-          <path d="M512 182L644 314M667 337L687 357M710 380L842 512M842 512L710 644M687 667L667 687M644 710L512 842M512 842L380 710M357 687L337 667M314 644L182 512M182 512L314 380M337 357L357 337M380 314L512 182" stroke="#0f172a" stroke-width="48" fill="none"/>
-        </svg>
+        <div class="brand-icon-tile">
+          <svg class="brand-mark" viewBox="0 0 1024 1024">
+            <polygon points="170,854 220,770 870,170 820,254 770,300 120,800" id="nav-slash" fill="#2563eb"/>
+            <path d="M512 182L842 512L512 842L182 512Z" stroke="#ffffff" stroke-width="84" stroke-linejoin="miter" fill="none"/>
+            <polygon points="170,854 220,770 870,170 820,254" fill="#3b82f6"/>
+          </svg>
+        </div>
         <div class="brand-text">
           <span class="brand-title">TOC</span>
           <span class="brand-sub">Tactical Operations Center</span>
@@ -907,9 +925,7 @@
   <header class="hero">
     <div class="hero-eyebrow" id="hero-eyebrow">COPTOC · THE COMMON OPERATING PICTURE</div>
     <h1 id="hero-title">One common operating picture. Built the way a military staff runs one.</h1>
-    <p class="lead" id="hero-lead">
-      The wall a Battle Captain runs a 12-hour shift from. Fuses S1 Personnel, S2 Intel, S3 Operations, and S6 Communications onto a single pane of glass — with zero external keys required to run locally.
-    </p>
+    <p class="lead" id="hero-lead" style="display:none;"></p>
 
     <div class="hero-ctas">
       <a href="https://github.com/h4yd3n/toc" target="_blank" rel="noopener" class="btn btn-primary" id="hero-primary-cta" style="padding:10px 20px; font-size:14px;">Deploy Local Wall (make run-cop)</a>
@@ -1289,7 +1305,7 @@
         displayLabel: 'LIVE WALL & CLIENT APPS',
         eyebrow: 'COPTOC · THE COMMON OPERATING PICTURE',
         title: 'One common operating picture. Built the way a military staff runs one.',
-        lead: 'The wall a Battle Captain runs a 12-hour shift from. Fuses S1 Personnel, S2 Intel, S3 Operations, and S6 Communications onto a single pane of glass — with zero external keys required to run locally.',
+        lead: '',
         btnText: 'Launch Wall',
         btnHref: 'https://github.com/h4yd3n/toc',
         btnTarget: '_blank',
@@ -1371,7 +1387,11 @@
       // Update Hero text
       document.getElementById('hero-eyebrow').textContent = data.eyebrow;
       document.getElementById('hero-title').textContent = data.title;
-      document.getElementById('hero-lead').textContent = data.lead;
+      const heroLead = document.getElementById('hero-lead');
+      if (heroLead) {
+        heroLead.textContent = data.lead || '';
+        heroLead.style.display = data.lead ? 'block' : 'none';
+      }
 
       // Toggle everything after that line:
       // Only COPTOC displays the full body content (wall, features, doctrine, collaborate section, quickstart)
