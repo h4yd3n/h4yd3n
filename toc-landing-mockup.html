@@ -100,45 +100,13 @@
       text-decoration: none;
       user-select: none;
     }
-    .brand-icon-tile {
-      width: 38px;
-      height: 38px;
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 5px rgba(15, 23, 42, 0.14);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      flex-shrink: 0;
-    }
-    .brand-lockup:hover .brand-icon-tile {
-      transform: scale(1.05);
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
-    }
     .brand-mark {
-      width: 24px;
-      height: 24px;
+      width: 36px;
+      height: 36px;
+      transition: transform 0.2s ease;
     }
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-    }
-    .brand-title {
-      font-weight: 850;
-      font-size: 19px;
-      letter-spacing: 0.08em;
-      color: #0f172a;
-      line-height: 1.1;
-    }
-    .brand-sub {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      color: #334155;
-      text-transform: uppercase;
-      font-weight: 700;
+    .brand-lockup:hover .brand-mark {
+      transform: scale(1.08);
     }
 
     /* Product Tabs */
@@ -884,17 +852,10 @@
   <nav>
     <div class="nav-inner">
       <div class="brand-lockup" onclick="switchTab('coptoc')">
-        <div class="brand-icon-tile">
-          <svg class="brand-mark" viewBox="0 0 1024 1024">
-            <polygon points="170,854 220,770 870,170 820,254 770,300 120,800" id="nav-slash" fill="#2563eb"/>
-            <path d="M512 182L842 512L512 842L182 512Z" stroke="#ffffff" stroke-width="84" stroke-linejoin="miter" fill="none"/>
-            <polygon points="170,854 220,770 870,170 820,254" fill="#3b82f6"/>
-          </svg>
-        </div>
-        <div class="brand-text">
-          <span class="brand-title">TOC</span>
-          <span class="brand-sub">Tactical Operations Center</span>
-        </div>
+        <svg class="brand-mark" viewBox="0 0 1024 1024">
+          <polygon points="170,854 220,770 870,170 820,254" id="nav-slash" fill="#2563eb"/>
+          <path d="M512 160L864 512L512 864L160 512Z" stroke="#0f172a" stroke-width="88" stroke-linejoin="miter" fill="none"/>
+        </svg>
       </div>
 
       <!-- Module Switcher Tabs -->
