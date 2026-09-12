@@ -345,43 +345,209 @@
       transition: transform 0.25s ease;
     }
 
-    /* Hotspot callouts on screenshot */
+    /* Tactical Map Hotspot Pins */
+    .map-hotspot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+      cursor: pointer;
+    }
+    .hotspot-beacon {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hotspot-ring {
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent, var(--blue));
+      opacity: 0.8;
+      animation: beacon-pulse 2.2s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+      pointer-events: none;
+    }
+    .hotspot-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(10, 15, 22, 0.9);
+      border: 1.5px solid var(--accent, var(--blue));
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      box-shadow: 0 0 12px var(--glow, rgba(59, 130, 246, 0.4)), inset 0 0 6px rgba(0, 0, 0, 0.8);
+      transition: all 0.2s ease;
+    }
+    .map-hotspot:hover .hotspot-dot,
+    .map-hotspot.active .hotspot-dot {
+      transform: scale(1.18);
+      background: var(--accent, var(--blue));
+      color: #080c10;
+      box-shadow: 0 0 20px var(--glow, rgba(59, 130, 246, 0.8));
+    }
+    @keyframes beacon-pulse {
+      0% { transform: scale(0.85); opacity: 0.95; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+
+    /* Popover HUD Callout Box */
+    .hotspot-tooltip {
+      position: absolute;
+      width: 270px;
+      background: rgba(8, 12, 18, 0.96);
+      border: 1px solid var(--border-bright);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 8px;
+      padding: 12px 14px;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+      z-index: 30;
+      font-family: var(--mono);
+      text-align: left;
+    }
+    .map-hotspot:hover .hotspot-tooltip,
+    .map-hotspot.active .hotspot-tooltip {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* Directional Tooltip Anchors */
+    .tooltip-bottom {
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+    }
+    .map-hotspot:hover .tooltip-bottom,
+    .map-hotspot.active .tooltip-bottom {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .tooltip-top {
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-4px);
+    }
+    .map-hotspot:hover .tooltip-top,
+    .map-hotspot.active .tooltip-top {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .tooltip-right {
+      left: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%) translateX(4px);
+    }
+    .map-hotspot:hover .tooltip-right,
+    .map-hotspot.active .tooltip-right {
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .tooltip-left {
+      right: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%) translateX(-4px);
+    }
+    .map-hotspot:hover .tooltip-left,
+    .map-hotspot.active .tooltip-left {
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .tooltip-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent, var(--blue));
+      margin-bottom: 4px;
+    }
+    .tooltip-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 5px;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .tooltip-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Hotspot callouts bar on screenshot */
     .hotspot-bar {
-      background: #0e141c;
+      background: #090e15;
       border-top: 1px solid var(--border);
-      padding: 16px 20px;
+      padding: 14px 16px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
       font-family: var(--mono);
     }
+    @media (max-width: 1100px) {
+      .hotspot-bar {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 720px) {
+      .hotspot-bar {
+        grid-template-columns: 1fr;
+      }
+      .hotspot-tooltip {
+        display: none !important;
+      }
+    }
     .hotspot-item {
-      padding: 10px 14px;
+      padding: 10px 12px;
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border);
       border-radius: 6px;
       font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+    .hotspot-item:hover,
+    .hotspot-item.active {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-bright);
+      transform: translateY(-1px);
+    }
+    .hotspot-item.active {
+      border-color: var(--item-accent, var(--blue));
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.25);
     }
     .hotspot-label {
       font-weight: 700;
-      color: var(--brand-accent);
+      color: #ffffff;
       margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 6px;
-      letter-spacing: 0.04em;
+      font-size: 11px;
+      letter-spacing: 0.02em;
     }
     .hotspot-desc {
       color: var(--text-muted);
+      font-size: 10.5px;
       line-height: 1.4;
     }
 
-    /* Features Grid */
-    .features-section {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 30px 24px 80px;
-    }
     .section-header {
       margin-bottom: 40px;
       text-align: left;
@@ -400,51 +566,6 @@
       font-weight: 800;
       color: #ffffff;
       letter-spacing: -0.01em;
-    }
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-    }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 24px;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-    .card:hover {
-      border-color: var(--border-bright);
-      transform: translateY(-2px);
-      background: var(--panel-hover);
-    }
-    .card-icon {
-      font-size: 24px;
-      margin-bottom: 14px;
-      display: inline-block;
-    }
-    .card-title {
-      font-size: 17px;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .card-title .card-code {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--brand-accent);
-      border: 1px solid var(--border);
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-    .card-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.5;
     }
 
     /* Doctrine & Founder Section */
@@ -741,25 +862,112 @@
 
       <!-- Tab View 1: COPTOC -->
       <div class="tab-view active" id="view-coptoc">
-        <div class="screenshot-hero">
+        <div class="screenshot-hero" id="wall-screenshot-hero">
           <img src="assets/wall.png" alt="COPTOC Common Operating Picture Full Wall" />
+
+          <!-- Callout Pin 01: FLASH Warning -->
+          <div class="map-hotspot" data-hotspot="1" style="top: 5.8%; left: 24%; --accent: #ef4444; --glow: rgba(239, 68, 68, 0.6);" onclick="selectHotspot(1)">
+            <div class="hotspot-beacon">
+              <div class="hotspot-ring"></div>
+              <div class="hotspot-dot">01</div>
+            </div>
+            <div class="hotspot-tooltip tooltip-bottom">
+              <div class="tooltip-tag">DOCTRINE · FLASH</div>
+              <div class="tooltip-title">The FLASH Warning</div>
+              <div class="tooltip-desc">A single critical alarm strip across all screens. Releases simultaneously over SMS and chat (Twilio/Slack) and demands verified human sign-off.</div>
+            </div>
+          </div>
+
+          <!-- Callout Pin 02: S1 Personnel & 15-Minute Rule -->
+          <div class="map-hotspot" data-hotspot="2" style="top: 25%; left: 8.5%; --accent: #3b82f6; --glow: rgba(59, 130, 246, 0.6);" onclick="selectHotspot(2)">
+            <div class="hotspot-beacon">
+              <div class="hotspot-ring"></div>
+              <div class="hotspot-dot">02</div>
+            </div>
+            <div class="hotspot-tooltip tooltip-right">
+              <div class="tooltip-tag">S1 PERSONNEL · S6 COMMS</div>
+              <div class="tooltip-title">Blue Force &amp; 15-Min Rule</div>
+              <div class="tooltip-desc">Automated roll-call accountability. Site present/assigned tallies, traveler check-ins, and unresponsive personnel automatically float to the top.</div>
+            </div>
+          </div>
+
+          <!-- Callout Pin 03: Dynamic Vector Map -->
+          <div class="map-hotspot" data-hotspot="3" style="top: 42%; left: 45.5%; --accent: #38bdf8; --glow: rgba(56, 189, 248, 0.6);" onclick="selectHotspot(3)">
+            <div class="hotspot-beacon">
+              <div class="hotspot-ring"></div>
+              <div class="hotspot-dot">03</div>
+            </div>
+            <div class="hotspot-tooltip tooltip-bottom">
+              <div class="tooltip-tag">MAPLIBRE · GEOSPATIAL</div>
+              <div class="tooltip-title">Full-Bleed Vector Map</div>
+              <div class="tooltip-desc">Dark vector basemap rendering corporate facilities, personnel blue-force tracks, flight corridors, and threat polygons with zero UI clutter.</div>
+            </div>
+          </div>
+
+          <!-- Callout Pin 04: S2 Intel Fusion -->
+          <div class="map-hotspot" data-hotspot="4" style="top: 14.5%; left: 90.5%; --accent: #f59e0b; --glow: rgba(245, 158, 11, 0.6);" onclick="selectHotspot(4)">
+            <div class="hotspot-beacon">
+              <div class="hotspot-ring"></div>
+              <div class="hotspot-dot">04</div>
+            </div>
+            <div class="hotspot-tooltip tooltip-left">
+              <div class="tooltip-tag">S2 INTEL · FUSION</div>
+              <div class="tooltip-title">S2 Intel Fusion Engine</div>
+              <div class="tooltip-desc">Autonomous keyless ingestion (GDACS, USGS, NOAA, FCDO), STIX 2.1 threat graphs, and collection gap tracking.</div>
+            </div>
+          </div>
+
+          <!-- Callout Pin 05: S3 Operations -->
+          <div class="map-hotspot" data-hotspot="5" style="top: 88%; left: 23%; --accent: #10b981; --glow: rgba(16, 185, 129, 0.6);" onclick="selectHotspot(5)">
+            <div class="hotspot-beacon">
+              <div class="hotspot-ring"></div>
+              <div class="hotspot-dot">05</div>
+            </div>
+            <div class="hotspot-tooltip tooltip-top">
+              <div class="tooltip-tag">S3 OPERATIONS · PLANNING</div>
+              <div class="tooltip-title">90-Day Tactical Ops</div>
+              <div class="tooltip-desc">90-day operation cards, executive travel schedules, security detail assignments, and active mission timelines.</div>
+            </div>
+          </div>
+
+          <!-- Callout Pin 06: Hash-Chained Battle Log -->
+          <div class="map-hotspot" data-hotspot="6" style="top: 88%; left: 86.5%; --accent: #c084fc; --glow: rgba(192, 132, 252, 0.6);" onclick="selectHotspot(6)">
+            <div class="hotspot-beacon">
+              <div class="hotspot-ring"></div>
+              <div class="hotspot-dot">06</div>
+            </div>
+            <div class="hotspot-tooltip tooltip-top">
+              <div class="tooltip-tag">THE WATCH · CRYPTO LOG</div>
+              <div class="tooltip-title">Battle Captain Ledger</div>
+              <div class="tooltip-desc">Every status change, radio report, and handover decision stored in an immutable, cryptographically chained audit log.</div>
+            </div>
+          </div>
         </div>
+
         <div class="hotspot-bar">
-          <div class="hotspot-item">
-            <div class="hotspot-label"><span style="color:var(--red);">●</span> FLASH ALERT BAR</div>
-            <div class="hotspot-desc">High-priority red alert bar triggers upon verified threat. Requires explicit human role acknowledgment.</div>
+          <div class="hotspot-item active" data-hotspot="1" style="--item-accent: #ef4444;" onclick="selectHotspot(1)">
+            <div class="hotspot-label"><span style="color:#ef4444;">●</span> 01 FLASH Warning</div>
+            <div class="hotspot-desc">High-priority red alert strip across all screens demanding verified human sign-off.</div>
           </div>
-          <div class="hotspot-item">
-            <div class="hotspot-label"><span style="color:var(--blue);">●</span> S1 PERSONNEL</div>
-            <div class="hotspot-desc">Blue-force tracker, site present/assigned tallies, traveler check-ins with 2-hour freshness chips.</div>
+          <div class="hotspot-item" data-hotspot="2" style="--item-accent: #3b82f6;" onclick="selectHotspot(2)">
+            <div class="hotspot-label"><span style="color:#3b82f6;">●</span> 02 S1 &amp; 15-Min Rule</div>
+            <div class="hotspot-desc">Automated roll-call accountability. Unresponsive personnel float to top after 15 minutes.</div>
           </div>
-          <div class="hotspot-item">
-            <div class="hotspot-label"><span style="color:var(--amber);">●</span> S2 INTEL FUSION</div>
-            <div class="hotspot-desc">Requirements coverage, live natural hazard feeds (GDACS, USGS, NOAA), and pending warnings awaiting release.</div>
+          <div class="hotspot-item" data-hotspot="3" style="--item-accent: #38bdf8;" onclick="selectHotspot(3)">
+            <div class="hotspot-label"><span style="color:#38bdf8;">●</span> 03 Dynamic Vector Map</div>
+            <div class="hotspot-desc">Dark MapLibre vector basemap rendering facility clusters, personnel tracks, and threat polygons.</div>
           </div>
-          <div class="hotspot-item">
-            <div class="hotspot-label"><span style="color:var(--purple);">●</span> S3 &amp; BATTLE LOG</div>
-            <div class="hotspot-desc">90-day operation cards, travel schedules, and an immutable, hash-chained ledger of every watch event.</div>
+          <div class="hotspot-item" data-hotspot="4" style="--item-accent: #f59e0b;" onclick="selectHotspot(4)">
+            <div class="hotspot-label"><span style="color:#f59e0b;">●</span> 04 S2 Intel Fusion</div>
+            <div class="hotspot-desc">Autonomous keyless feeds (GDACS, USGS, NOAA, FCDO) mapped into STIX 2.1 threat graphs.</div>
+          </div>
+          <div class="hotspot-item" data-hotspot="5" style="--item-accent: #10b981;" onclick="selectHotspot(5)">
+            <div class="hotspot-label"><span style="color:#10b981;">●</span> 05 S3 Operations</div>
+            <div class="hotspot-desc">90-day operation cards, travel schedules, executive protection details, and event security.</div>
+          </div>
+          <div class="hotspot-item" data-hotspot="6" style="--item-accent: #c084fc;" onclick="selectHotspot(6)">
+            <div class="hotspot-label"><span style="color:#c084fc;">●</span> 06 Battle Captain Ledger</div>
+            <div class="hotspot-desc">Every status change and handover decision stored in an immutable, hash-chained audit log.</div>
           </div>
         </div>
 
@@ -880,47 +1088,6 @@
     </div>
   </main>
 
-  <!-- Features Grid -->
-  <section class="features-section" id="coptoc-features">
-    <div class="section-header">
-      <div class="section-tag" id="feat-tag">COPTOC CAPABILITIES</div>
-      <h2 class="section-title" id="feat-title">Engineered for the 24/7 Watch Floor</h2>
-    </div>
-
-    <div class="grid-3" id="feat-grid">
-      <div class="card">
-        <div class="card-icon">🗺️</div>
-        <div class="card-title">Full-Bleed Dynamic Map <span class="card-code">MAPLIBRE</span></div>
-        <p class="card-desc">Dark vector basemap rendering corporate facilities, personnel blue-force tracks, travel corridors, and threat polygons with zero UI clutter.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">⚡</div>
-        <div class="card-title">The FLASH Warning <span class="card-code">DOCTRINE</span></div>
-        <p class="card-desc">A single critical alarm strip across all screens. Releases simultaneously over SMS and chat (simulated or Twilio/Slack) and demands verified sign-off.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">⏱️</div>
-        <div class="card-title">The 15-Minute Rule <span class="card-code">S6 COMMS</span></div>
-        <p class="card-desc">Automated roll-call accountability. Unresponsive personnel float to the top after 15 minutes, triggering escalation procedures automatically.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🛡️</div>
-        <div class="card-title">Battle Captain Handover <span class="card-code">THE WATCH</span></div>
-        <p class="card-desc">The incoming watch officer must review and individually acknowledge every incident and intelligence shift that occurred during the handover overlap.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🔗</div>
-        <div class="card-title">Hash-Chained Ledger <span class="card-code">CRYPTO LOG</span></div>
-        <p class="card-desc">Every status change, radio report, and command decision is stored in an immutable, cryptographically chained audit log for post-incident review.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">📱</div>
-        <div class="card-title">Native iOS &amp; Android <span class="card-code">SWIFTUI · KOTLIN</span></div>
-        <p class="card-desc">The same operations wall rendered natively on mobile devices. Full offline cache, push check-ins, and biometric role authorization.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- Author Narrative & Doctrine -->
   <section class="doctrine-section">
     <div class="doctrine-inner">
@@ -1033,17 +1200,7 @@
         secondaryCtaHref: 'https://github.com/h4yd3n/toc',
         pillLinkText: 'collaborate on GitHub ↗',
         pillLinkHref: 'https://github.com/h4yd3n/toc',
-        pillLinkTarget: '_blank',
-        featTag: 'COPTOC CAPABILITIES',
-        featTitle: 'Engineered for the 24/7 Watch Floor',
-        cards: [
-          { icon: '🗺️', title: 'Full-Bleed Dynamic Map', code: 'MAPLIBRE', desc: 'Dark vector basemap rendering corporate facilities, personnel blue-force tracks, travel corridors, and threat polygons with zero UI clutter.' },
-          { icon: '⚡', title: 'The FLASH Warning', code: 'DOCTRINE', desc: 'A single critical alarm strip across all screens. Releases simultaneously over SMS and chat (simulated or Twilio/Slack) and demands verified sign-off.' },
-          { icon: '⏱️', title: 'The 15-Minute Rule', code: 'S6 COMMS', desc: 'Automated roll-call accountability. Unresponsive personnel float to the top after 15 minutes, triggering escalation procedures automatically.' },
-          { icon: '🛡️', title: 'Battle Captain Handover', code: 'THE WATCH', desc: 'The incoming watch officer must review and individually acknowledge every incident and intelligence shift that occurred during the handover overlap.' },
-          { icon: '🔗', title: 'Hash-Chained Ledger', code: 'CRYPTO LOG', desc: 'Every status change, radio report, and command decision is stored in an immutable, cryptographically chained audit log for post-incident review.' },
-          { icon: '📱', title: 'Native iOS & Android', code: 'SWIFTUI · KOTLIN', desc: 'The same operations wall rendered natively on mobile devices. Full offline cache, push check-ins, and biometric role authorization.' }
-        ]
+        pillLinkTarget: '_blank'
       },
       sigtoc: {
         accent: '#f59e0b',
@@ -1084,6 +1241,15 @@
         pillLinkTarget: '_blank'
       }
     };
+
+    function selectHotspot(id) {
+      document.querySelectorAll('.map-hotspot').forEach(el => {
+        el.classList.toggle('active', el.getAttribute('data-hotspot') === String(id));
+      });
+      document.querySelectorAll('.hotspot-item').forEach(el => {
+        el.classList.toggle('active', el.getAttribute('data-hotspot') === String(id));
+      });
+    }
 
     function switchTab(tabId) {
       const data = tabs[tabId];
@@ -1148,30 +1314,24 @@
         pillLink.target = data.pillLinkTarget || '_self';
       }
 
-      // If switching to COPTOC, ensure capability cards are populated
-      if (tabId === 'coptoc' && data.cards) {
-        document.getElementById('feat-tag').textContent = data.featTag;
-        document.getElementById('feat-title').textContent = data.featTitle;
-        const grid = document.getElementById('feat-grid');
-        if (grid) {
-          grid.innerHTML = data.cards.map(c => `
-            <div class="card">
-              <div class="card-icon">${c.icon}</div>
-              <div class="card-title">${c.title} <span class="card-code">${c.code}</span></div>
-              <p class="card-desc">${c.desc}</p>
-            </div>
-          `).join('');
-        }
-      }
-
       // Update URL hash without scroll
       if (history.replaceState) {
         history.replaceState(null, null, `#${tabId}`);
       }
     }
 
-    // Auto-detect hash on load (#coptoc, #sigtoc, #modtoc)
+    // Auto-detect hash on load (#coptoc, #sigtoc, #modtoc) & bind hotspot interactions
     window.addEventListener('DOMContentLoaded', () => {
+      // Hotspot interactive synchronization
+      document.querySelectorAll('.hotspot-item').forEach(item => {
+        const id = item.getAttribute('data-hotspot');
+        item.addEventListener('mouseenter', () => selectHotspot(id));
+      });
+      document.querySelectorAll('.map-hotspot').forEach(pin => {
+        const id = pin.getAttribute('data-hotspot');
+        pin.addEventListener('mouseenter', () => selectHotspot(id));
+      });
+
       const hash = window.location.hash.replace('#', '');
       if (tabs[hash]) {
         switchTab(hash);
