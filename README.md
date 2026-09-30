@@ -9,7 +9,7 @@ Calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, and Codex.
 - 🗒️ [Washipad](https://washipad.com) — a simple sticky-note wall
 - 🎨 [SoriToon](https://soritoon.com) — an AI-illustrated webtoon
 - 🎤 [SoriSpeak](https://sorispeak.com) — a free teleprompter for creators, plus a live practice call with an AI interviewer
-- 🌊 [ConstantFloat](https://constantfloat.com) — a mental health app built against engagement *(in progress)*
+- 🌊 [ConstantFloat](https://constantfloat.com) — a private daily journal, one line a day. Life in flux. You are constant. *(coming soon)*
 
 🛠️ **Stack:** Swift/SwiftUI, Kotlin, Firebase, Cloudflare — Claude, Gemini, and Codex for the AI layer, ElevenLabs for voice cloning.
 
