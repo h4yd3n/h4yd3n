@@ -1,6 +1,6 @@
 # Hayden Lee
 
-🛡️ [TOC](https://github.com/h4yd3n/toc) — building open-source tools to give security and Trust & Safety teams a better common operating picture of threats, moderation activity, escalations, and response. (in progress) *I'd love to connect with collaborators who are interested in working on this open-source project with me*
+🛡️ [TOC](https://coptoc.com) — building tools to give security and Trust & Safety teams a better common operating picture of threats, moderation activity, escalations, and response. (in progress)
 
 Calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, and Codex.
 
