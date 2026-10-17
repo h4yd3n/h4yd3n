@@ -369,7 +369,7 @@
       <table>
         <thead>
           <tr>
-            <th>Time</th>
+            <th>When</th>
             <th>Type</th>
             <th>Note</th>
             <th>Element / Target</th>
@@ -407,8 +407,9 @@
   function formatTime(isoStr) {
     if (!isoStr) return '-';
     try {
+      // The stream spans days, so a bare time is ambiguous: show "Oct 17, 2:05 PM".
       const d = new Date(isoStr);
-      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      return d.toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
     } catch(e) {
       return isoStr;
     }
