@@ -1,0 +1,11 @@
+# Short links for social bios and posts. Each lands on the homepage with a ?ref=
+# tag, so the visit tracker can tell Instagram from TikTok: in-app browsers there
+# usually send no referrer, and without a tag those visits all look like (direct).
+#
+# 302, not 301: browsers cache a 301 forever, and these targets may change.
+/ig  /?ref=ig  302
+/tt  /?ref=tt  302
+/x   /?ref=x   302
+/fb  /?ref=fb  302
+/li  /?ref=li  302
+/yt  /?ref=yt  302

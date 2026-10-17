@@ -348,6 +348,14 @@
       <div id="countries-list">
         <div class="empty-state">No country data yet</div>
       </div>
+
+      <div class="card-title" style="margin-top: 24px;">
+        <span>Visitor Sources</span>
+        <span class="card-badge">ref / referrer</span>
+      </div>
+      <div id="sources-list">
+        <div class="empty-state">No source data yet</div>
+      </div>
     </div>
   </div>
 
@@ -463,6 +471,22 @@
         '<li class="kv-row">' +
           '<span class="kv-key">' + c + '</span>' +
           '<span class="kv-val">' + countries[c] + '</span>' +
+        '</li>'
+      ).join('') + '</ul>';
+    }
+
+    // Sources list: ?ref= tag from the /ig, /tt, ... short links, else referring host, else (direct)
+    const sourceLabels = { ig: 'Instagram (/ig)', tt: 'TikTok (/tt)', x: 'X (/x)', fb: 'Facebook (/fb)', li: 'LinkedIn (/li)', yt: 'YouTube (/yt)' };
+    const sources = summary.sources || {};
+    const sourceKeys = Object.keys(sources).sort((a,b) => sources[b] - sources[a]).slice(0, 8);
+    const sourcesContainer = document.getElementById('sources-list');
+    if (sourceKeys.length === 0) {
+      sourcesContainer.innerHTML = '<div class="empty-state">No source data yet.</div>';
+    } else {
+      sourcesContainer.innerHTML = '<ul class="kv-list">' + sourceKeys.map(s =>
+        '<li class="kv-row">' +
+          '<span class="kv-key" title="' + s + '">' + (sourceLabels[s] || s) + '</span>' +
+          '<span class="kv-val">' + sources[s] + '</span>' +
         '</li>'
       ).join('') + '</ul>';
     }

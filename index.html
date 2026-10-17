@@ -491,11 +491,21 @@
   (function(){
     try {
       // 1. Log visit (once per browsing session to keep counts clean)
+      // ?ref= comes from the short links in _redirects (/ig, /tt, ...); utm_source
+      // from anything tagged elsewhere. Read it, then drop it from the address bar
+      // so a visitor who copies the URL doesn't pass our tag along.
+      var params = new URLSearchParams(window.location.search);
+      var source = params.get('ref') || params.get('utm_source') || '';
+      if (source && window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+      }
+
       if (!sessionStorage.getItem('_h_visited')) {
         sessionStorage.setItem('_h_visited', '1');
         var visitPayload = JSON.stringify({
           type: 'visit',
           referrer: document.referrer || '',
+          source: source,
           path: window.location.pathname
         });
         if (navigator.sendBeacon) {

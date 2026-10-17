@@ -41,6 +41,18 @@ export async function onRequestPost(context) {
     const device = cf.deviceType || (request.headers.get('user-agent')?.toLowerCase().includes('mobile') ? 'mobile' : 'desktop');
     const referrer = data.referrer ? String(data.referrer).slice(0, 250) : '';
 
+    // Where a visit came from: the ?ref=/utm_source tag if the link carried one,
+    // else the referring host, else (direct). Social in-app browsers mostly send no
+    // referrer, which is why the /ig, /tt, ... short links tag the URL instead.
+    let source = String(data.source || '').toLowerCase().replace(/[^a-z0-9._-]/g, '').slice(0, 30);
+    if (!source && referrer) {
+      try {
+        const refHost = new URL(referrer).hostname.replace(/^www\./, '');
+        if (refHost && refHost !== new URL(request.url).hostname.replace(/^www\./, '')) source = refHost;
+      } catch (e) {}
+    }
+    if (!source) source = '(direct)';
+
     const eventRecord = {
       id: Math.random().toString(36).substring(2, 10),
       timestamp: ts,
@@ -51,7 +63,8 @@ export async function onRequestPost(context) {
       country,
       city,
       device,
-      referrer
+      referrer,
+      source: type === 'visit' ? source : ''
     };
 
     if (env.ANALYTICS_KV) {
@@ -71,6 +84,8 @@ export async function onRequestPost(context) {
         summary.total_visits = (summary.total_visits || 0) + 1;
         if (!summary.daily[dateStr]) summary.daily[dateStr] = { visits: 0, clicks: 0 };
         summary.daily[dateStr].visits = (summary.daily[dateStr].visits || 0) + 1;
+        if (!summary.sources) summary.sources = {};
+        summary.sources[source] = (summary.sources[source] || 0) + 1;
       } else {
         summary.total_clicks = (summary.total_clicks || 0) + 1;
         if (!summary.daily[dateStr]) summary.daily[dateStr] = { visits: 0, clicks: 0 };
