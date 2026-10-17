@@ -526,7 +526,7 @@
           }
         }
 
-        const loc = [evt.city, evt.country].filter(Boolean).join(', ') || '-';
+        const loc = [evt.city, evt.region, evt.country].filter(Boolean).join(', ') || '-';
         const device = evt.device ? '<span style="font-size:12px; text-transform:capitalize;">' + evt.device + '</span>' : '-';
 
         return '<tr>' +

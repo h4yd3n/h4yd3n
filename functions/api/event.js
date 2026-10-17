@@ -38,6 +38,8 @@ export async function onRequestPost(context) {
     const cf = request.cf || {};
     const country = cf.country || 'Unknown';
     const city = cf.city || '';
+    // State/province code ("PA"), so "Easton" isn't ambiguous between PA, MD and MA.
+    const region = String(cf.regionCode || cf.region || '').slice(0, 40);
     const device = cf.deviceType || (request.headers.get('user-agent')?.toLowerCase().includes('mobile') ? 'mobile' : 'desktop');
     const referrer = data.referrer ? String(data.referrer).slice(0, 250) : '';
 
@@ -62,6 +64,7 @@ export async function onRequestPost(context) {
       element: String(data.element || '').slice(0, 50),
       country,
       city,
+      region,
       device,
       referrer,
       source: type === 'visit' ? source : ''
