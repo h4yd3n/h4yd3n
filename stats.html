@@ -388,6 +388,11 @@
 </div>
 
 <script>
+  // Only the owner opens this page, so opening it marks this browser as the
+  // owner's and the homepage tracker stops counting it (index.html checks the
+  // same key). Undo on a browser with h4yd3n.com/?me=0.
+  try { localStorage.setItem('_h_owner', '1'); } catch (e) {}
+
   async function fetchStats() {
     try {
       const res = await fetch('/api/stats');

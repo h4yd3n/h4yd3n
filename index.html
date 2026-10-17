@@ -490,16 +490,29 @@
   // Privacy-friendly wall analytics & outbound note click tracker
   (function(){
     try {
-      // 1. Log visit (once per browsing session to keep counts clean)
       // ?ref= comes from the short links in _redirects (/ig, /tt, ...); utm_source
       // from anything tagged elsewhere. Read it, then drop it from the address bar
       // so a visitor who copies the URL doesn't pass our tag along.
       var params = new URLSearchParams(window.location.search);
       var source = params.get('ref') || params.get('utm_source') || '';
-      if (source && window.history.replaceState) {
+
+      // The owner's own browsing would swamp the numbers, and travel makes IP or
+      // city filters useless. Opening /stats marks this browser as the owner's
+      // (see stats.html); ?me=1 marks one by hand, ?me=0 unmarks it. A marked
+      // browser sends nothing.
+      var me = params.get('me');
+      try {
+        if (me === '1') localStorage.setItem('_h_owner', '1');
+        if (me === '0') localStorage.removeItem('_h_owner');
+      } catch (e) {}
+      if ((source || me) && window.history.replaceState) {
         window.history.replaceState(null, '', window.location.pathname + window.location.hash);
       }
+      var isOwner = false;
+      try { isOwner = localStorage.getItem('_h_owner') === '1'; } catch (e) {}
+      if (isOwner) return;
 
+      // 1. Log visit (once per browsing session to keep counts clean)
       if (!sessionStorage.getItem('_h_visited')) {
         sessionStorage.setItem('_h_visited', '1');
         var visitPayload = JSON.stringify({
