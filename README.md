@@ -7,7 +7,7 @@ Calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, and Codex.
 - 🌙 [SoriStory](https://soristory.com) — AI-narrated bedtime stories with voice cloning
 - 📄 [Washidoc](https://washidoc.com) — a fast, free PDF editor
 - 🗒️ [Washipad](https://washipad.com) — a simple sticky-note wall
-- 💳 [Washicard](https://washicard.com) — a free credit card perks tracker: stamp each credit as you use it *(coming soon)*
+- 💳 [Washicard](https://washicard.com) — a free credit card perks tracker: stamp each credit as you use it. On [Google Play](https://play.google.com/store/apps/details?id=com.washicard.app) and the [web](https://app.washicard.com); iOS coming soon
 - 🎨 [SoriToon](https://soritoon.com) — an AI-illustrated webtoon
 - 🎤 [SoriSpeak](https://sorispeak.com) — a free teleprompter for creators, plus a live practice call with an AI interviewer
 - 🌊 [ConstantFloat](https://constantfloat.com) — a private daily journal, one line a day. Life in flux. You are constant. *(coming soon)*
