@@ -1,6 +1,6 @@
 # Hayden Lee
 
-🛡️ [TOC](https://coptoc.com) — building tools to give security and Trust & Safety teams a better common operating picture of threats, moderation activity, escalations, and response. (in progress)
+🛡️ [TOC](https://coptoc.com) — building tools to give security, Trust & Safety, and operations teams a common operating picture of their people, threats, escalations, and response. (in progress)
 
 Calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, and Codex.
 
