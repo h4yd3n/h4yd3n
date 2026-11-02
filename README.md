@@ -1,6 +1,6 @@
 # Hayden Lee
 
-🛡️ [TOC](https://coptoc.com) — building tools to give security, Trust & Safety, and operations teams a common operating picture of their people, threats, escalations, and response. (in progress)
+🛡️ [TOC](https://coptoc.com) — a common operating picture for the teams that keep an organization running: where your people are, what's happening, and who's responding. Built for security, Trust & Safety, and operations teams. (in progress)
 
 Calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, and Codex.
 
