@@ -10,7 +10,7 @@ Calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, and Codex.
 - 💳 [Washicard](https://washicard.com) — a free credit card perks tracker: stamp each credit as you use it. On the [App Store](https://apps.apple.com/us/app/washicard-credit-card-perks/id6826107399), [Google Play](https://play.google.com/store/apps/details?id=com.washicard.app) and the [web](https://app.washicard.com)
 - 🎨 [SoriToon](https://soritoon.com) — an AI-illustrated webtoon. On the [App Store](https://apps.apple.com/us/app/soritoon-ink-your-webtoon/id6794130729) and [Google Play](https://play.google.com/store/apps/details?id=com.soritoon.app)
 - 🎤 [SoriSpeak](https://sorispeak.com) — a free teleprompter for creators, plus a live practice call with an AI interviewer. On the [App Store](https://apps.apple.com/us/app/sorispeak-say-it-better/id6794129758) and [Google Play](https://play.google.com/store/apps/details?id=com.sorispeak.app)
-- 🌊 [ConstantFloat](https://constantfloat.com) — a private daily journal, one line a day. Life in flux. You are constant. On [Google Play](https://play.google.com/store/apps/details?id=com.constantfloat.app), iOS coming soon
+- 🌊 [ConstantFloat](https://constantfloat.com) — a private daily journal, one line a day. Life in flux. You are constant. On the [App Store](https://apps.apple.com/us/app/constant-float-daily-journal/id6828240213) and [Google Play](https://play.google.com/store/apps/details?id=com.constantfloat.app)
 
 🛠️ **Stack:** Swift/SwiftUI, Kotlin, Firebase, Cloudflare — Claude, Gemini, and Codex for the AI layer, ElevenLabs for voice cloning.
 
