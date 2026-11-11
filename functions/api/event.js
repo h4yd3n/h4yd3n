@@ -1,14 +1,3 @@
-export async function onRequestOptions() {
-  return new Response(null, {
-    status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    }
-  });
-}
-
 // Anyone can POST here, so a script sending a new note/target/source on every
 // request would grow the one 'summary' KV value without limit. Past this many
 // keys, new ones are counted under '(other)'.
@@ -18,25 +7,45 @@ function bump(map, key) {
   map[key] = (map[key] || 0) + 1;
 }
 
+// The wall's own beacons are small and same-origin; anything else is noise.
+const MAX_BODY = 2048;          // bytes; a real event is ~200
+const MAX_PER_MINUTE = 30;      // events per IP per minute
+
+// Per-IP throttle kept in the edge cache, so it costs no KV reads or writes.
+// Counts are per data center and approximate, which is enough to blunt a
+// script. (The Cache API is a no-op on *.pages.dev previews.)
+async function overLimit(request) {
+  const ip = request.headers.get('cf-connecting-ip');
+  if (!ip || typeof caches === 'undefined') return false;
+  const minute = Math.floor(Date.now() / 60000);
+  const key = new Request('https://event-rate.invalid/' + encodeURIComponent(ip) + '/' + minute);
+  const hit = await caches.default.match(key);
+  const count = hit ? parseInt(await hit.text(), 10) || 0 : 0;
+  if (count >= MAX_PER_MINUTE) return true;
+  await caches.default.put(key, new Response(String(count + 1), { headers: { 'Cache-Control': 'max-age=120' } }));
+  return false;
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
-  const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-  };
+  const corsHeaders = { 'Content-Type': 'application/json' };
+  const reply = (body, status) => new Response(JSON.stringify(body), { status, headers: corsHeaders });
 
   try {
+    // sendBeacon and fetch both send Origin on a POST; only the site's own pages count.
+    const origin = request.headers.get('origin');
+    if (!origin || new URL(origin).host !== new URL(request.url).host) {
+      return reply({ ok: false }, 403);
+    }
+    if (await overLimit(request)) return reply({ ok: false }, 429);
+
+    const text = await request.text().catch(() => '');
+    if (text.length > MAX_BODY) return reply({ ok: false }, 413);
     let data = {};
-    const contentType = request.headers.get('content-type') || '';
-    if (contentType.includes('application/json')) {
-      data = await request.json().catch(() => ({}));
-    } else {
-      const text = await request.text().catch(() => '');
-      try {
-        data = JSON.parse(text);
-      } catch (e) {
-        data = {};
-      }
+    try {
+      data = JSON.parse(text) || {};
+    } catch (e) {
+      data = {};
     }
 
     const type = data.type === 'click' ? 'click' : 'visit';
@@ -143,9 +152,6 @@ export async function onRequestPost(context) {
       headers: corsHeaders
     });
   } catch (err) {
-    return new Response(JSON.stringify({ ok: false, error: err.message }), {
-      status: 500,
-      headers: corsHeaders
-    });
+    return reply({ ok: false }, 500);
   }
 }
