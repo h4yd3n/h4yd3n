@@ -9,3 +9,8 @@
 /fb  /?ref=fb  302
 /li  /?ref=li  302
 /yt  /?ref=yt  302
+
+# Repo files that aren't part of the site. Pages publishes the whole repo root,
+# so without these README.md and .gitignore are served as-is.
+/README.md   /  301
+/.gitignore  /  301
