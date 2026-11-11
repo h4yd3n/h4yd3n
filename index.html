@@ -125,9 +125,11 @@
 <style>
   :root{
     /* Washipad palette, pulled straight from the app's Theme.swift */
-    --wall:#F1ECDB; --ink:#29261F; --muted:#76705F; --line:#D9D2C0;
+    --wall:#F1ECDB; --ink:#29261F; --muted:#706A5A; --line:#D9D2C0;
     --vermillion:#C73D2E; --teal:#1C6E5E;
-    --note-ink:#2A2722; --note-muted:#756D5E;
+    /* the two muted greys are a shade darker than Theme.swift (#76705F, #756D5E)
+       so small text clears WCAG AA 4.5:1 on the wall and on every pastel */
+    --note-ink:#2A2722; --note-muted:#60594D;
     /* the six sticky pastels */
     --butter:#FCE685; --coral:#FCC4B5; --sage:#C9E3B8; --sky:#BDD9F2; --lavender:#DECFF2; --peach:#FAD9A8;
     /* paired washi-tape tones */
