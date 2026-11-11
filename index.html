@@ -12,13 +12,17 @@
 <!-- Open Graph / Social & AI preview cards -->
 <meta property="og:type" content="profile" />
 <meta property="og:title" content="Hayden Lee — the wall" />
-<meta property="og:description" content="A wall of work by Hayden Lee — calm, native apps for iPhone, iPad, and Mac. Creator of SoriSpeak, Washidoc, Washipad, Washicard, COPTOC, SoriToon, SoriStory, and ConstantFloat." />
+<meta property="og:description" content="A wall of work by Hayden Lee — calm, native apps for iPhone, iPad, and Mac. Creator of SoriSpeak, Washidoc, Washipad, Washicard, COPTOC, SoriToon, SoriStory, and Constant Float." />
 <meta property="og:url" content="https://h4yd3n.com/" />
-<meta property="og:image" content="https://h4yd3n.com/assets/wall.png" />
+<meta property="og:image" content="https://h4yd3n.com/assets/og-wall.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Hayden Lee's wall of projects: sticky notes for each app, with screenshots" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Hayden Lee — the wall" />
-<meta name="twitter:description" content="A wall of work by Hayden Lee — calm, native apps for iPhone, iPad, and Mac. Creator of SoriSpeak, Washidoc, Washipad, Washicard, COPTOC, SoriToon, SoriStory, and ConstantFloat." />
-<meta name="twitter:image" content="https://h4yd3n.com/assets/wall.png" />
+<meta name="twitter:description" content="A wall of work by Hayden Lee — calm, native apps for iPhone, iPad, and Mac. Creator of SoriSpeak, Washidoc, Washipad, Washicard, COPTOC, SoriToon, SoriStory, and Constant Float." />
+<meta name="twitter:image" content="https://h4yd3n.com/assets/og-wall.jpg" />
+<meta name="twitter:image:alt" content="Hayden Lee's wall of projects: sticky notes for each app, with screenshots" />
 
 <script type="application/ld+json">
 {
@@ -54,7 +58,7 @@
       "about": {
         "@id": "https://h4yd3n.com/#person"
       },
-      "description": "Portfolio wall of calm, native applications created by Hayden Lee, including SoriSpeak, Washidoc, Washipad, Washicard, COPTOC, SoriToon, SoriStory, and ConstantFloat.",
+      "description": "Portfolio wall of calm, native applications created by Hayden Lee, including SoriSpeak, Washidoc, Washipad, Washicard, COPTOC, SoriToon, SoriStory, and Constant Float.",
       "hasPart": [
         {
           "@type": "SoftwareApplication",
@@ -121,9 +125,11 @@
 <style>
   :root{
     /* Washipad palette, pulled straight from the app's Theme.swift */
-    --wall:#F1ECDB; --ink:#29261F; --muted:#76705F; --line:#D9D2C0;
+    --wall:#F1ECDB; --ink:#29261F; --muted:#706A5A; --line:#D9D2C0;
     --vermillion:#C73D2E; --teal:#1C6E5E;
-    --note-ink:#2A2722; --note-muted:#756D5E;
+    /* the two muted greys are a shade darker than Theme.swift (#76705F, #756D5E)
+       so small text clears WCAG AA 4.5:1 on the wall and on every pastel */
+    --note-ink:#2A2722; --note-muted:#60594D;
     /* the six sticky pastels */
     --butter:#FCE685; --coral:#FCC4B5; --sage:#C9E3B8; --sky:#BDD9F2; --lavender:#DECFF2; --peach:#FAD9A8;
     /* paired washi-tape tones */
@@ -204,7 +210,7 @@
   .store-badge .lbl strong{font-size:11px;font-weight:600;letter-spacing:-.01em}
 
   .shot{margin-top:11px;border-radius:8px;overflow:hidden;border:1px solid rgba(41,38,31,.12)}
-  .shot img{display:block;width:100%}
+  .shot img{display:block;width:100%;height:auto}
   .shot a{display:block}
   .shot a img{transition:transform .2s ease}
   .shot a:hover img{transform:scale(1.025)}
@@ -257,7 +263,7 @@
 
     <!-- intro -->
     <article class="note n-butter t1" data-note="Bio">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">Hello</div>
       <h2>Hi, I'm Hayden.</h2>
       <p class="tag">I design &amp; build cute, careful software.</p>
@@ -267,9 +273,9 @@
 
     <!-- SAPEUR -->
     <article class="note n-sky t2" data-note="SAPEUR">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">Fashion Photography</div>
-      <div class="shot phone" style="margin-top:6px;"><a href="https://sapeur.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/sapeur-hayden.png" alt="Hayden Lee Behind The Lens" style="border-radius:6px; object-fit:cover; width:100%; aspect-ratio:3/4;" /></a></div>
+      <div class="shot phone" style="margin-top:6px;"><a href="https://sapeur.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/sapeur-hayden.webp" width="367" height="429" alt="Hayden Lee Behind The Lens" style="border-radius:6px; object-fit:cover; width:100%; aspect-ratio:3/4;" /></a></div>
       <p class="tag" style="margin-top:10px">Fashion, photography &amp; directorial lookbooks.</p>
       <p class="desc">Editorial and runway photography from New York, Paris, Milan, London, Seoul, and Tokyo.</p>
       <div style="margin-top:14px; margin-bottom:8px; width:100%; display:flex; justify-content:center;">
@@ -282,10 +288,10 @@
 
     <!-- ConstantFloat -->
     <article class="note n-peach t2" data-note="ConstantFloat">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">Daily note · iPhone &amp; Android</div>
-      <div class="logo"><a href="https://constantfloat.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/constantfloat.png" alt="ConstantFloat" /></a></div>
-      <div class="shot phone"><a href="https://constantfloat.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/constantfloat-today.jpg" alt="Constant Float's Today screen: this morning's thought on a blue sticky note above a week of one-line notes" /></a></div>
+      <div class="logo"><a href="https://constantfloat.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/constantfloat.webp" width="400" height="102" alt="Constant Float" /></a></div>
+      <div class="shot phone"><a href="https://constantfloat.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/constantfloat-today.webp" width="600" height="775" alt="Constant Float's Today screen: this morning's thought on a blue sticky note above a week of one-line notes" /></a></div>
       <p class="tag" style="margin-top:10px">Steady float, constant flux.</p>
       <p class="desc">Life in flux. You are constant. One line a day in your own words, and each morning a thought written from them.</p>
       <p class="free">Free <span>— daily notes and morning reflections</span></p>
@@ -303,10 +309,10 @@
 
     <!-- SoriSpeak -->
     <article class="note n-coral t3" data-note="SoriSpeak">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">Creator tool · iPhone &amp; Android</div>
-      <div class="logo"><a href="https://sorispeak.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/sorispeak.png" alt="SoriSpeak" /></a></div>
-      <div class="shot phone"><a href="https://sorispeak.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/sorispeak-prompter.jpg?v=2" alt="SoriSpeak's teleprompter scrolling a script over the front camera while a creator films a get-ready-with-me video" /></a></div>
+      <div class="logo"><a href="https://sorispeak.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/sorispeak.webp" width="400" height="120" alt="SoriSpeak" /></a></div>
+      <div class="shot phone"><a href="https://sorispeak.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/sorispeak-prompter.webp" width="600" height="1299" alt="SoriSpeak's teleprompter scrolling a script over the front camera while a creator films a get-ready-with-me video" /></a></div>
       <p class="tag" style="margin-top:10px">From rough idea to ready-to-record.</p>
       <p class="desc">Turns a messy idea into a creator-ready script you can hear performed before you record.</p>
       <p class="desc">New: a live practice call. Paste a job description and an AI interviewer runs the interview out loud — follow-ups and all — then tells you how your answers landed.</p>
@@ -325,10 +331,10 @@
 
     <!-- Washipad (meta) -->
     <article class="note n-sky t4" data-note="Washipad">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">Note wall · iPhone · Android</div>
       <div class="logo"><a href="https://washipad.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/washipad.svg" alt="Washipad" /></a></div>
-      <div class="shot phone"><a href="https://washipad.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/washipad.png" alt="Washipad sticky-note wall" /></a></div>
+      <div class="shot phone"><a href="https://washipad.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/washipad.webp" width="600" height="1305" alt="Washipad sticky-note wall" /></a></div>
       <p class="tag" style="margin-top:10px">Just paper.</p>
       <p class="desc">A simple sticky-note wall you peel, jot on, and arrange — <em>you're looking at its design right now.</em></p>
       <p class="free">Completely free <span>— the whole app, nothing to buy</span></p>
@@ -346,10 +352,10 @@
 
     <!-- Washicard -->
     <article class="note n-butter t2" data-note="Washicard">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">Card perks · iPhone · Android · web</div>
       <div class="logo"><a href="https://washicard.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/washicard.svg" alt="Washicard" /></a></div>
-      <div class="shot phone"><a href="https://washicard.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/washicard-home.jpg" alt="Washicard's Home screen: Plan ahead notes for a Platinum and a Hilton Aspire, and this month's credits as coupons to stamp" /></a></div>
+      <div class="shot phone"><a href="https://washicard.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/washicard-home.webp" width="600" height="1305" alt="Washicard's Home screen: Plan ahead notes for a Platinum and a Hilton Aspire, and this month's credits as coupons to stamp" /></a></div>
       <p class="tag" style="margin-top:10px">Your card wall.</p>
       <p class="desc">Tape every card to the wall, stamp each credit as you use it, and see when a card has paid for its fee.</p>
       <p class="free">Free <span>— no bank logins, no card numbers</span></p>
@@ -367,22 +373,22 @@
 
     <!-- personal statement -->
     <article class="note n-lavender t1" data-note="Philosophy">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">Why work with me</div>
       <p class="quote">I would be honored to share my unique blend of creativity, management, analytical ability and high degree of technical fluency to advance your mission of augmenting those who aspire to create and build something great and unique for the world.</p>
     </article>
 
     <!-- SoriStory -->
     <article class="note n-butter t3" data-note="SoriStory">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">Family stories · iPhone · Android</div>
-      <div class="logo"><a href="https://soristory.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/soristory.png" alt="SoriStory" /></a></div>
-      <div class="shot phone"><a href="https://soristory.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/soristory-home.png?v=20260815b" alt="SoriStory home screen" /></a></div>
+      <div class="logo"><a href="https://soristory.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/soristory.webp" width="400" height="114" alt="SoriStory" /></a></div>
+      <div class="shot phone"><a href="https://soristory.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/soristory-home.webp" width="600" height="1303" alt="SoriStory home screen" /></a></div>
       <p class="tag" style="margin-top:10px">Stories worth hearing, in a voice worth remembering.</p>
       <p class="desc">Personalized stories for families — create new tales or adapt folk classics, narrated in a calm voice (or a cloned one you love) across 23 languages.</p>
       <p class="free">Free to read</p>
       <div class="store-badges">
-        <a class="store-badge" href="https://apps.apple.com/us/app/soristory-your-storyteller/id6762029388" target="_blank" rel="noopener" aria-label="Download SoriStory on the App Store">
+        <a class="store-badge" href="https://apps.apple.com/us/app/soristory-bedtime-stories/id6762029388" target="_blank" rel="noopener" aria-label="Download SoriStory on the App Store">
           <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
           <span class="lbl"><small>Download on the</small><strong>App Store</strong></span>
         </a>
@@ -395,13 +401,13 @@
 
     <!-- TOC -->
     <article class="note n-sky t4" data-note="TOC">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">Operations · Security · Intel</div>
       <div class="logo"><a href="https://coptoc.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/toc.svg" alt="TOC" style="height:32px; width:auto; display:block;" /></a></div>
       <div class="shot" style="position:relative; overflow:hidden; border-radius:8px;">
         <a href="https://coptoc.com/?ref=h4yd3n.com" target="_blank" rel="noopener" title="COPTOC Wall & Native iOS Companion (San Francisco)">
-          <img src="assets/toc-wall.png?v=4" alt="COPTOC Operations Center Wall" style="width:100%; aspect-ratio:16/10; object-fit:cover; display:block;" />
-          <img src="assets/coptoc-ios.png" alt="COPTOC iOS Companion App" style="position:absolute; right:8px; bottom:8px; width:28%; max-width:96px; aspect-ratio:9/19.5; object-fit:cover; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.55), 0 0 0 1.5px rgba(255,255,255,0.3); z-index:2;" />
+          <img src="assets/toc-wall.webp" width="900" height="505" alt="COPTOC Operations Center Wall" style="width:100%; aspect-ratio:16/10; object-fit:cover; display:block;" />
+          <img src="assets/coptoc-ios.webp" width="300" height="653" alt="COPTOC iOS Companion App" style="position:absolute; right:8px; bottom:8px; width:28%; max-width:96px; aspect-ratio:9/19.5; object-fit:cover; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.55), 0 0 0 1.5px rgba(255,255,255,0.3); z-index:2;" />
         </a>
       </div>
       <p class="tag" style="margin-top:10px">The wall a watch officer runs a shift from.</p>
@@ -411,10 +417,10 @@
 
     <!-- SoriToon -->
     <article class="note n-coral t3" data-note="SoriToon">
-      <span class="dots">&bull;&bull;&bull;</span>
+      <span class="dots" aria-hidden="true">&bull;&bull;&bull;</span>
       <div class="pad">AI comics &middot; iPhone &middot; Android</div>
-      <div class="logo"><a href="https://soritoon.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/soritoon.png?v=20260725" alt="SoriToon" /></a></div>
-      <div class="shot phone"><a href="https://soritoon.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/soritoon-reader.png?v=20260725" alt="SoriToon manga reader" /></a></div>
+      <div class="logo"><a href="https://soritoon.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/soritoon.webp" width="640" height="102" alt="SoriToon" /></a></div>
+      <div class="shot phone"><a href="https://soritoon.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/soritoon-reader.webp" width="540" height="1138" alt="SoriToon manga reader" /></a></div>
       <p class="tag" style="margin-top:10px">Ink your webtoon.</p>
       <p class="desc">Turn one prompt into a complete comic. 11 styles, 6 tones, and consistent characters across every issue.</p>
       <p class="free">Free to read</p>
@@ -432,19 +438,19 @@
 
     <!-- Washidoc -->
     <article class="note n-sage t2" data-note="Washidoc">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">PDF editor · Mac · iPhone · Android</div>
       <div class="logo"><a href="https://washidoc.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/logos/washidoc.svg" alt="Washidoc" /></a></div>
-      <div class="shot phone"><a href="https://washidoc.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/washidoc-editor.png?v=20260815" alt="Washidoc editing an invoice" /></a></div>
+      <div class="shot phone"><a href="https://washidoc.com/?ref=h4yd3n.com" target="_blank" rel="noopener"><img src="assets/washidoc-editor.webp" width="600" height="1305" alt="Washidoc editing an invoice" /></a></div>
       <p class="tag" style="margin-top:10px">Fix this PDF in 30 seconds.</p>
       <p class="desc">A fast, native document editor that edits the real text, not sticky notes over it.</p>
       <p class="free">Free on iPhone &amp; Android</p>
       <div class="store-badges">
-        <a class="store-badge" href="https://apps.apple.com/us/app/washidoc-neat-little-pdfs/id6784829034" target="_blank" rel="noopener" aria-label="Download Washidoc on the App Store">
+        <a class="store-badge" href="https://apps.apple.com/us/app/washidoc-pdf-editor-scanner/id6784829034" target="_blank" rel="noopener" aria-label="Download Washidoc on the App Store">
           <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
           <span class="lbl"><small>Download on the</small><strong>App Store</strong></span>
         </a>
-        <a class="store-badge" href="https://apps.apple.com/us/app/washidoc-neat-little-pdfs/id6784829034?platform=mac" target="_blank" rel="noopener" aria-label="Download Washidoc on the Mac App Store">
+        <a class="store-badge" href="https://apps.apple.com/us/app/washidoc-pdf-editor-scanner/id6784829034?platform=mac" target="_blank" rel="noopener" aria-label="Download Washidoc on the Mac App Store">
           <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
           <span class="lbl"><small>Download on the</small><strong>Mac App Store</strong></span>
         </a>
@@ -457,7 +463,7 @@
 
     <!-- contact -->
     <article class="note n-sage t1" id="contact" data-note="Contact">
-      <span class="dots">•••</span>
+      <span class="dots" aria-hidden="true">•••</span>
       <div class="pad">Say hi</div>
       <h2>Let's talk.</h2>
       <p class="desc">Find me on X, LinkedIn or GitHub — always happy to connect.</p>
