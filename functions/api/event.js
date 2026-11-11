@@ -9,6 +9,15 @@ export async function onRequestOptions() {
   });
 }
 
+// Anyone can POST here, so a script sending a new note/target/source on every
+// request would grow the one 'summary' KV value without limit. Past this many
+// keys, new ones are counted under '(other)'.
+const MAX_KEYS = 200;
+function bump(map, key) {
+  if (!(key in map) && Object.keys(map).length >= MAX_KEYS) key = '(other)';
+  map[key] = (map[key] || 0) + 1;
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
   const corsHeaders = {
@@ -88,28 +97,28 @@ export async function onRequestPost(context) {
         if (!summary.daily[dateStr]) summary.daily[dateStr] = { visits: 0, clicks: 0 };
         summary.daily[dateStr].visits = (summary.daily[dateStr].visits || 0) + 1;
         if (!summary.sources) summary.sources = {};
-        summary.sources[source] = (summary.sources[source] || 0) + 1;
+        bump(summary.sources, source);
       } else {
         summary.total_clicks = (summary.total_clicks || 0) + 1;
         if (!summary.daily[dateStr]) summary.daily[dateStr] = { visits: 0, clicks: 0 };
         summary.daily[dateStr].clicks = (summary.daily[dateStr].clicks || 0) + 1;
 
         const noteKey = eventRecord.note;
-        summary.notes[noteKey] = (summary.notes[noteKey] || 0) + 1;
+        bump(summary.notes, noteKey);
 
         if (eventRecord.target) {
           try {
-            const host = new URL(eventRecord.target).hostname.replace(/^www./, '');
-            summary.targets[host] = (summary.targets[host] || 0) + 1;
+            const host = new URL(eventRecord.target).hostname.replace(/^www\./, '');
+            bump(summary.targets, host);
           } catch (e) {
             const safeTarget = eventRecord.target.slice(0, 60);
-            summary.targets[safeTarget] = (summary.targets[safeTarget] || 0) + 1;
+            bump(summary.targets, safeTarget);
           }
         }
       }
 
       if (country && country !== 'Unknown') {
-        summary.countries[country] = (summary.countries[country] || 0) + 1;
+        bump(summary.countries, country);
       }
 
       const days = Object.keys(summary.daily).sort();
