@@ -393,6 +393,12 @@
   // same key). Undo on a browser with h4yd3n.com/?me=0.
   try { localStorage.setItem('_h_owner', '1'); } catch (e) {}
 
+  // Everything below comes from /api/event, which anyone can POST to, so every
+  // value is escaped before it goes into innerHTML.
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
   async function fetchStats() {
     try {
       const res = await fetch('/api/stats');
@@ -441,8 +447,8 @@
         const pct = Math.round((count / maxClicks) * 100);
         return '<div class="rank-item">' +
           '<div class="rank-header">' +
-            '<span class="rank-name">' + k + '</span>' +
-            '<span class="rank-count">' + count + ' click' + (count === 1 ? '' : 's') + '</span>' +
+            '<span class="rank-name">' + esc(k) + '</span>' +
+            '<span class="rank-count">' + esc(count) + ' click' + (count === 1 ? '' : 's') + '</span>' +
           '</div>' +
           '<div class="rank-bar-bg">' +
             '<div class="rank-bar-fill" style="width: ' + pct + '%;"></div>' +
@@ -460,8 +466,8 @@
     } else {
       targetsContainer.innerHTML = '<ul class="kv-list">' + targetKeys.map(t => 
         '<li class="kv-row">' +
-          '<span class="kv-key" title="' + t + '">' + t + '</span>' +
-          '<span class="kv-val">' + targets[t] + '</span>' +
+          '<span class="kv-key" title="' + esc(t) + '">' + esc(t) + '</span>' +
+          '<span class="kv-val">' + esc(targets[t]) + '</span>' +
         '</li>'
       ).join('') + '</ul>';
     }
@@ -475,8 +481,8 @@
     } else {
       countriesContainer.innerHTML = '<ul class="kv-list">' + countryKeys.map(c => 
         '<li class="kv-row">' +
-          '<span class="kv-key">' + c + '</span>' +
-          '<span class="kv-val">' + countries[c] + '</span>' +
+          '<span class="kv-key">' + esc(c) + '</span>' +
+          '<span class="kv-val">' + esc(countries[c]) + '</span>' +
         '</li>'
       ).join('') + '</ul>';
     }
@@ -491,8 +497,8 @@
     } else {
       sourcesContainer.innerHTML = '<ul class="kv-list">' + sourceKeys.map(s =>
         '<li class="kv-row">' +
-          '<span class="kv-key" title="' + s + '">' + (sourceLabels[s] || s) + '</span>' +
-          '<span class="kv-val">' + sources[s] + '</span>' +
+          '<span class="kv-key" title="' + esc(s) + '">' + esc(sourceLabels[s] || s) + '</span>' +
+          '<span class="kv-val">' + esc(sources[s]) + '</span>' +
         '</li>'
       ).join('') + '</ul>';
     }
@@ -510,27 +516,31 @@
           ? '<span class="badge-tag badge-click">CLICK</span>' 
           : '<span class="badge-tag badge-visit">VISIT</span>';
         const noteBadge = evt.note && evt.note !== 'pageview'
-          ? '<span class="badge-tag badge-note">' + evt.note + '</span>'
+          ? '<span class="badge-tag badge-note">' + esc(evt.note) + '</span>'
           : '<span style="color:var(--muted); font-size:12px;">-</span>';
         
         let targetDisplay = '-';
         if (evt.target) {
           try {
             const u = new URL(evt.target);
-            targetDisplay = '<a href="' + evt.target + '" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:none; font-family:monospace; font-size:12px;">' + u.hostname + (u.pathname !== '/' ? u.pathname : '') + '</a>';
+            const label = esc(u.hostname + (u.pathname !== '/' ? u.pathname : ''));
+            // Only http(s) targets become links; a javascript: URL would run on click.
+            targetDisplay = /^https?:$/.test(u.protocol)
+              ? '<a href="' + esc(u.href) + '" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:none; font-family:monospace; font-size:12px;">' + label + '</a>'
+              : '<span style="font-size:12px;">' + esc(evt.target.slice(0, 30)) + '</span>';
           } catch(e) {
-            targetDisplay = '<span style="font-size:12px;">' + evt.target.slice(0, 30) + '</span>';
+            targetDisplay = '<span style="font-size:12px;">' + esc(evt.target.slice(0, 30)) + '</span>';
           }
           if (evt.element) {
-            targetDisplay += ' <small style="color:var(--muted); font-size:11px;">(' + evt.element + ')</small>';
+            targetDisplay += ' <small style="color:var(--muted); font-size:11px;">(' + esc(evt.element) + ')</small>';
           }
         }
 
-        const loc = [evt.city, evt.region, evt.country].filter(Boolean).join(', ') || '-';
-        const device = evt.device ? '<span style="font-size:12px; text-transform:capitalize;">' + evt.device + '</span>' : '-';
+        const loc = esc([evt.city, evt.region, evt.country].filter(Boolean).join(', ') || '-');
+        const device = evt.device ? '<span style="font-size:12px; text-transform:capitalize;">' + esc(evt.device) + '</span>' : '-';
 
         return '<tr>' +
-          '<td style="font-family:monospace; font-size:12px; color:var(--muted);">' + formatTime(evt.timestamp) + '</td>' +
+          '<td style="font-family:monospace; font-size:12px; color:var(--muted);">' + esc(formatTime(evt.timestamp)) + '</td>' +
           '<td>' + typeBadge + '</td>' +
           '<td>' + noteBadge + '</td>' +
           '<td>' + targetDisplay + '</td>' +
