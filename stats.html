@@ -290,6 +290,7 @@
       <div class="live-indicator">
         <span class="live-dot"></span> LIVE
       </div>
+      <button class="refresh-btn" id="token-btn" onclick="askToken()" hidden>Enter token</button>
       <button class="refresh-btn" onclick="fetchStats()">
         <span>&#8635;</span> Refresh
       </button>
@@ -399,9 +400,27 @@
     return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
 
+  // /api/stats needs the STATS_TOKEN secret. It's asked for once and kept in
+  // this browser only.
+  const TOKEN_KEY = '_h_stats_token';
+  function getToken() { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; } }
+  function askToken() {
+    const t = (prompt('Stats token') || '').trim();
+    if (!t) return;
+    try { localStorage.setItem(TOKEN_KEY, t); } catch (e) {}
+    document.getElementById('token-btn').hidden = true;
+    fetchStats();
+  }
+
   async function fetchStats() {
     try {
-      const res = await fetch('/api/stats');
+      if (!getToken()) { document.getElementById('token-btn').hidden = false; return; }
+      const res = await fetch('/api/stats', { headers: { Authorization: 'Bearer ' + getToken() } });
+      if (res.status === 401) {
+        try { localStorage.removeItem(TOKEN_KEY); } catch (e) {}
+        document.getElementById('token-btn').hidden = false;
+        return;
+      }
       if (!res.ok) throw new Error('Failed to fetch stats');
       const data = await res.json();
       renderDashboard(data);
@@ -551,7 +570,7 @@
     }
   }
 
-  fetchStats();
+  if (!getToken()) askToken(); else fetchStats();
   setInterval(fetchStats, 10000);
 </script>
 
