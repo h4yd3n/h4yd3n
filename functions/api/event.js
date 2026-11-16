@@ -1,3 +1,5 @@
+import { isOwnerNetwork } from '../lib/owner.js';
+
 // Anyone can POST here, so a script sending a new note/target/source on every
 // request would grow the one 'summary' KV value without limit. Past this many
 // keys, new ones are counted under '(other)'.
@@ -89,6 +91,9 @@ export async function onRequestPost(context) {
     };
 
     if (env.ANALYTICS_KV) {
+      // The owner's own visits (from a network they opened /stats on) don't count.
+      if (await isOwnerNetwork(request, env.ANALYTICS_KV)) return reply({ ok: true, skipped: 'owner' }, 200);
+
       let summary = await env.ANALYTICS_KV.get('summary', { type: 'json' });
       if (!summary) {
         summary = {

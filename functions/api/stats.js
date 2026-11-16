@@ -2,6 +2,8 @@
 // phone and the owner chose no token. The page is noindex and not linked from the
 // site. The dashboard is same-origin, so there are no CORS headers.
 
+import { markOwnerNetwork } from '../lib/owner.js';
+
 const headers = {
   'Content-Type': 'application/json',
   'Cache-Control': 'no-store',
@@ -12,7 +14,7 @@ function json(body, status = 200) {
 }
 
 export async function onRequestGet(context) {
-  const { env } = context;
+  const { request, env } = context;
 
   try {
     if (!env.ANALYTICS_KV) {
@@ -22,6 +24,9 @@ export async function onRequestGet(context) {
         recent: []
       });
     }
+
+    // Whoever opens the dashboard is the owner: stop counting visits from this network.
+    await markOwnerNetwork(request, env.ANALYTICS_KV).catch(() => {});
 
     const [summary, recent] = await Promise.all([
       env.ANALYTICS_KV.get('summary', { type: 'json' }),
