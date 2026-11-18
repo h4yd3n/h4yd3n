@@ -16,4 +16,4 @@ Calm, native apps for iPhone, iPad, and Mac — with Claude, Gemini, and Codex.
 
 🎖️ Before this: Chief of Staff / Head of Ops at high-growth startups, Trust & Safety at TikTok, and a few years in the Army.
 
-[LinkedIn](https://www.linkedin.com/in/h4yd3n) · [h4yd3n.com](https://h4yd3n.com)
+[LinkedIn](https://www.linkedin.com/in/h4yd3n) · [h4yd3n.com](https://h4yd3n.com/gh)
