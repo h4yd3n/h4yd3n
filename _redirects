@@ -9,6 +9,13 @@
 /fb  /?ref=fb  302
 /li  /?ref=li  302
 /yt  /?ref=yt  302
+/gh  /?ref=gh  302
+
+# Resume and job applications: put h4yd3n.com/cv on the resume and h4yd3n.com/job
+# in application forms, so a recruiter's visit shows which one they came from.
+/cv      /?ref=cv   302
+/resume  /?ref=cv   302
+/job     /?ref=job  302
 
 # Repo files that aren't part of the site. Pages publishes the whole repo root,
 # so without these README.md and .gitignore are served as-is.

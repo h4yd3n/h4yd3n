@@ -488,7 +488,7 @@
     }
 
     // Sources list: ?ref= tag from the /ig, /tt, ... short links, else referring host, else (direct)
-    const sourceLabels = { ig: 'Instagram (/ig)', tt: 'TikTok (/tt)', x: 'X (/x)', fb: 'Facebook (/fb)', li: 'LinkedIn (/li)', yt: 'YouTube (/yt)' };
+    const sourceLabels = { ig: 'Instagram (/ig)', tt: 'TikTok (/tt)', x: 'X (/x)', fb: 'Facebook (/fb)', li: 'LinkedIn (/li)', yt: 'YouTube (/yt)', gh: 'GitHub (/gh)', cv: 'Resume (/cv)', job: 'Job application (/job)' };
     const sources = summary.sources || {};
     const sourceKeys = Object.keys(sources).sort((a,b) => sources[b] - sources[a]).slice(0, 8);
     const sourcesContainer = document.getElementById('sources-list');
